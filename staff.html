@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Guía de Staff: Jugadores y Territorios</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item active">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>2. Staff</span> <span style="color: #475569;">/</span> <span class="current-page">Gestión de Jugadores y Códigos</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar comando de staff... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner staff">
+            <div><strong>Sección 2: Staff</strong> &mdash; Moderación diaria en el juego, territorios, jugadores y códigos de liderazgo.</div>
+            <div><span class="badge badge-staff">Staff / Admin In-Game</span></div>
+        </div>
+
+        <h1>Guía de Staff: Permisos, Jugadores, Territorios y Códigos</h1>
+        <p>Esta sección está diseñada para los moderadores y administradores que asisten a los usuarios dentro de Minecraft: crear regiones o naciones, asignar líderes mediante códigos, gestionar miembros y supervisar el chat.</p>
+
+        <h2>1. Permisos de Staff y Bypass Administrativo</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Nodo de Permiso</th>
+                    <th>Por Defecto</th>
+                    <th>Facultades que otorga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>dynamicclaims.command.admin</code><br><em>(o <code>dynamicclaims.admin</code>)</em></td>
+                    <td><code>op</code></td>
+                    <td><strong>Acceso Administrativo Completo:</strong> Permite usar todos los subcomandos de <code>/dc admin</code>, fundar regiones/naciones, reclamar/liberar chunks, editar cualquier nación en menús o en el Atlas Web, y omite las restricciones de construcción, interacción, fronteras cerradas, combat-tag y tiempos de espera de teletransporte.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.admin.spy</code></td>
+                    <td><code>false</code></td>
+                    <td>Permite activar <code>/dc chat espiar</code> para leer canales privados (Región, Nación y Alianza) sin conceder administración total.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.leader</code></td>
+                    <td><code>false</code></td>
+                    <td>Habilita sugerencias de herramientas de liderazgo, pero <strong>NO</strong> concede administración global ni convierte al portador en líder de naciones ajenas.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Creación y Gestión de Regiones y Naciones</h2>
+        <p>Los nombres nuevos admiten de 1 a 48 caracteres (letras, números, guiones <code>-</code> y guiones bajos <code>_</code>; sin espacios ni puntos). Al asociar una región a una nación, su identificador interno adopta el formato <code>NACION_REGION</code>:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Uso Práctico para el Staff</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin region crear &lt;REGION&gt; [PROPIETARIO|-] [MUNDO]</code></td>
+                    <td>Crea una región vacía. Usa <code>-</code> como propietario si deseas crearla sin dueño inicial. También puedes usar <code>/dc region crear &lt;REGION&gt;</code> o <code>/dc crear &lt;REGION&gt;</code> en tu mundo actual.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin nacion crear &lt;NACION&gt; &lt;REGION_CAPITAL&gt;</code></td>
+                    <td>Funda una nación soberana convirtiendo la región independiente indicada en su capital oficial (también <code>/dc nacion crear &lt;NACION&gt; [REGION_CAPITAL]</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc reclamar [RADIO|auto|rellenar|confirmar|cancelar]</code></td>
+                    <td>Reclama chunks en el mundo para la región seleccionada (también puedes pintarlos cómodamente desde el <strong>Editor Territorial del Atlas Web</strong> con <code>/dc mapa-web</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc liberar [RADIO|auto|rellenar|todo|confirmar|cancelar]</code></td>
+                    <td>Desreclama chunks de una región.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin region propietario &lt;REGION&gt; &lt;JUGADOR&gt;</code></td>
+                    <td>Asigna o transfiere la titularidad de una región a un jugador.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin region transferir &lt;REGION&gt; &lt;NACION&gt;</code></td>
+                    <td>Anexa una región independiente (o la traslada desde otra nación) hacia la nación destino conservando sus chunks y datos.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin nacion capital &lt;NACION&gt; &lt;REGION&gt;</code></td>
+                    <td>Cambia la región capital oficial de una nación existente.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin region renombrar &lt;REGION&gt; &lt;NUEVO_NOMBRE&gt; [confirmar]</code><br><code>/dc admin nacion renombrar &lt;NACION&gt; &lt;NUEVO_NOMBRE&gt; [confirmar]</code></td>
+                    <td>Cambia el nombre de una región o nación actualizando automáticamente todas sus referencias y conservando su UUID.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin region eliminar &lt;REGION&gt;</code><br><code>/dc admin nacion eliminar &lt;NACION&gt;</code></td>
+                    <td>Elimina una región o disuelve una nación (requiere confirmación con <code>/dc admin confirmar</code> si aplica).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin establecer-inicios &lt;all | nación | región&gt;</code></td>
+                    <td>Genera automáticamente puntos de aparición seguros (Home) en el centro de las regiones que aún no tengan uno configurado.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Códigos de Liderazgo (Entrega de Países a Usuarios)</h2>
+        <p>La forma más limpia y segura de entregar una nación recién creada (o vacante) a un jugador que ganó una postulación en Discord es generarle un <strong>Código de Liderazgo</strong>:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Explicación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin codigos crear &lt;NACION&gt; &lt;JUGADOR&gt; [dias]</code></td>
+                    <td>Genera un código único vinculado a esa nación y a ese jugador (caduca en 30 días por defecto si no se especifica duración). El jugador lo canjea con <code>/dc codigo &lt;CODIGO&gt;</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin codigos menu</code></td>
+                    <td>Abre el panel gráfico de gestión de códigos de liderazgo.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin codigos listar [pagina]</code><br><code>/dc admin codigos info &lt;CODIGO&gt;</code></td>
+                    <td>Muestra los códigos activos o consulta el estado, creador y fecha de expiración de un código concreto.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin codigos eliminar &lt;CODIGO&gt;</code><br><code>/dc admin codigos limpiar</code></td>
+                    <td>Revoca un código específico o purga todos los códigos ya caducados/usados.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin codigos auditar [PAGINA]</code></td>
+                    <td>Muestra el historial de auditoría de códigos creados y canjeados.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Gestión de Jugadores, Roles y Moderación</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Función de Soporte / Moderación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin jugadores info &lt;JUGADOR&gt;</code></td>
+                    <td>Muestra la ficha completa de un jugador: regiones, nación, cargos, rango militar y estado.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin jugadores listar &lt;region|nacion&gt; &lt;NOMBRE&gt;</code></td>
+                    <td>Lista todos los miembros empadronados en una región o nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin jugadores unir &lt;JUGADOR&gt; &lt;REGION&gt;</code></td>
+                    <td>Incorpora forzosamente a un jugador dentro de una región.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin jugadores expulsar &lt;JUGADOR&gt; &lt;REGION&gt;</code></td>
+                    <td>Retira a un jugador de la región indicada. (Recuerda que no se puede expulsar al dueño de la capital ni al líder del gobierno activo sin relevarlos antes).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin jugadores rol &lt;JUGADOR&gt; &lt;REGION&gt; &lt;lider|colider|alcalde|miembro&gt;</code></td>
+                    <td>Asigna directamente el cargo político o regional del jugador en esa región/nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc chat espiar</code></td>
+                    <td>Activa o desactiva el modo Chat Spy para supervisar en tiempo real los mensajes enviados en los canales de Región, Nación y Alianza.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin guia dar &lt;JUGADOR&gt;</code><br><code>/dc admin guia libro [JUGADOR]</code></td>
+                    <td>Entrega el libro físico de la Guía interactiva a un usuario.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

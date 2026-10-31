@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Arbitraje de Staff: Guerras y Eventos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item active">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>2. Staff</span> <span style="color: #475569;">/</span> <span class="current-page">Arbitraje: Guerras y Eventos</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar arbitraje, guerra, pandemia... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner staff">
+            <div><strong>Sección 2: Staff</strong> &mdash; Control de conflictos bélicos, elecciones, leyes, pandemias, radiación y tiempo RP.</div>
+            <div><span class="badge badge-staff">Staff / Arbitraje</span></div>
+        </div>
+
+        <h1>Arbitraje de Staff: Guerras, Gobierno, Pandemias y Leyes</h1>
+        <p>Guía de comandos para que el Staff pueda supervisar o intervenir en conflictos geopolíticos, ajustar cupos militares, bloquear leyes específicas, lanzar eventos sanitarios o adelantar el calendario Roleplay.</p>
+
+        <h2>1. Control de Guerras, Treguas y Zonas de Guerra</h2>
+        <div class="note-box">
+            <p><strong>Bypass en Declaraciones Administrativas:</strong> Cuando un miembro del Staff inicia una guerra (por comando o desde el menú de diplomacia), el sistema omite los requisitos de población mínima, soberanía compartida, infamia, alianzas, treguas y horas de preparación, pero sigue validando que no exista otra guerra activa en conflicto con esos bandos.</p>
+        </div>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Efecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin guerra iniciar &lt;ATACANTE&gt; &lt;DEFENSORA&gt; [REGION_OBJETIVO]</code></td>
+                    <td>Inicia inmediatamente una guerra entre dos naciones.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin guerra terminar [true|false]</code></td>
+                    <td>Finaliza la guerra en curso declarando ganador al atacante (<code>true</code>) o al defensor (<code>false</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin guerra cancelar</code></td>
+                    <td>Aborta la guerra activa o programada sin aplicar cambios territoriales ni sanciones.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin guerra chunks &lt;CANTIDAD&gt;</code><br><code>/dc admin guerra info</code></td>
+                    <td>Ajusta la cantidad de chunks en la contienda o muestra el diagnóstico completo de la guerra actual.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin guerra tregua &lt;establecer|eliminar|listar&gt; [nacion1] [nacion2] [dias]</code></td>
+                    <td>Impone una tregua obligatoria entre dos naciones, elimina una existente o lista las vigentes.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin zona-guerra crear &lt;REGION&gt; [meta%]</code><br><code>/dc admin zona-guerra eliminar &lt;REGION&gt;</code></td>
+                    <td>Convierte una región en una Zona de Guerra abierta o la desactiva. Puedes cambiar el porcentaje de victoria con <code>/dc admin zona-guerra meta &lt;REGION&gt; &lt;meta%&gt;</code> y consultar con <code>info</code> o <code>listar</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Cupo Militar Nacional y Estados Títeres (Vasallaje)</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Efecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin militares max &lt;NACION&gt; &lt;CANTIDAD&gt;</code></td>
+                    <td>Establece un límite máximo exclusivo de soldados para esa nación (tiene prioridad sobre el valor global de <code>config.yml</code>). Usar <code>0</code> impide reclutar y participar en guerras.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin militares info &lt;NACION&gt;</code></td>
+                    <td>Muestra el censo militar actual, el tope máximo, las plazas libres y el origen del límite (global, placeholder o exclusivo).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin militares restablecer &lt;NACION&gt;</code></td>
+                    <td>Borra el límite exclusivo de esa nación para que vuelva a usar la configuración general del servidor.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin titeres crear &lt;OVERLORD&gt; &lt;TITERE&gt;</code><br><code>/dc admin titeres eliminar &lt;TITERE&gt;</code><br><code>/dc admin titeres listar [NACION]</code></td>
+                    <td>Establece una relación de vasallaje (convirtiendo a <code>TITERE</code> en estado subordinado de <code>OVERLORD</code>), libera a un estado títere o lista las relaciones de soberanía.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Gobierno, Guerra Civil y Partidos Electorales</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Efecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin gobierno info &lt;NACION&gt;</code></td>
+                    <td>Consulta los votos de aprobación, desaprobación, líder rebelde y estado de Guerra Civil de una nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin gobierno iniciar-guerra-civil &lt;NACION&gt;</code></td>
+                    <td>Desata inmediatamente una Guerra Civil activa en la nación indicada.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin gobierno terminar-guerra-civil &lt;NACION&gt; &lt;rebeldes|leales&gt;</code></td>
+                    <td>Finaliza la Guerra Civil otorgando la victoria a la facción rebelde o al gobierno leal.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin gobierno limpiar-votos &lt;NACION&gt;</code></td>
+                    <td>Reinicia a cero todos los votos de aprobación y desaprobación de una nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin partidos crear &lt;NACION&gt; &lt;CANDIDATO&gt; &lt;PARTIDO&gt; &lt;IDEOLOGIA&gt;</code></td>
+                    <td>Registra administrativamente una candidatura electoral en una nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin partidos ganador &lt;NACION&gt; &lt;CANDIDATO&gt;</code></td>
+                    <td>Proclama ganador electoral al candidato indicado. También puedes usar <code>eliminar</code>, <code>tipo</code>, <code>reiniciar</code>, <code>limpiar-huerfanos</code> y <code>listar</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin prueba votaciones &lt;iniciar|terminar|abrir&gt;</code></td>
+                    <td>Permite iniciar, abrir o cerrar manualmente un ciclo de prueba electoral.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Disponibilidad de Leyes y Banderas</h2>
+        <p>El Staff puede decidir qué leyes constitucionales tienen permitido cambiar los líderes y cuáles quedan bloqueadas con su valor actual:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Efecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin leyes global &lt;FLAG&gt; &lt;habilitar|deshabilitar&gt;</code></td>
+                    <td>Permite o bloquea globalmente la edición de una ley (ej: <code>openNation</code>, <code>electionsEnabled</code>, <code>pvpEnabled</code>, <code>alliesCanBuild</code>, etc.).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin leyes nacion &lt;NACION&gt; &lt;FLAG&gt; &lt;habilitar|deshabilitar|heredar&gt;</code></td>
+                    <td>Crea una excepción para una nación específica o usa <code>heredar</code> para volver a la regla global.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin leyes listar [global|NACION]</code></td>
+                    <td>Muestra qué leyes están habilitadas o bloqueadas y el origen de cada política.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin region bandera &lt;NACION|REGION&gt; &lt;LEY&gt; &lt;true|false&gt;</code></td>
+                    <td>Cambia directamente el valor booleano de cualquiera de las 7 leyes nacionales o reglas externas registradas.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Pandemias, Radiación, Tecnología y Tiempo Roleplay</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Efecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin pandemia crear &lt;NOMBRE&gt; &lt;SEVERIDAD 1-5&gt; &lt;NACION_ORIGEN&gt;</code></td>
+                    <td>Inicia un nuevo brote epidemiológico en la nación origen indicada (o abre el asistente desde <code>/dc admin pandemia</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin pandemia configurar &lt;NOMBRE&gt; &lt;PARAMETRO&gt; &lt;VALOR&gt;</code></td>
+                    <td>Ajusta en caliente tasas de contagio, mortalidad o severidad de una pandemia activa.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin pandemia vacuna &lt;PANDEMIA&gt;</code> / <code>vacunar &lt;PANDEMIA&gt;</code> / <code>terminar &lt;PANDEMIA&gt;</code></td>
+                    <td>Completa la vacuna, inmuniza a los afectados o erradica inmediatamente la pandemia.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin radiacion listar</code><br><code>/dc admin radiacion limpiar &lt;todo|radio|id&gt;</code></td>
+                    <td>Enumera las zonas contaminadas por impactos nucleares o descontamina un radio, un ID específico o todo el mapa.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin tecnologia dar|eliminar|puntos|establecer-puntos|desbloquear-todo|reiniciar &lt;NACION&gt; ...</code></td>
+                    <td>Otorga o retira tecnologías específicas, suma puntos de ciencia, desbloquea todo el árbol o reinicia el progreso de una nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin tecnologia validar [NACION|todo]</code><br><code>/dc admin tecnologia reparar [NACION|todo]</code></td>
+                    <td>Verifica y repara inconsistencias en los permisos y nodos tecnológicos de las naciones.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin tiempo establecer &lt;HH:MM|DD.MM.AA&gt; [HH:MM|DD.MM.AA]</code><br><code>/dc admin tiempo sumar &lt;1d|1h|1m|1s...&gt;</code></td>
+                    <td>Fija o adelanta la fecha y hora del calendario ficticio de Roleplay del servidor.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

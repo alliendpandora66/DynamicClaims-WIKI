@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Territorios, Ciudadanía y Leyes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item active">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Territorios, Ciudadanía y Leyes</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en territorios... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Guía verificada para Ciudadanos, Alcaldes y Líderes Nacionales.</div>
+            <div><span class="badge badge-citizen">Ciudadano</span> <span class="badge badge-mayor">Alcalde</span> <span class="badge badge-leader">Líder / Colíder</span></div>
+        </div>
+
+        <h1>Territorios, Ciudadanía y Leyes</h1>
+        <p>El mundo de DynamicClaims se estructura en dos niveles territoriales: <strong>Regiones</strong> (ciudades, provincias o municipios locales formados por chunks protegidos) y <strong>Naciones</strong> (estados soberanos formados por una o más regiones, encabezados por una <strong>Región Capital</strong>).</p>
+
+        <div class="note-box warning">
+            <p><strong>Importante sobre la fundación y el reclamo de terrenos:</strong> En la implementación actual de DynamicClaims, crear regiones o naciones nuevas y reclamar/liberar chunks mediante comandos (<code>/dc crear</code>, <code>/dc reclamar</code>, <code>/dc liberar</code>) requiere permisos de <strong>Staff</strong>. Como jugador, te unes a las regiones o naciones creadas en el mapa, o asumes el mando de una nación mediante un <strong>Código de Liderazgo</strong>.</p>
+            <p>Si el operador del servidor activa <code>claims.allow-region-owners: true</code> en el Atlas Web, los dueños de región pueden reclamar y liberar chunks visualmente desde <code>/dc mapa-web</code>.</p>
+        </div>
+
+        <h2>1. Ciudadanía: Cómo Unirse, Salir y Reclamar Liderazgo</h2>
+        <p>Para participar en la vida política, económica y militar de un país, primero debes residir en una de sus regiones:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Quién puede usarlo</th>
+                    <th>Qué hace exactamente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc unirse menu</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Abre el explorador gráfico de naciones y regiones disponibles para unirte con un clic.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc unirse regiones &lt;NACION&gt;</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Muestra directamente las regiones que componen una nación específica.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc unirse &lt;REGION&gt;</code><br><em>(o <code>/dc region unirse &lt;REGION&gt;</code>)</em></td>
+                    <td><span class="badge badge-citizen">Jugador sin patria</span></td>
+                    <td>Te une directamente a la región indicada si su nación tiene la ley de <strong>Frontera Abierta (<code>openNation</code>)</strong> activa.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc nacion unirse &lt;NACION&gt; &lt;REGION&gt;</code></td>
+                    <td><span class="badge badge-citizen">Jugador / Dueño</span></td>
+                    <td>Si eres ciudadano sin nación, te une a esa región; si eres dueño de una región independiente, la federa dentro de esa nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc aceptar [REGION]</code><br><code>/dc rechazar [REGION]</code></td>
+                    <td><span class="badge badge-citizen">Jugador invitado</span></td>
+                    <td>Acepta o rechaza una invitación formal enviada por un alcalde o líder (incluso cuando la frontera nacional está cerrada).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc salir [REGION] [confirmar]</code><br><code>/dc nacion salir [REGION] [confirmar]</code></td>
+                    <td><span class="badge badge-citizen">Ciudadano</span></td>
+                    <td>Abandona tu región o nación actual. Existe un enfriamiento de seguridad (300 segundos por defecto) antes de poder cambiar de región nuevamente.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc codigo &lt;CODIGO&gt;</code></td>
+                    <td><span class="badge badge-citizen">Portador del código</span></td>
+                    <td>Canjea un <strong>Código de Liderazgo</strong> entregado por el Staff para convertirte de inmediato en el Líder Supremo y dueño de la capital de esa nación.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Teletransporte, Información e Invitaciones Regionales</h2>
+        <p>Cada región cuenta con un punto de aparición (Home) y herramientas de consulta e invitación:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Rol Requerido</th>
+                    <th>Explicación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc inicio [REGION]</code><br><em>(o <code>/dc region inicio [REGION]</code>)</em></td>
+                    <td><span class="badge badge-citizen">Miembro de la región</span></td>
+                    <td>Te teletransporta al punto de aparición de tu región tras una espera inmóvil (10s por defecto) y con enfriamiento (60s por defecto).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc establecer-inicio [REGION]</code><br><em>(o <code>/dc region establecer-inicio [REGION]</code>)</em></td>
+                    <td><span class="badge badge-mayor">Dueño / Alcalde / Líder</span></td>
+                    <td>Fija el punto de aparición (Home) de la región en tu ubicación actual (debe estar dentro de un chunk reclamado por esa región).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc invitar &lt;JUGADOR&gt;</code><br><em>(o <code>/dc region invitar &lt;JUGADOR&gt; [REGION]</code>)</em></td>
+                    <td><span class="badge badge-mayor">Dueño / Cogobernador / Alcalde / Líder / Colíder</span></td>
+                    <td>Envía una invitación a un jugador para que pueda residir en tu región aunque las fronteras nacionales estén cerradas.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc info</code> / <code>/dc region info [REGION]</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Muestra la ficha de la región actual o indicada: propietario, nación, cantidad de chunks, residentes y banderas.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc nacion info [NACION]</code><br><code>/dc nacion listar</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Consulta la ficha completa de una nación (líder, capital, población, regiones, alianzas) o enumera todas las naciones activas.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc territorio</code> / <code>/dc limites</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Inspecciona el chunk actual o activa/desactiva el visualizador de partículas en los bordes de los chunks reclamados.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Las 7 Leyes Nacionales</h2>
+        <p>El <strong>Dueño de la Capital (Líder)</strong> o los <strong>Colíderes</strong> pueden configurar las 7 leyes constitucionales de la nación desde <code>/dc leyes</code> (también accesible en <code>/dc menu</code> &rarr; Leyes, o desde la pestaña Nación del Atlas Web si tienen <code>dynamicclaims.webmap.flags</code>). Todas las regiones de una nación comparten sus leyes nacionales:</p>
+
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Ley Constitucional</th>
+                    <th>Clave Interna</th>
+                    <th>Por Defecto</th>
+                    <th>Efecto en toda la Nación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Frontera Abierta</strong></td>
+                    <td><code>openNation</code></td>
+                    <td><code>true</code></td>
+                    <td>Si está activa, cualquier jugador sin nación puede unirse libremente con <code>/dc unirse &lt;REGION&gt;</code> sin necesitar invitación previa.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Elecciones Democráticas</strong></td>
+                    <td><code>electionsEnabled</code></td>
+                    <td><code>true</code></td>
+                    <td>Habilita las elecciones periódicas de partidos políticos para elegir al Líder del Gobierno mediante voto ciudadano.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. PvP Nacional (Fuego Amigo)</strong></td>
+                    <td><code>pvpEnabled</code></td>
+                    <td><code>false</code></td>
+                    <td>Controla el combate PvP entre ciudadanos dentro del territorio nacional en tiempos de paz (también modificable con <code>/dc leyes pvp &lt;si|no&gt;</code>).</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Construcción de Aliados</strong></td>
+                    <td><code>alliesCanBuild</code></td>
+                    <td><code>false</code></td>
+                    <td>Permite a los ciudadanos de naciones aliadas colocar y romper bloques dentro de las regiones de tu nación.</td>
+                </tr>
+                <tr>
+                    <td><strong>5. Interacción de Aliados</strong></td>
+                    <td><code>alliesCanInteract</code></td>
+                    <td><code>false</code></td>
+                    <td>Permite a los ciudadanos de naciones aliadas abrir puertas, trampillas, cofres y usar botones o palancas.</td>
+                </tr>
+                <tr>
+                    <td><strong>6. Construcción de Neutrales</strong></td>
+                    <td><code>neutralsCanBuild</code></td>
+                    <td><code>false</code></td>
+                    <td>Autoriza a jugadores neutrales o extranjeros a construir y romper bloques en territorio nacional.</td>
+                </tr>
+                <tr>
+                    <td><strong>7. Interacción de Neutrales</strong></td>
+                    <td><code>neutralsCanInteract</code></td>
+                    <td><code>false</code></td>
+                    <td>Autoriza a jugadores neutrales o extranjeros a interactuar con puertas, contenedores y mecanismos.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <p><strong>Leyes de otros plugins y restricciones del servidor:</strong> Si el servidor cuenta con integraciones vía UltraAPI, aparecerá el submenú <code>/dc leyes personalizadas</code>. Además, el Staff puede bloquear el cambio de ciertas leyes globalmente o para una nación específica; si una ley está bloqueada por la administración, conservará su estado actual y no podrá alternarse desde el menú.</p>
+        </div>
+
+        <h2>4. Las 5 Banderas de Protección Regional</h2>
+        <p>Además de las 7 leyes nacionales, cada región posee 5 banderas locales que protegen sus chunks frente al entorno:</p>
+        <ul>
+            <li><code>PVP</code>: Permite o bloquea el daño entre jugadores en esa región (durante una guerra activa o guerra civil, las reglas de combate bélico prevalecen en las zonas en disputa).</li>
+            <li><code>FIRE_SPREAD</code>: Impide que el fuego se propague o consuma bloques dentro de la región.</li>
+            <li><code>MOB_SPAWNING</code>: Regula la aparición de monstruos hostiles en la región.</li>
+            <li><code>EXPLOSIONS</code>: Protege las construcciones contra explosiones de TNT, Creepers y cristales.</li>
+            <li><code>INTERACT</code>: Controla el uso local de contenedores, puertas y mecanismos por parte de no residentes.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

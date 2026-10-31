@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Mercado Global y Tienda</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item active">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Mercado Global y Tienda</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en comercio... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Comercio entre jugadores (Casa de Subastas) y Tienda Oficial del Servidor.</div>
+            <div><span class="badge badge-citizen">Cualquier Jugador</span></div>
+        </div>
+
+        <h1>Mercado Global (Subastas) y Tienda del Servidor</h1>
+        <p>DynamicClaims ofrece dos canales comerciales conectados con tu cuenta bancaria virtual (<code>/dc banco</code>): el <strong>Mercado Global entre Jugadores</strong> y la <strong>Tienda Oficial del Servidor</strong>.</p>
+
+        <h2>1. Comandos de Comercio para Jugadores</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Qué abre o ejecuta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc mercado</code><br><em>(o <code>/dc menu mercado</code>)</em></td>
+                    <td>Abre el catálogo principal del Mercado Global (Casa de Subastas entre jugadores).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc mercado vender &lt;PRECIO&gt;</code></td>
+                    <td>Publica inmediatamente a la venta el ítem que tienes en tu mano principal por el precio indicado en tu moneda nacional (o abre el publicador visual desde el menú).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc mercado ofertas</code></td>
+                    <td>Abre directamente la lista de tus artículos publicados para revisar su estado o cancelarlos y recuperar el ítem.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc mercado cartera</code></td>
+                    <td>Abre tu monedero de pagos pendientes para cobrar las ventas realizadas mientras estabas desconectado.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc tienda</code></td>
+                    <td>Abre la <strong>Tienda Oficial del Servidor</strong> para comprar o vender productos del catálogo administrativo usando tu divisa nacional.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Funcionamiento del Mercado Global (<code>/dc mercado</code>)</h2>
+        <ul>
+            <li><strong>Límite de Publicaciones:</strong> Cada jugador puede mantener hasta <strong>10 ofertas activas</strong> simultáneamente.</li>
+            <li><strong>5 Categorías de Filtro:</strong>
+                <ol>
+                    <li><strong>Armas y Herramientas</strong> (Espada de Diamante)</li>
+                    <li><strong>Armaduras</strong> (Pechera de Diamante)</li>
+                    <li><strong>Bloques y Construcción</strong> (Ladrillos)</li>
+                    <li><strong>Comida y Pociones</strong> (Manzana Dorada)</li>
+                    <li><strong>Misceláneo y Recursos</strong> (Polvo de Redstone)</li>
+                </ol>
+            </li>
+            <li><strong>Compras y Devolución Segura:</strong> Las compras se descuentan de tu saldo bancario virtual. Si cierras la ventana de publicación antes de confirmar, el objeto colocado se devuelve automáticamente a tu inventario.</li>
+        </ul>
+
+        <h2>3. Funcionamiento de la Tienda del Servidor (<code>/dc tienda</code>)</h2>
+        <p>La Tienda del Servidor contiene artículos con precios base definidos en <strong>Oro</strong> por el Staff, pero te cobra y te paga automáticamente en la <strong>divisa oficial de tu nación</strong>:</p>
+        <ul>
+            <li><strong>Conversión Automática por Patrón Oro:</strong> Si tu moneda nacional tiene un respaldo alto en oro, los artículos de <code>/dc tienda</code> te costarán menos unidades de tu moneda. Si tu moneda está devaluada, necesitarás más billetes para comprar el mismo artículo.</li>
+            <li><strong>Modos de Artículo:</strong> Cada producto de la tienda indica en su descripción si admite <strong>Compra y Venta</strong>, <strong>Solo Compra</strong> o <strong>Solo Venta</strong>.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

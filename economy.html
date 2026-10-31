@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Economía, Banco y Divisas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item active">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Economía, Banco y Divisas</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en economía... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Patrón Oro real, emisión monetaria, billetes físicos y cuentas bancarias.</div>
+            <div><span class="badge badge-citizen">Ciudadano</span> <span class="badge badge-leader">Líder / Colíder</span></div>
+        </div>
+
+        <h1>Economía, Banco Nacional y Divisas (Patrón Oro)</h1>
+        <p>En DynamicClaims el dinero no aparece de la nada: cada nación soberana cuenta con su propia moneda respaldada por <strong>lingotes de oro físico</strong> almacenados en la reserva del Banco Central. Esto genera tipos de cambio dinámicos, inflación real por sobreemisión y comercio internacional basado en el valor del oro.</p>
+
+        <h2>1. ¿Cómo se calcula el valor de una moneda?</h2>
+        <p>La cotización unitaria de cualquier divisa frente al oro se calcula automáticamente en todo momento con la fórmula:</p>
+        <div class="code-block">
+            <pre><code>Valor Unitario (en Oro) = Lingotes de Oro en Reserva / Billetes Emitidos en Circulación</code></pre>
+        </div>
+        <ul>
+            <li><strong>Respaldo Fuerte:</strong> Si tu nación deposita más lingotes de oro en su bóveda central sin imprimir más billetes, cada billete vale más oro y tu moneda gana poder adquisitivo en la Tienda del Servidor y frente a monedas extranjeras.</li>
+            <li><strong>Devaluación (Inflación):</strong> Si el gobierno imprime billetes nuevos sin añadir oro a la reserva, el valor unitario de cada billete disminuye proporcionalmente.</li>
+        </ul>
+
+        <h2>2. Comandos de Economía, Banco y Divisas</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Rol Requerido</th>
+                    <th>Función Exacta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc banco</code><br><em>(o <code>/dc menu banco</code>)</em></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Abre tu cuenta en el Banco Nacional para consultar tu saldo virtual y operar con billetes físicos.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc banco depositar</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Abre directamente la bandeja para ingresar billetes físicos de tu inventario y convertirlos en saldo bancario virtual.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc banco retirar</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Abre el selector para retirar saldo virtual de tu cuenta y recibir billetes físicos reales en tu inventario.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc divisas</code><br><em>(o <code>/dc menu divisas</code>)</em></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Muestra el catálogo de todas las monedas del servidor, sus reservas de oro, billetes en circulación y tasa de cambio actual.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc economia</code><br><em>(o <code>/dc menu economia</code>)</em></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Abre la Tesorería Nacional: permite depositar/retirar oro de la reserva estatal y emitir o retirar billetes.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc economia crear-moneda</code></td>
+                    <td><span class="badge badge-leader">Dueño de la Capital</span></td>
+                    <td>Inicia el asistente para fundar la divisa oficial de la nación (código ISO de 3 letras, símbolo y nombre). <em>Exclusivo del dueño de la capital.</em></td>
+                </tr>
+                <tr>
+                    <td><code>/dc economia modelo</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Permite elegir entre los 4 diseños/modelos visuales de textura para los billetes físicos de tu nación.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Billetes Físicos vs. Saldo Bancario Virtual</h2>
+        <ul>
+            <li><strong>Billetes Físicos:</strong> Son ítems en el inventario con metadatos NBT criptográficos (código de divisa, denominación, nación emisora y número de serie). Sirven para intercambios en mano entre jugadores; ten cuidado, ya que si mueres puedes perder los billetes que lleves encima.</li>
+            <li><strong>Saldo Bancario Virtual:</strong> Es el dinero depositado en <code>/dc banco</code>. Está 100% seguro aunque mueras en combate y se utiliza de forma automática para comprar en el <strong>Mercado Global (<code>/dc mercado</code>)</strong> y en la <strong>Tienda del Servidor (<code>/dc tienda</code>)</strong>.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

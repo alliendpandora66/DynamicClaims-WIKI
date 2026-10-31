@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Instalación, Módulos y BD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item active">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>3. Operador</span> <span style="color: #475569;">/</span> <span class="current-page">Instalación, Módulos y BD</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar módulo, BD, auditoría... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner operator">
+            <div><strong>Sección 3: Operador</strong> &mdash; Despliegue del servidor, gestión de los 36 módulos, persistencia SQL y recuperación.</div>
+            <div><span class="badge badge-operator">Operador / Consola</span></div>
+        </div>
+
+        <h1>Instalación, Arquitectura de 36 Módulos, Base de Datos y Mantenimiento</h1>
+        <p>Guía técnica para el propietario u operador del servidor encargada de la instalación, activación de subsistemas, persistencia de datos y diagnóstico de integridad.</p>
+
+        <h2>1. Requisitos del Servidor e Instalación</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Componente</th>
+                    <th>Versión Requerida</th>
+                    <th>Carácter</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Java Runtime (JVM)</strong></td>
+                    <td>Java 21 (LTS)</td>
+                    <td><span class="badge badge-required">Obligatorio</span></td>
+                    <td>Compilado con <code>--release 21</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Servidor Minecraft</strong></td>
+                    <td>Paper 1.21.4 (<code>api-version: 1.21</code>)</td>
+                    <td><span class="badge badge-required">Obligatorio</span></td>
+                    <td>Usa APIs nativas de Paper y Bukkit.</td>
+                </tr>
+                <tr>
+                    <td><strong>PlaceholderAPI</strong></td>
+                    <td>2.12.2+</td>
+                    <td><span class="badge badge-required">Obligatorio</span></td>
+                    <td>Declarado en <code>depend: [PlaceholderAPI]</code> dentro de <code>plugin.yml</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>TAB / LuckPerms / Dynmap / squaremap / WeaponMechanics</strong></td>
+                    <td>Versiones compatibles 1.21</td>
+                    <td><span class="badge badge-optional">Opcional</span></td>
+                    <td>Integraciones automáticas detectadas en <code>softdepend</code>. El Atlas Web propio no requiere Dynmap ni Squaremap.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Los 36 Módulos Configurables y su Grafo de Dependencias</h2>
+        <p>DynamicClaims divide su arquitectura en <strong>36 módulos</strong> declarados bajo <code>modules.&lt;id&gt;.enabled</code> en <code>config.yml</code>. Todos están habilitados por defecto (excepto el servidor HTTP del Atlas Web, que además requiere <code>enabled: true</code> en <code>web-map.yml</code>).</p>
+        <ul>
+            <li><code>/dc admin modulos listar</code>: Muestra el estado de todos los módulos.</li>
+            <li><code>/dc admin modulos configurar &lt;MODULO&gt; info</code>: Muestra su descripción, estado configurado, estado efectivo, dependencias directas/indirectas y módulos dependientes.</li>
+            <li><code>/dc admin modulos configurar &lt;MODULO&gt; &lt;activar|desactivar&gt;</code>: Enciende o apaga un módulo en caliente sin reiniciar el servidor ni perder sus datos guardados.</li>
+        </ul>
+
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Familia</th>
+                    <th>IDs de Módulos en <code>config.yml</code></th>
+                    <th>Relaciones Clave de Dependencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Núcleo Territorial</strong></td>
+                    <td><code>claims</code>, <code>regions</code>, <code>nations</code>, <code>invitations</code>, <code>claim-visualizer</code>, <code>teleportation</code></td>
+                    <td><code>regions</code> y <code>nations</code> dependen de <code>claims</code>. Desactivar <code>claims</code> pausa toda la jerarquía territorial.</td>
+                </tr>
+                <tr>
+                    <td><strong>Diplomacia y Guerra</strong></td>
+                    <td><code>diplomacy</code>, <code>war</code>, <code>warzones</code>, <code>missiles</code>, <code>nuclear-weapons</code>, <code>combat</code>, <code>infamy</code></td>
+                    <td><code>warzones</code> y <code>missiles</code> requieren <code>war</code> y <code>regions</code>. <code>nuclear-weapons</code> requiere <code>missiles</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Política y Sociedad</strong></td>
+                    <td><code>elections</code>, <code>government</code>, <code>ranks</code>, <code>technology</code></td>
+                    <td>Gobernanza nacional, elecciones, rangos (<code>rangos.yml</code>) y árbol científico.</td>
+                </tr>
+                <tr>
+                    <td><strong>Economía y Comercio</strong></td>
+                    <td><code>economy</code>, <code>server-shop</code>, <code>auctions</code></td>
+                    <td><code>server-shop</code> (<code>/dc tienda</code>) y <code>auctions</code> (<code>/dc mercado</code>) dependen de <code>economy</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Producción y Supervivencia</strong></td>
+                    <td><code>industry</code>, <code>resources</code>, <code>crafting</code>, <code>pandemic</code>, <code>guidebook</code>, <code>scaffold-grapple</code></td>
+                    <td><code>scaffold-grapple</code> (<code>/dc andamio</code>) requiere <code>claims</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mapas, Red y Visuales</strong></td>
+                    <td><code>web-map</code>, <code>map-integration</code>, <code>tactical-map</code>, <code>chat</code>, <code>nametags</code>, <code>discord</code>, <code>time</code>, <code>notifications</code></td>
+                    <td><code>web-map</code> requiere <code>claims</code>, <code>regions</code> y <code>nations</code>; sus capas opcionales siguen el estado de cada módulo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Seguridad y Extensión</strong></td>
+                    <td><code>security</code>, <code>scripting</code></td>
+                    <td>Anti-glitch y motor GraalJS con carga perezosa (ahorra ~50 MB de RAM si <code>scripts/</code> está vacío).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Base de Datos (SQLite / MySQL), Auditoría y Recuperación</h2>
+        <p>El plugin opera con <strong>SQLite</strong> activo por defecto (o <strong>MySQL</strong> cambiando <code>database.type: mysql</code> en <code>config.yml</code>) combinando consultas asíncronas (<code>DatabaseManager.runAsync()</code>) con escritura atómica por lotes en archivos YAML (<code>CoalescedAsyncFileWriter</code>):</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando de Operador</th>
+                    <th>Propósito de Mantenimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin recargar</code><br><em>(o <code>/dynamicclaims:dc admin recargar</code>)</em></td>
+                    <td>Ejecuta el plan unificado de recarga (<code>ServiceRegistry.reloadAll()</code>): respalda configuraciones modificadas, migra claves antiguas y recarga gestores, menús y mapas en orden seguro.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin auditar [reparar]</code></td>
+                    <td>Inspecciona la coherencia entre regiones, naciones, claims, capitales y módulos activos. Con <code>reparar</code> corrige desajustes automáticamente.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin diagnostico</code><br><code>/dc admin verificar-integridad</code></td>
+                    <td>Muestra métricas de memoria JVM (<code>MemorySafetyWatchdog</code>), estado de servicios, sesiones del Atlas Web e integridad de datos.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin sanear</code><br><code>/dc admin sincronizar</code></td>
+                    <td>Limpia referencias huérfanas y fuerza la sincronización entre cachés en memoria y almacenamiento persistente.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin migrar-bd</code></td>
+                    <td>Ejecuta la migración de datos territoriales y económicos hacia la base de datos SQL configurada.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin revertir &lt;tiempo (1s,10m,1h,1d)&gt; [action] [target]</code></td>
+                    <td>Revierte acciones registradas en el historial de auditoría dentro de la ventana de tiempo indicada.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin purgar-mapa &lt;nación | all&gt; [min-chunks]</code></td>
+                    <td>Limpia regiones residuales o fragmentos menores al mínimo de chunks especificado.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin uuid info &lt;NACION&gt; [REGION]</code><br><code>/dc admin uuid regenerar &lt;NACION&gt; [REGION]</code></td>
+                    <td>Consulta o regenera el UUID v4 persistente de una nación o región utilizado por integraciones de UltraAPI v2.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

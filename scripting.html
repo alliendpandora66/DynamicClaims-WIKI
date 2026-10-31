@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripting API (GraalJS) - DynamicClaims Wiki</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item active">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>3. Operador</span> <span style="color: #475569;">/</span> <span class="current-page">Scripting API (GraalJS)</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en scripting... (Ctrl+K)" autocomplete="off">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner operator">
+            <div>⚙️ <strong>Sección 3: Operador y Desarrolladores</strong> &mdash; Motor embebido <strong>GraalVM JavaScript</strong> con carga diferida (ahorro de ~50 MB de RAM si no hay scripts) y acceso directo a toda la <code>DynamicClaimsAPI</code>.</div>
+            <div><span class="badge badge-operator">GraalJS Engine</span></div>
+        </div>
+
+        <h1>Motor de Scripting (GraalVM JavaScript)</h1>
+        <p>DynamicClaims integra el motor <strong>GraalJS</strong> para ejecutar scripts en <code>plugins/DynamicClaims/scripts/*.js</code> sin necesidad de compilar un plugin en Java. El motor se inicializa de forma diferida (<em>lazy initialization</em>) únicamente cuando el módulo <code>scripting</code> está activo y existen archivos <code>.js</code> en la carpeta.</p>
+
+        <h2>1. Comandos de Gestión y Ejecución de Scripts</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Permiso / Rol</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin scripts listar</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Muestra todos los scripts activos, su nombre, versión, descripción y estado de carga.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin scripts cargar &lt;archivo.js&gt;</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Carga y evalúa un archivo <code>.js</code> específico desde <code>plugins/DynamicClaims/scripts/</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin scripts descargar &lt;archivo.js&gt;</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Desactiva el script en caliente, desregistrando automáticamente todos sus eventos y comandos.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin scripts recargar</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Vuelca las bases de datos de scripts pendientes a disco, libera la memoria de contextos y recarga todos los <code>.js</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin scripts diagnostico</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Inspecciona el estado del motor GraalJS, scripts cargados y comandos registrados.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc scripts ejecutar &lt;nombre&gt; [argumentos...]</code></td>
+                    <td><span class="badge-user">Jugador</span></td>
+                    <td>Ejecuta un comando registrado por un script mediante <code>DynamicClaimsAPI.registerCommand(nombre, fn)</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Variables Globales Inyectadas en cada Script</h2>
+        <p>Al evaluarse un archivo <code>.js</code>, <code>ScriptManager</code> inyecta automáticamente los siguientes objetos globales en el contexto del script:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Objeto Global</th>
+                    <th>Tipo Java Real</th>
+                    <th>Métodos y Utilidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>DynamicClaimsAPI</code><br>(o su alias <code>api</code>)</td>
+                    <td><code>com.wwcstudios.scripting.DynamicClaimsAPI</code></td>
+                    <td>Hereda los <strong>14 dominios completos</strong> de <a href="developer.html"><code>com.wwcstudios.api.DynamicClaimsAPI</code></a> (regiones, naciones, UUIDs, divisas, oro, guerras, tecnología, pandemias, etc.) y añade:<br>
+                    • <code>onEvent(eventClassName, callback)</code><br>
+                    • <code>registerCommand(commandName, callback)</code><br>
+                    • <code>getScriptDatabase(dbName)</code></td>
+                </tr>
+                <tr>
+                    <td><code>Script</code><br>(o su alias <code>script</code>)</td>
+                    <td><code>ScriptManager.ScriptHelper</code></td>
+                    <td>Define los metadatos del script que se muestran en <code>/dc admin scripts listar</code>:<br>
+                    • <code>Script.setName("Nombre")</code><br>
+                    • <code>Script.setVersion("1.0")</code><br>
+                    • <code>Script.setDescription("Descripción...")</code></td>
+                </tr>
+                <tr>
+                    <td><code>plugin</code></td>
+                    <td><code>com.wwcstudios.App</code></td>
+                    <td>Instancia principal del plugin DynamicClaims.</td>
+                </tr>
+                <tr>
+                    <td><code>server</code></td>
+                    <td><code>org.bukkit.Server</code></td>
+                    <td>Servidor de Bukkit (`Bukkit.getServer()`), útil para consultar jugadores conectados o mundos.</td>
+                </tr>
+                <tr>
+                    <td><code>logger</code></td>
+                    <td><code>java.util.logging.Logger</code></td>
+                    <td>Logger del plugin (`logger.info(...)`, `logger.warning(...)`, `logger.severe(...)`).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Persistencia de Datos por Script (`ScriptDatabase`)</h2>
+        <p>Cada script puede crear o abrir su propio archivo YAML persistente en <code>plugins/DynamicClaims/scripts/data/&lt;dbName&gt;.yml</code> mediante <code>DynamicClaimsAPI.getScriptDatabase(dbName)</code>. La escritura a disco utiliza <code>CoalescedAsyncFileWriter</code> y <code>DeferredSave</code> para no bloquear el hilo principal:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Método de `ScriptDatabase`</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>db.set(String key, Object value)</code></td>
+                    <td>Asigna un valor a la clave YAML y programa un guardado diferido automático en segundo plano.</td>
+                </tr>
+                <tr>
+                    <td><code>db.get(String key, Object def)</code></td>
+                    <td>Obtiene un objeto genérico o devuelve <code>def</code> si no existe.</td>
+                </tr>
+                <tr>
+                    <td><code>db.getInt(String key, int def)</code></td>
+                    <td>Obtiene un entero (<code>int</code>) o devuelve el valor por defecto <code>def</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>db.getDouble(String key, double def)</code></td>
+                    <td>Obtiene un número decimal (<code>double</code>) o devuelve <code>def</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>db.getString(String key, String def)</code></td>
+                    <td>Obtiene una cadena de texto (<code>String</code>) o devuelve <code>def</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>db.getBoolean(String key, boolean def)</code></td>
+                    <td>Obtiene un booleano (<code>true</code>/<code>false</code>) o devuelve <code>def</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>db.save()</code> / <code>db.saveIfDirty()</code></td>
+                    <td>Fuerza la serialización y escritura asíncrona inmediata si hubo cambios.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Ejemplos Reales Funcionando</h2>
+
+        <h3>Ejemplo 1: Sistema de Prestigio Nacional por Construcción (`prestige_system.js`)</h3>
+        <p>Este script incluido en el repositorio otorga puntos de prestigio a una nación cuando sus ciudadanos construyen dentro de su territorio y deposita oro de recompensa en su reserva nacional:</p>
+        <pre><code>// ==========================================
+// SCRIPT: Sistema de Prestigio por Construcción
+// Archivo: plugins/DynamicClaims/scripts/prestige_system.js
+// ==========================================
+
+Script.setName("Nation Prestige System");
+Script.setVersion("1.0");
+Script.setDescription("Otorga +1 de Prestigio a una nación por cada bloque colocado.");
+
+var prestigeData = DynamicClaimsAPI.getScriptDatabase("prestige_data");
+
+DynamicClaimsAPI.onEvent("org.bukkit.event.block.BlockPlaceEvent", function(event) {
+    var player = event.getPlayer();
+    var blockLocation = event.getBlock().getLocation();
+
+    var regionName = DynamicClaimsAPI.getRegionAt(blockLocation);
+    if (regionName == null) {
+        return;
+    }
+
+    var nationName = DynamicClaimsAPI.getNationOfRegion(regionName);
+    if (nationName != null) {
+        var currentPrestige = prestigeData.getInt(nationName + "_prestige", 0);
+        var newPrestige = currentPrestige + 1;
+        prestigeData.set(nationName + "_prestige", newPrestige);
+
+        if (newPrestige % 100 === 0) {
+            DynamicClaimsAPI.broadcastMessage("§e¡La nación §6" + nationName + " §eha alcanzado §b" + newPrestige + " §epuntos de Prestigio!");
+            DynamicClaimsAPI.addNationBalance(nationName, 50.0);
+        }
+    }
+});
+
+// Ejecutable por cualquier jugador con: /dc scripts ejecutar prestigio
+DynamicClaimsAPI.registerCommand("prestigio", function(sender, args) {
+    if (sender instanceof org.bukkit.entity.Player) {
+        var playerNation = DynamicClaimsAPI.getNationOfPlayer(sender.getUniqueId());
+        if (playerNation == null) {
+            sender.sendMessage("§cNo perteneces a ninguna nación para consultar tu prestigio.");
+            return true;
+        }
+
+        var currentPrestige = prestigeData.getInt(playerNation + "_prestige", 0);
+        sender.sendMessage("§aEl prestigio estructural de tu nación (§e" + playerNation + "§a) es: §b" + currentPrestige + " puntos.");
+    } else {
+        sender.sendMessage("Este comando es solo para jugadores.");
+    }
+    return true;
+});</code></pre>
+
+        <h3>Ejemplo 2: Escuchar Eventos Geopolíticos de DynamicClaims</h3>
+        <p>Puedes pasar el nombre completo de cualquier clase de <code>com.wwcstudios.events.*</code> a <code>api.onEvent(...)</code>:</p>
+        <pre><code>Script.setName("Crónicas de Guerra");
+Script.setVersion("1.2");
+Script.setDescription("Registra estadísticas históricas de guerras y tecnologías.");
+
+var warDb = api.getScriptDatabase("cronicas_guerra");
+
+api.onEvent("com.wwcstudios.events.WarStartEvent", function(event) {
+    var atacante = event.getInvadingNation();
+    var defensor = event.getDefendingNation();
+    var objetivo = event.getGoal().getDisplayName();
+
+    var total = warDb.getInt("guerras_iniciadas", 0) + 1;
+    warDb.set("guerras_iniciadas", total);
+
+    api.broadcastMessage("§4⚔ [Crónicas #" + total + "] §c" + atacante + " §7ha iniciado una guerra de §e" + objetivo + " §7contra §9" + defensor + "§7.");
+});
+
+api.onEvent("com.wwcstudios.events.TechnologyResearchedEvent", function(event) {
+    var nacion = event.getNationName();
+    var techId = event.getTechnologyId();
+    var techNombre = api.getTechName(techId);
+    logger.info("[Ciencia] La nación " + nacion + " completó la tecnología: " + techNombre);
+});</code></pre>
+
+        <footer class="footer">
+            <div>DynamicClaims Wiki Oficial — Documentación 100% Verificada</div>
+            <div>Sección: 3. Operador y Desarrolladores</div>
+        </footer>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

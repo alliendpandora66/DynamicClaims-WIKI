@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Wiki Oficial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item active">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span class="current-page">Inicio</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en la wiki... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;"><img src="icono.png" alt="DynamicClaims" style="width: 52px; height: 52px; object-fit: contain; border-radius: 10px; filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.4));"><h1 style="margin-bottom: 0;">DynamicClaims: Documentación Oficial</h1></div>
+        <p><strong>DynamicClaims</strong> es una plataforma geopolítica integral para servidores Paper (compilada para Paper 1.21.4 con Java 21). Unifica territorios, naciones, elecciones, guerra civil, guerras tácticas, misiles, economía con Patrón Oro, industria autónoma, pandemias y un Atlas Web propio dentro de un solo comando raíz: <code>/dc</code>.</p>
+
+        <div class="note-box tip">
+            <p><strong>¿Cómo está organizada esta Wiki?</strong> Para evitar confusiones entre lo que puede hacer un jugador normal y lo que requiere permisos administrativos o acceso a los archivos del servidor, toda la documentación se divide en <strong>3 secciones independientes</strong>: <strong>1. Usuario / Jugador Común</strong>, <strong>2. Staff</strong> y <strong>3. Operador</strong>.</p>
+        </div>
+
+        <h2>Resumen Rápido: ¿Qué puede hacer cada perfil?</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Perfil / Cargo</th>
+                    <th>Cómo se obtiene</th>
+                    <th>Qué puede hacer realmente en el servidor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-citizen">Ciudadano / Jugador</span></td>
+                    <td>Entrar al servidor y unirse a una región (<code>/dc unirse &lt;REGION&gt;</code>)</td>
+                    <td>Usar <code>/dc menu</code>, teletransportarse a su región (<code>/dc inicio</code>), votar en elecciones (<code>/dc elecciones</code>) y aprobación de gobierno (<code>/dc gobierno</code>), usar el banco (<code>/dc banco</code>), comerciar en subastas (<code>/dc mercado</code>) y tienda (<code>/dc tienda</code>), donar XP a ciencia (<code>/dc tecnologias donar</code>), usar el mapa táctico (<code>/dc mapa</code>), entrar al Atlas Web (<code>/dc mapa-web</code>) y reclamar recompensas de rango (<code>/dc rango</code>).</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-military">Militar Activo</span></td>
+                    <td>Designado por el Líder o Colíder en <code>/dc poblacion</code> (dentro del cupo <code>max-soldiers</code>)</td>
+                    <td><strong>Requisito obligatorio para guerras:</strong> Solo los ciudadanos con rango militar reconocido y plaza activa pueden conquistar o defender chunks, participar en Zonas de Guerra, sumar bajas bélicas, recibir efectos de moral y usar la reaparición del frente.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-mayor">Alcalde / Dueño Regional</span></td>
+                    <td>Asignado a una región o nombrado desde <code>/dc menu</code></td>
+                    <td>Fijar el punto de aparición local (<code>/dc establecer-inicio</code>), invitar ciudadanos a su región (<code>/dc invitar &lt;JUGADOR&gt;</code>), gestionar banderas locales y (si el servidor activa <code>claims.allow-region-owners: true</code>) reclamar/liberar chunks desde el <strong>Atlas Web</strong>.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-leader">Líder / Colíder Nacional</span></td>
+                    <td>Dueño de la capital, ganador electoral, canje de <code>/dc codigo &lt;CODIGO&gt;</code> o nombrado con <code>/dc nacion asignar-colider</code></td>
+                    <td>Promulgar las 7 Leyes Nacionales (<code>/dc leyes</code>), dirigir la diplomacia, alianzas, guerras y vasallaje (<code>/dc diplomacia</code>), administrar la tesorería y emitir billetes (<code>/dc economia</code>), investigar tecnologías (<code>/dc tecnologias</code>), asignar rangos militares y expulsar ciudadanos (<code>/dc poblacion</code>). <em>Nota: Crear la moneda inicial y degradar colíderes es exclusivo del Líder/Dueño de Capital.</em></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-staff">Staff (In-Game)</span></td>
+                    <td>Permiso <code>dynamicclaims.command.admin</code>, <code>dynamicclaims.admin</code> u <code>OP</code></td>
+                    <td>Fundar regiones y naciones (<code>/dc region crear</code>, <code>/dc nacion crear</code>), reclamar/liberar chunks por comando (<code>/dc reclamar</code>, <code>/dc liberar</code>), generar códigos de liderazgo (<code>/dc admin codigos</code>), moderar jugadores, arbitrar guerras/pandemias/elecciones y usar los editores gráficos in-game de industria, tienda, recursos, crafteos y rangos.</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-operator">Operador / Dev</span></td>
+                    <td>Acceso a consola, archivos <code>plugins/DynamicClaims/</code> y código</td>
+                    <td>Activar/desactivar los 36 módulos (<code>/dc admin modulos</code>), configurar YAML y base de datos SQLite/MySQL, desplegar el servidor HTTP del Atlas Web (<code>web-map.yml</code>), vincular Dynmap/Squaremap y Discord Bot/Webhook, importar mapas GeoJSON/ZNodes, ejecutar auditorías/rollbacks y programar con PlaceholderAPI, GraalJS o UltraAPI v2.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>1. Sección: Usuario / Jugador Común</h2>
+        <p>Guía pensada para jugadores, ciudadanos, soldados, alcaldes y presidentes de naciones. No incluye comandos administrativos para que puedas consultar tus mecánicas de juego sin ruido técnico.</p>
+        <div class="card-grid">
+            <div class="card">
+                <h3>🌍 Territorios, Ciudadanía y Leyes</h3>
+                <p>Cómo unirte a una región o nación, usar un código de liderazgo, teletransportarte a tu hogar y configurar las 7 leyes constitucionales y 5 banderas regionales.</p>
+                <a href="nations.html">Abrir guía territorial &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🎖️ Cargos, Elecciones y Rangos</h3>
+                <p>Diferencia exacta entre Cargos Políticos, Elecciones Democráticas de partidos, Rangos Militares (con cupo nacional) y Rangos VIP del servidor.</p>
+                <a href="roles.html">Ver cargos y rangos &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🏛️ Gobierno y Guerra Civil</h3>
+                <p>Votación de aprobación o rechazo al mandato actual, postulación de líderes rebeldes opositores y cómo estalla una Guerra Civil al superar el 51% de descontento.</p>
+                <a href="government.html">Ver sistema político &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>⚔️ Guerras, Asedios y Misiles</h3>
+                <p>Declaración de guerra, modos de conquista, balanceo por soldados, estados títeres, Zonas de Guerra, misiles, armas nucleares, radiación e infamia.</p>
+                <a href="wars.html">Ver módulo bélico &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>💰 Economía, Banco y Divisas</h3>
+                <p>Funcionamiento del Patrón Oro real, creación e impresión de billetes físicos con número de serie, tipos de cambio y depósitos/retiros en el Banco Nacional.</p>
+                <a href="economy.html">Ver economía y banco &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🛒 Mercado Global y Tienda</h3>
+                <p>Cómo comprar y vender objetos entre jugadores en la Casa de Subastas (<code>/dc mercado</code>) y cómo operar con la Tienda Oficial del Servidor (<code>/dc tienda</code>).</p>
+                <a href="auctions.html">Ver comercio &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🔬 Tecnología e Investigación</h3>
+                <p>Árbol científico de 4 ramas (Industria, Ciencia, Militar, Sociedad), requisitos por fecha/nodo y donación ciudadana de experiencia (<code>/dc tecnologias donar</code>).</p>
+                <a href="technology.html">Ver árbol tecnológico &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🏭 Industria y Edificios</h3>
+                <p>Colocación de edificios con previsualización holográfica 3D, ciclos de producción autónoma, almacenes regionales, recetas en fábricas y aeropuertos.</p>
+                <a href="industry.html">Ver industria &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>☣️ Pandemias y Vacunas</h3>
+                <p>Contagio fronterizo, incubación, los 5 niveles de síntomas y cómo cooperar entre naciones aliadas (+20% velocidad) para sintetizar una vacuna.</p>
+                <a href="pandemic.html">Ver bioseguridad &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🗺️ Chat, Mapas y Utilidades</h3>
+                <p>Canales de chat, Minimapa Táctico en mano (con zoom tecla F), acceso y uso del Atlas Web Integrado (<code>/dc mapa-web</code>) y desplazamiento en andamios.</p>
+                <a href="localization.html">Ver chat y mapas &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🖥️ Menú Principal (/dc menu)</h3>
+                <p>Referencia de los 14 paneles gráficos interactivos, atajos directos por comando, controles estándar de navegación y el Códice de Guía (<code>/dc guia</code>).</p>
+                <a href="gui.html">Ver interfaces GUI &rarr;</a>
+            </div>
+        </div>
+
+        <h2>2. Sección: Staff (Moderación y Gestión en el Juego)</h2>
+        <p>Manual práctico para moderadores, constructores y administradores que operan dentro de Minecraft organizando naciones, asistiendo a usuarios y creando contenido desde interfaces gráficas.</p>
+        <div class="card-grid">
+            <div class="card">
+                <h3>🛡️ Jugadores, Territorios y Códigos</h3>
+                <p>Creación administrativa de regiones y naciones, reclamo de chunks, gestión de roles de jugadores, códigos de liderazgo (<code>/dc admin codigos</code>) y Chat Spy.</p>
+                <a href="staff.html">Ir a guía de moderación &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>⚖️ Arbitraje: Guerras, Gobierno y Eventos</h3>
+                <p>Control de guerras y treguas, cupos militares por nación, estados títeres, elecciones, bloqueo de leyes, creación de pandemias, radiación y reloj RP.</p>
+                <a href="staff-events.html">Ir a control de eventos &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🧰 Editores In-Game y Catálogos</h3>
+                <p>Cómo diseñar estructuras y tipos industriales, configurar la tienda del servidor, crear minerales con drops, recetas de crafteo, divisas y rangos sin tocar YAML.</p>
+                <a href="staff-content.html">Ir a editores in-game &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>⌨️ Catálogo Oficial de Comandos</h3>
+                <p>Tabla de referencia completa y autogenerada con todas las rutas de <code>/dc</code>, su sintaxis exacta de argumentos y el nivel de acceso requerido.</p>
+                <a href="commands.html">Ver todos los comandos &rarr;</a>
+            </div>
+        </div>
+
+        <h2>3. Sección: Operador (Administración Técnica, Archivos y API)</h2>
+        <p>Documentación de ingeniería para dueños de servidor, encargados de infraestructura y desarrolladores de plugins o scripts.</p>
+        <div class="card-grid">
+            <div class="card">
+                <h3>⚙️ Instalación, Módulos (36) y BD</h3>
+                <p>Requisitos del servidor, gestión en caliente de los 36 módulos con su grafo de dependencias, SQLite/MySQL, auditorías, diagnóstico y rollback.</p>
+                <a href="operator.html">Ver manual de operador &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>📄 Configuración Técnica (YAML)</h3>
+                <p>Catálogo de las 24 configuraciones editables, sistema de respaldos automáticos y referencia actualizada de <code>config.yml</code>.</p>
+                <a href="configuration.html">Ver configuración YAML &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>🌐 Atlas Web, Dynmap y Squaremap</h3>
+                <p>Despliegue HTTP/HTTPS del Atlas Web Integrado (<code>web-map.yml</code>), renderizado completo, fuentes, banderas, skins y tarjetas de <code>dynmap.yml</code>.</p>
+                <a href="dynmap.html">Ver configuración de mapas &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>💬 Discord (Webhook y Bot JDA)</h3>
+                <p>Configuración real de alertas por Webhook asíncrono y puesta en marcha del Bot JDA con panel interactivo de naciones y menciones tácticas.</p>
+                <a href="discord.html">Ver integración Discord &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>⛏️ Recursos, Anti-Exploit y GeoJSON</h3>
+                <p>Configuración de <code>recursos_drops.yml</code>, <code>PlacedBlockTracker</code>, <code>vehiculos.yml</code> e importación de mapas reales desde GeoJSON y ZNodes.</p>
+                <a href="resources.html">Ver recursos e importación &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>📊 Variables PlaceholderAPI</h3>
+                <p>Catálogo completo de placeholders estándar (nación, economía, combate, cupo militar) y relacionales (<code>%rel_dynamicclaims_*%</code>) con ejemplos para TAB.</p>
+                <a href="placeholders.html">Ver placeholders &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>📜 Scripting API (GraalJS)</h3>
+                <p>Creación de scripts JavaScript en caliente en <code>scripts/</code>, eventos Bukkit, base de datos SQLite por script y ejecución vía <code>/dc scripts ejecutar</code>.</p>
+                <a href="scripting.html">Ver Scripting API &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>💻 Java API y UltraAPI v2</h3>
+                <p>Integración Maven, fachada <code>DynamicClaimsAPI</code>, eventos Spigot y el servicio <code>UltraAPI v2</code> (289 firmas, UUIDs territoriales, leyes custom y capas web).</p>
+                <a href="developer.html">Ver Portal de Desarrolladores &rarr;</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java API y UltraAPI v2 - DynamicClaims Wiki</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item active">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>3. Operador</span> <span style="color: #475569;">/</span> <span class="current-page">Java API y UltraAPI v2</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar método o evento... (Ctrl+K)" autocomplete="off">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner operator">
+            <div>⚙️ <strong>Sección 3: Operador y Desarrolladores</strong> &mdash; Guía técnica oficial de <strong>UltraAPI v2</strong> (289 operaciones públicas), <code>DynamicClaimsAPI</code>, snapshots inmutables <code>UltraData</code>, capas del Atlas Web y eventos de Bukkit.</div>
+            <div><span class="badge badge-operator">Developer SDK</span></div>
+        </div>
+
+        <h1>Java API (`DynamicClaimsAPI`) y UltraAPI v2</h1>
+        <p>DynamicClaims expone dos puntos de integración públicos para plugins de Paper / Spigot (Java 21):</p>
+        <ul>
+            <li><strong>UltraAPI v2 (<code>com.wwcstudios.api.ultra.*</code>):</strong> Servicio desacoplado registrado en el <code>ServicesManager</code> de Bukkit con <strong>289 operaciones públicas</strong> (273 de gameplay en <code>UltraGameplay</code> + 16 de dibujo vectorial en el Atlas Web vía <code>UltraLayer</code>). Retorna records inmutables definidos en <code>UltraData</code> sin exponer managers internos.</li>
+            <li><strong>Fachada Singleton (<code>com.wwcstudios.api.DynamicClaimsAPI</code>):</strong> Acceso directo mediante <code>DynamicClaimsAPI.get()</code> a los 14 subsistemas geopolíticos del plugin.</li>
+        </ul>
+
+        <h2>1. Dependencia Maven y `plugin.yml`</h2>
+        <p>Al compilar el proyecto se generan dos artefactos: el plugin completo y el contrato ligero <code>DynamicClaims-0.1Beta1-ultra-api.jar</code>. Declara la dependencia con <code>&lt;scope&gt;provided&lt;/scope&gt;</code> (no reubiques ni empaquetes las clases de UltraAPI dentro de tu JAR):</p>
+        <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.wwcstudios&lt;/groupId&gt;
+    &lt;artifactId&gt;DynamicClaims&lt;/artifactId&gt;
+    &lt;version&gt;0.1Beta1&lt;/version&gt;
+    &lt;classifier&gt;ultra-api&lt;/classifier&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+
+        <p>En el archivo <code>plugin.yml</code> de tu plugin consumidor:</p>
+        <pre><code>name: MiAddonGeopolitico
+version: "1.0.0"
+main: com.ejemplo.MiPlugin
+api-version: "1.20"
+softdepend:
+  - DynamicClaims</code></pre>
+
+        <h2>2. Descubrimiento del Servicio, Hilos y Concurrencia</h2>
+        <p>Descubre <code>UltraAPI</code> a través del <code>ServicesManager</code> de Bukkit. Las llamadas síncronas de <code>UltraGameplay</code> se ejecutan de forma segura en el hilo principal de Bukkit y devuelven copias inmutables (incluyendo clones de <code>Location</code>). Si consultas desde un hilo asíncrono o worker SQL, utiliza <code>game.executeAsync(...)</code>:</p>
+        <pre><code>import com.wwcstudios.api.ultra.UltraAPI;
+import com.wwcstudios.api.ultra.UltraGameplay;
+import com.wwcstudios.api.ultra.UltraData.*;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+public void consultarEstado(Player player, Player victim) {
+    UltraAPI ultra = Bukkit.getServicesManager().load(UltraAPI.class);
+    if (ultra == null || !ultra.isGameplayAvailable()) return;
+
+    UltraGameplay game = ultra.game();
+
+    // Consultas síncronas desde el hilo principal de Bukkit
+    PlayerStatus estado = game.getPlayerStatus(player.getUniqueId());
+    RegionStatus territorio = game.getRegionStatus("Aurora_Capital");
+    DiplomacyStatus diplomacia = game.getDiplomacyStatus("Aurora", "Boreal");
+    PvpDecision pvp = game.getPvpDecision(player, victim);
+
+    // Modificación administrativa directa
+    game.setNationPvpEnabled("Aurora", false);
+
+    // Desde un worker asíncrono o callback SQL: se ejecuta en Bukkit sin bloquear tu hilo
+    game.executeAsync(api -&gt; api.getPlayerStatus(player.getUniqueId()))
+        .thenAccept(snapshot -&gt; getLogger().info("En combate: " + snapshot.combat()));
+}</code></pre>
+
+        <div class="note-box warning">
+            <p><strong>Regla de oro con <code>executeAsync</code>:</strong> Nunca llames a <code>.join()</code> ni <code>.get()</code> sobre el <code>CompletableFuture</code> desde el hilo principal de Bukkit para evitar interbloqueos (deadlocks). Al recargar o reiniciar DynamicClaims, vuelve a descubrir el servicio con <code>ServicesManager.load(UltraAPI.class)</code>.</p>
+        </div>
+
+        <h2>3. UUIDs Persistentes de Regiones y Naciones</h2>
+        <p>Las regiones y naciones cuentan con un <code>UUID</code> v4 inmutable (persistido en YAML y SQL) que se mantiene intacto aunque el territorio sea renombrado (ej. de <code>Polonia_Norte</code> a <code>Alemania_Norte</code>) o transferido tras una guerra. Guarda siempre el <code>UUID</code> en la base de datos de tu plugin y resuelve el nombre vigente en memoria:</p>
+        <pre><code>import com.wwcstudios.api.ultra.UltraAPI;
+import com.wwcstudios.api.ultra.UltraGameplay;
+import com.wwcstudios.api.ultra.UltraData.*;
+import java.util.UUID;
+
+// 1. Obtener el UUID persistente para guardarlo en tu plugin
+UUID regionId = game.getRegionUUID("Aurora_Puerto");
+UUID nationId = game.getNationUUID("Aurora");
+
+// 2. Consultar estado directamente por UUID o resolver su nombre actual en O(1)
+RegionStatus region = game.getRegionStatusByUUID(regionId);
+NationStatus nation = game.getNationStatusByUUID(nationId);
+String currentRegionName = game.getRegionNameByUUID(regionId);
+String currentNationName = game.getNationNameByUUID(nationId);
+
+// 3. Patrón recomendado para consumidores asíncronos: resolver y mutar en el mismo bloque
+game.executeAsync(api -&gt; {
+    String current = api.getRegionNameByUUID(regionId);
+    if (current == null) return false; // La región fue eliminada o su UUID regenerado
+    api.setRegionDescription(current, "Zona portuaria comercial");
+    api.setRegionFlag(current, "explosions", false);
+    return true;
+});</code></pre>
+
+        <h2>4. Leyes Nacionales y Flags Regionales de Otros Plugins</h2>
+        <p>Tu plugin puede registrar sus propias <strong>leyes nacionales</strong> (ámbito <code>RuleScope.NATION</code>) y <strong>flags regionales</strong> (ámbito <code>RuleScope.REGION</code>) con nombre, descripción, valor por defecto e icono de inventario. DynamicClaims persiste automáticamente sus valores en YAML/SQL, sincroniza las leyes nacionales en todas las regiones del país e inyecta un menú paginado en <code>/dc leyes</code> (botón <em>Leyes de otros plugins</em> en el slot 47) y autocompletado en <code>/dc admin region bandera</code>:</p>
+        <pre><code>import com.wwcstudios.api.ultra.UltraAPI;
+import com.wwcstudios.api.ultra.UltraGameplay;
+import com.wwcstudios.api.ultra.UltraData.*;
+import com.wwcstudios.api.ultra.CustomRuleChangeEvent;
+import org.bukkit.Material;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerTeleportEvent;
+
+public class ReglasAddonListener implements Listener {
+    private String leyTeletransporte;
+    private String flagPortales;
+    private UltraGameplay game;
+
+    public void registrarReglas( org.bukkit.plugin.Plugin miPlugin, UltraGameplay game) {
+        this.game = game;
+
+        // Devuelve la clave con namespace automático: "miplugin:teletransporte"
+        this.leyTeletransporte = game.registerNationLaw(miPlugin, "teletransporte",
+            new RuleOptions("Permitir Teletransporte", "Permite usar /tpa dentro de la nación", true, Material.ENDER_PEARL));
+
+        // Devuelve la clave con namespace automático: "miplugin:portales"
+        this.flagPortales = game.registerRegionFlag(miPlugin, "portales",
+            new RuleOptions("Portales Dimensionales", "Permite cruzar portales en esta región", true, Material.OBSIDIAN));
+    }
+
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent event) {
+        String region = game.getRegionAt(event.getTo());
+        if (region == null) return;
+
+        // getEffectiveRegionFlags combina flags locales + leyes nacionales heredadas
+        Boolean permitido = game.getEffectiveRegionFlags(region).get(leyTeletransporte);
+        if (Boolean.FALSE.equals(permitido)) {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage("§cEsta nación ha prohibido el teletransporte por ley.");
+        }
+    }
+
+    @EventHandler
+    public void onCustomRuleChange(CustomRuleChangeEvent event) {
+        CustomRule rule = event.getRule();
+        String destino = event.getTargetName(); // Nombre de la nación o región
+        boolean antes = event.getPreviousValue();
+        boolean ahora = event.getValue();
+        Bukkit.getLogger().info("[Regla Externa] " + rule.key() + " en " + destino + ": " + antes + " -> " + ahora);
+    }
+}</code></pre>
+
+        <h2>5. Capas Vectoriales en el Atlas Web (`UltraLayer` y `AtlasDrawing`)</h2>
+        <p>El servicio <code>UltraAPI</code> permite publicar marcadores, líneas, polígonos (con huecos), círculos y etiquetas de texto rotables sobre el <a href="dynmap.html">Mapa Web Integrado (Atlas Web)</a> sin depender de Dynmap ni Squaremap. Registra la capa en el hilo principal; una vez obtenida la instancia de <code>UltraLayer</code>, puedes invocar <code>put</code>, <code>putAll</code>, <code>remove</code>, <code>clear</code> o <code>close</code> desde <strong>cualquier hilo</strong>:</p>
+        <pre><code>import com.wwcstudios.api.ultra.UltraAPI;
+import com.wwcstudios.api.ultra.UltraLayer;
+import com.wwcstudios.api.ultra.LayerOptions;
+import com.wwcstudios.api.ultra.AtlasDrawing;
+import java.util.List;
+import java.util.UUID;
+
+// 1. Registrar capa en el hilo principal con icono personalizado en el panel "Capas"
+UltraLayer layer = ultra.registerLayer(
+    this,
+    "rutas_comerciales",
+    LayerOptions.of("Rutas Comerciales").withIcon(AtlasDrawing.Icon.ANCHOR)
+);
+
+// 2. Publicar dibujos inmutables (thread-safe y atómico con putAll)
+UUID worldId = Bukkit.getWorld("world").getUID();
+AtlasDrawing.Style estiloAzul = new AtlasDrawing.Style("#81d4fa", "#2196f3", 2.0, 0.85);
+
+layer.putAll(List.of(
+    new AtlasDrawing.Marker(
+        "puerto_central",
+        worldId,
+        new AtlasDrawing.Point(120.0, -80.0),
+        AtlasDrawing.Icon.ANCHOR,
+        20.0,
+        estiloAzul,
+        new AtlasDrawing.Info("Puerto Central", "Salida marítima principal de mercancías.")
+    ),
+    new AtlasDrawing.Polyline(
+        "ruta_maritima_1",
+        worldId,
+        List.of(new AtlasDrawing.Point(120.0, -80.0), new AtlasDrawing.Point(340.0, 160.0)),
+        estiloAzul,
+        new AtlasDrawing.Info("Ruta Comercial Norte", "Puerto Central → Mercado Continental")
+    ),
+    new AtlasDrawing.Circle(
+        "zona_exclusiva",
+        worldId,
+        new AtlasDrawing.Point(120.0, -80.0),
+        75.0,
+        AtlasDrawing.Style.of("#38bdf8"),
+        new AtlasDrawing.Info("Aguas Portuarias", "Radio de protección de 75 bloques")
+    )
+));</code></pre>
+
+        <h3>Tipos de Dibujo en `AtlasDrawing`</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Record (`AtlasDrawing.*`)</th>
+                    <th>Firma del Constructor</th>
+                    <th>Límites y Validaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Marker</code></td>
+                    <td><code>new Marker(String id, UUID world, Point position, Icon icon, double size, Style style, Info info)</code></td>
+                    <td><code>size</code>: <code>3.0</code> a <code>48.0</code> píxeles de pantalla.</td>
+                </tr>
+                <tr>
+                    <td><code>Polyline</code></td>
+                    <td><code>new Polyline(String id, UUID world, List&lt;Point&gt; points, Style style, Info info)</code></td>
+                    <td>De <code>2</code> a <code>4096</code> vértices (coordenadas de bloque X/Z).</td>
+                </tr>
+                <tr>
+                    <td><code>Polygon</code></td>
+                    <td><code>new Polygon(String id, UUID world, List&lt;Point&gt; outer, List&lt;List&lt;Point&gt;&gt; holes, Style style, Info info)</code></td>
+                    <td>Mínimo <code>3</code> vértices por anillo, hasta <code>128</code> huecos (<code>holes</code>) y <code>4096</code> puntos totales.</td>
+                </tr>
+                <tr>
+                    <td><code>Circle</code></td>
+                    <td><code>new Circle(String id, UUID world, Point center, double radius, Style style, Info info)</code></td>
+                    <td><code>radius</code>: <code>0.1</code> a <code>1,000,000</code> bloques.</td>
+                </tr>
+                <tr>
+                    <td><code>Label</code></td>
+                    <td><code>new Label(String id, UUID world, Point position, String text, double fontSize, double rotation, Style style, Info info)</code></td>
+                    <td><code>text</code>: hasta 120 caracteres; <code>fontSize</code>: <code>8..64</code> px; <code>rotation</code>: <code>-180..180</code> grados.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Catálogo de los 39 Iconos Vectoriales (`AtlasDrawing.Icon`)</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Constantes de `AtlasDrawing.Icon`</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Formas Geométricas (8)</strong></td>
+                    <td><code>DOT</code>, <code>PIN</code>, <code>STAR</code>, <code>DIAMOND</code>, <code>SQUARE</code>, <code>TRIANGLE</code>, <code>HEXAGON</code>, <code>CROSS</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Lugares y Edificios (9)</strong></td>
+                    <td><code>FLAG</code>, <code>HOME</code>, <code>CASTLE</code>, <code>SHOP</code>, <code>FACTORY</code>, <code>MINE</code>, <code>HOSPITAL</code>, <code>PORTAL</code>, <code>BED</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Naturaleza y Recursos (5)</strong></td>
+                    <td><code>TREE</code>, <code>FARM</code>, <code>MOUNTAIN</code>, <code>GEM</code>, <code>CHEST</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Navegación y Mapas (5)</strong></td>
+                    <td><code>ANCHOR</code>, <code>BOAT</code>, <code>COMPASS</code>, <code>WAYPOINT</code>, <code>MAP</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Combate, Peligro y Símbolos (8)</strong></td>
+                    <td><code>SHIELD</code>, <code>SWORDS</code>, <code>HEART</code>, <code>SKULL</code>, <code>WARNING</code>, <code>RADIATION</code>, <code>BOLT</code>, <code>BOOK</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Capas e Interfaz (4)</strong></td>
+                    <td><code>LAYERS</code>, <code>LABEL</code>, <code>GRID</code>, <code>USERS</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>6. Snapshots y Records Inmutables (`UltraData`)</h2>
+        <p>Todas las consultas agrupadas de <code>UltraGameplay</code> retornan records inmutables definidos en <code>com.wwcstudios.api.ultra.UltraData</code>:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Record / Enum (`UltraData.*`)</th>
+                    <th>Campos / Componentes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>PlayerStatus</code></td>
+                    <td><code>uuid</code>, <code>name</code>, <code>known</code>, <code>online</code>, <code>position</code> (<code>Position</code>), <code>territory</code>, <code>region</code>, <code>nations</code>, <code>combat</code>, <code>combatSeconds</code>, <code>infected</code>, <code>rank</code>, <code>chatChannel</code>, <code>balances</code>, <code>autoclaim</code>, <code>autounclaim</code>, <code>visualizer</code>, <code>teleportPending</code></td>
+                </tr>
+                <tr>
+                    <td><code>RegionStatus</code></td>
+                    <td><code>name</code>, <code>world</code>, <code>owner</code>, <code>coowner</code>, <code>mayor</code>, <code>description</code>, <code>members</code>, <code>nation</code>, <code>chunks</code>, <code>home</code> (<code>Position</code>), <code>flags</code>, <code>pvpEnabled</code>, <code>war</code>, <code>warzone</code>, <code>buildings</code>, <code>townHall</code>, <code>airport</code></td>
+                </tr>
+                <tr>
+                    <td><code>NationStatus</code></td>
+                    <td><code>name</code>, <code>displayName</code>, <code>capital</code>, <code>leader</code>, <code>coleaders</code>, <code>members</code>, <code>regions</code>, <code>alliance</code>, <code>overlord</code>, <code>puppets</code>, <code>color</code>, <code>infamy</code>, <code>pvpEnabled</code>, <code>laws</code>, <code>war</code>, <code>government</code>, <code>research</code>, <code>currency</code>, <code>taxRate</code>, <code>taxBalance</code></td>
+                </tr>
+                <tr>
+                    <td><code>DiplomacyStatus</code><br>+ <code>Relation</code></td>
+                    <td><code>nation</code>, <code>target</code>, <code>relation</code> (<code>UNKNOWN</code>, <code>SAME_NATION</code>, <code>SAME_SOVEREIGN</code>, <code>ALLIED</code>, <code>ENEMY</code>, <code>NEUTRAL</code>), <code>ally</code>, <code>enemy</code>, <code>enemyReverse</code>, <code>sameWarSide</code>, <code>opposingWarSides</code>, <code>truce</code>, <code>truceEnd</code>, <code>alliance</code>, <code>targetAlliance</code>, <code>sovereign</code>, <code>targetSovereign</code>, <code>casusBelli</code></td>
+                </tr>
+                <tr>
+                    <td><code>WarStatus</code></td>
+                    <td><code>active</code>, <code>attacker</code>, <code>defender</code>, <code>attackers</code>, <code>defenders</code>, <code>targets</code>, <code>elapsedSeconds</code>, <code>chunks</code>, <code>attackingSoldiers</code>, <code>defendingSoldiers</code></td>
+                </tr>
+                <tr>
+                    <td><code>PvpDecision</code><br>+ <code>PvpReason</code></td>
+                    <td><code>allowed</code>, <code>reason</code> (<code>INVALID_PLAYERS</code>, <code>DIFFERENT_WORLDS</code>, <code>WORLD_DISABLED</code>, <code>SELF_DAMAGE</code>, <code>ADMIN_BYPASS</code>, <code>AIRPORT_SAFE_ZONE</code>, <code>WILDERNESS</code>, <code>ACTIVE_WAR</code>, <code>WARZONE</code>, <code>CIVILIAN_PROTECTED</code>, <code>CIVIL_WAR</code>, <code>NATION_FRIENDLY_FIRE</code>, <code>REGION_FRIENDLY_FIRE</code>, <code>VEHICLE_BYPASS</code>, <code>ALLOWED</code>), <code>region</code>, <code>nation</code></td>
+                </tr>
+                <tr>
+                    <td><code>AllianceStatus</code></td>
+                    <td><code>name</code>, <code>founder</code>, <code>color</code>, <code>members</code>, <code>pendingRequests</code>, <code>createdAt</code>, <code>scheduledWar</code></td>
+                </tr>
+                <tr>
+                    <td><code>ClaimPreview</code> / <code>ClaimResult</code></td>
+                    <td>Previsualización (<code>ready</code>, <code>currentChunks</code>, <code>resultChunks</code>, <code>cells</code>, <code>issues</code>) y resultado de reclamo/liberación (<code>changed</code>, <code>rejected</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>ServerStatus</code></td>
+                    <td><code>modules</code> (mapa de los 36 módulos), <code>regions</code>, <code>nations</code>, <code>onlinePlayers</code>, <code>activeWar</code>, <code>pandemic</code>, <code>lowSpec</code>, <code>memoryCritical</code>, <code>gameDateTime</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>7. Resumen de los 14 Dominios de `UltraGameplay` y `DynamicClaimsAPI`</h2>
+        <p>Tanto <code>UltraGameplay</code> como <code>DynamicClaimsAPI.get()</code> organizan sus métodos en 14 dominios funcionales:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Dominio</th>
+                    <th>Métodos Principales de Consulta y Control</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Regiones y Territorio</strong></td>
+                    <td><code>getRegionAt(Location / World,x,z)</code>, <code>isChunkClaimed(...)</code>, <code>getRegionUUID(name)</code>, <code>getRegionNameByUUID(uuid)</code>, <code>getRegionStatus(name)</code>, <code>getRegionChunks(name)</code>, <code>getRegionBounds(name)</code>, <code>getEffectiveRegionFlags(name)</code>, <code>setRegionFlag(name, flag, val)</code>, <code>hasTerritorialPermission(player, chunk)</code>, <code>previewClaims(...)</code>, <code>claimChunks(...)</code>, <code>unclaimChunks(...)</code>, <code>createRegion(...)</code>, <code>renameRegion(...)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>2. Naciones y Diplomacia</strong></td>
+                    <td><code>getNationUUID(name)</code>, <code>getNationNameByUUID(uuid)</code>, <code>getNationStatus(name)</code>, <code>getNationOfPlayer(uuid/name)</code>, <code>getNationOfRegion(region)</code>, <code>getNationLeader(nation)</code>, <code>getNationLaws(nation)</code>, <code>setNationLaw(nation, law, val)</code>, <code>isPuppet(nation)</code>, <code>getNationOverlord(nation)</code>, <code>getDiplomacyStatus(n1, n2)</code>, <code>isAlly(n1, n2)</code>, <code>isEnemy(n1, n2)</code>, <code>setNationEnemy(n1, n2, val)</code>, <code>getAllianceStatus(name)</code>, <code>createAlliance(...)</code>, <code>getNationInfamy(nation)</code>, <code>addNationInfamy(...)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>3. Economía y Patrón Oro</strong></td>
+                    <td><code>getPlayerBalance(uuid, code)</code>, <code>getPlayerBalances(uuid)</code>, <code>addPlayerBalance(uuid, code, amount)</code>, <code>removePlayerBalance(uuid, code, amount)</code>, <code>setPlayerBalance(uuid, code, amount)</code>, <code>getNationCurrency(nation)</code>, <code>getNationGoldReserve(nation)</code>, <code>setNationGoldReserve(nation, gold)</code>, <code>addNationBalance(nation, gold)</code>, <code>getPapersIssued(code)</code>, <code>getUnitaryValue(code)</code>, <code>isCurrencyPaper(item)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>4. Guerras, Warzones y PvP</strong></td>
+                    <td><code>getWarStatus()</code>, <code>hasActiveWar(nation)</code>, <code>isRegionAtWar(region)</code>, <code>getWarAttackerNations()</code>, <code>getWarDefenderNations()</code>, <code>isChunkContested(chunk)</code>, <code>isChunkConquered(chunk)</code>, <code>hasTruce(n1, n2)</code>, <code>getTruceEndDate(n1, n2)</code>, <code>getPvpDecision(attacker, victim)</code>, <code>canPlayersFight(u1, u2)</code>, <code>isInCombat(uuid)</code>, <code>tagCombat(uuid)</code>, <code>isMilitaryPlayer(uuid)</code>, <code>isWarParticipant(uuid)</code>, <code>createWarzone(region, pct)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>5. Gobierno y Elecciones</strong></td>
+                    <td><code>getGovernmentType(nation)</code>, <code>getGovernmentParty(nation)</code>, <code>getGovernmentApproval(nation)</code>, <code>getGovernmentDisapproval(nation)</code>, <code>isCivilWarActive(nation)</code>, <code>isPlayerRebel(nation, player)</code>, <code>hasActiveElection(nation)</code>, <code>getElectionCandidateNames(nation)</code>, <code>hasPlayerVoted(nation, player)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>6. Rangos y Roles</strong></td>
+                    <td><code>getPlayerRankId(uuid)</code>, <code>getPlayerRankName(uuid)</code>, <code>getPlayerRankPrefix(uuid)</code>, <code>getPlayerRankExpiration(uuid)</code>, <code>hasRankExpired(uuid)</code>, <code>setPlayerRank(uuid, name, rankId, durationMs)</code>, <code>removePlayerRank(uuid)</code>, <code>getPlayerMilitaryRank(player, region)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>7. Ciencia y Tecnología</strong></td>
+                    <td><code>isTechUnlocked(nation, techId)</code>, <code>getUnlockedTechs(nation)</code>, <code>getActiveResearch(nation)</code>, <code>getResearchProgress(nation, techId)</code>, <code>startResearch(nation, techId)</code>, <code>unlockTechnology(nation, techId)</code>, <code>revokeTechnology(nation, techId)</code>, <code>setResearchPoints(nation, techId, pts)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>8. Industria y Edificios</strong></td>
+                    <td><code>getBuildingsInRegion(region)</code>, <code>hasTownHall(region)</code>, <code>hasAirport(region)</code>, <code>isAirportSafeZone(loc)</code>, <code>isLocationInsideBuilding(loc)</code>, <code>getAllBuildingDefinitionIds()</code></td>
+                </tr>
+                <tr>
+                    <td><strong>9. Pandemias y Vacunas</strong></td>
+                    <td><code>isPandemicActive()</code>, <code>getActivePandemicNames()</code>, <code>isPlayerInfected(uuid)</code>, <code>getPlayerInfectionProgress(uuid, pandemic)</code>, <code>isVaccineReady(pandemic, nation)</code>, <code>getVaccineResearchProgress(pandemic, nation)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>10-14. Mercado, Tiempo, Chat, Recursos y Módulos</strong></td>
+                    <td><code>getActiveAuctionListingsCount()</code>, <code>getPlayerPendingPayoutAmount(uuid)</code>, <code>getFormattedGameDateTime()</code>, <code>isNight()</code>, <code>getPlayerChatChannel(uuid)</code>, <code>setPlayerChatChannel(uuid, ch)</code>, <code>isTacticalMap(item)</code>, <code>isBlockPlayerPlaced(block)</code>, <code>isModuleEnabled(id)</code>, <code>getServerStatus()</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>8. Eventos de Bukkit / Spigot (`com.wwcstudios.events`)</h2>
+        <p>Puedes escuchar los eventos nativos de DynamicClaims mediante cualquier <code>Listener</code> estándar de Bukkit:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Clase del Evento</th>
+                    <th>Cancelable</th>
+                    <th>Métodos Disponibles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>com.wwcstudios.events.RegionClaimEvent</code></td>
+                    <td><span class="badge badge-optional">Sí</span></td>
+                    <td><code>getPlayer()</code> (<code>@Nullable</code> si se reclamó desde el Atlas Web estando desconectado), <code>getActorId()</code>, <code>getActorName()</code>, <code>getRegionName()</code>, <code>getChunkCoord()</code> (formato <code>"x,z"</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>com.wwcstudios.events.RegionUnclaimEvent</code></td>
+                    <td><span class="badge badge-optional">Sí</span></td>
+                    <td><code>getPlayer()</code> (<code>@Nullable</code>), <code>getActorId()</code>, <code>getActorName()</code>, <code>getRegionName()</code>, <code>getChunkCoord()</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>com.wwcstudios.events.NationCreateEvent</code></td>
+                    <td><span class="badge badge-optional">Sí</span></td>
+                    <td><code>getNationName()</code>, <code>getCreator()</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>com.wwcstudios.events.WarStartEvent</code></td>
+                    <td><span class="badge badge-required">No</span></td>
+                    <td><code>getInvadingNation()</code>, <code>getDefendingNation()</code>, <code>getTargetRegions()</code> (<code>Set&lt;String&gt;</code>), <code>getTargetRegion()</code>, <code>getGoal()</code> (<code>CONQUEST</code>, <code>SUBJUGATION</code>, <code>INDEPENDENCE</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>com.wwcstudios.events.WarEndEvent</code></td>
+                    <td><span class="badge badge-required">No</span></td>
+                    <td><code>getInvadingNation()</code>, <code>getDefendingNation()</code>, <code>isConquered()</code> (<code>true</code> si ganó el atacante), <code>getGoal()</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>com.wwcstudios.events.TechnologyResearchedEvent</code></td>
+                    <td><span class="badge badge-required">No</span></td>
+                    <td><code>getNationName()</code>, <code>getTechnologyId()</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>com.wwcstudios.api.ultra.CustomRuleChangeEvent</code></td>
+                    <td><span class="badge badge-required">No</span></td>
+                    <td><code>getRule()</code> (<code>CustomRule</code>), <code>getTargetName()</code>, <code>getPreviousValue()</code>, <code>getValue()</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="footer">
+            <div>DynamicClaims Wiki Oficial — Documentación 100% Verificada</div>
+            <div>Sección: 3. Operador y Desarrolladores</div>
+        </footer>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

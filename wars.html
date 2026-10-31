@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Guerras, Asedios y Misiles</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item active">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Guerras, Asedios y Misiles</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en guerras... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Diplomacia, asedios territoriales, moral, vasallaje, warzones y armamento estratégico.</div>
+            <div><span class="badge badge-military">Militar Activo</span> <span class="badge badge-leader">Líder / Colíder</span></div>
+        </div>
+
+        <h1>Diplomacia, Guerras, Asedios y Misiles</h1>
+        <p>Los conflictos armados en DynamicClaims combinan diplomacia formal, asedios estratégicos, desgaste de moral por bajas, estados vasallos (títeres), zonas de guerra abiertas y armamento de largo alcance.</p>
+
+        <div class="note-box warning">
+            <p><strong>Requisito para combatir:</strong> Solo los ciudadanos que posean un <strong>Rango Militar reconocido y una plaza activa</strong> dentro del cupo nacional (<code>/dc poblacion</code>) pueden capturar o recuperar territorio, infligir o recibir daño de guerra, contabilizar bajas o desplegarse en Zonas de Guerra. Los civiles no participan en el combate bélico.</p>
+        </div>
+
+        <h2>1. Diplomacia, Alianzas y Declaración de Guerra</h2>
+        <p>El <strong>Líder (Dueño de la Capital)</strong> y los <strong>Colíderes</strong> dirigen las relaciones exteriores desde <code>/dc diplomacia</code> o mediante atajos directos:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando / Acceso</th>
+                    <th>Rol Requerido</th>
+                    <th>Función Diplomática</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc diplomacia</code></td>
+                    <td><span class="badge badge-citizen">Ciudadano</span> / <span class="badge badge-leader">Líder</span></td>
+                    <td>Abre la Cancillería: consulta aliados, enemigos, treguas, notificaciones y acceso a guerras.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc diplomacia alianza</code><br><code>/dc diplomacia alianza gestionar</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Explora los bloques militares existentes, funda una alianza, invita naciones o gestiona miembros. El fundador puede personalizar el color con <code>/dc diplomacia alianza color</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc nacion aliado &lt;NACION&gt;</code><br><code>/dc nacion enemigo &lt;NACION&gt;</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Establece relación de alianza o declara enemistad diplomática bilateral con otra nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc diplomacia guerra</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Si hay una guerra activa, abre el panel de gestión; si no, permite preparar una nueva declaración de guerra.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc diplomacia guerra regiones [NACION]</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Selecciona la región objetivo para iniciar una guerra de conquista territorial.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc diplomacia guerra subyugacion [NACION]</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Prepara una guerra de <strong>Subyugación</strong> con el objetivo de convertir a la nación derrotada en un <strong>Estado Títere (Vasallo)</strong>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc diplomacia soberania</code></td>
+                    <td><span class="badge badge-leader">Líder / Colíder</span></td>
+                    <td>Permite a una nación hegemónica (Overlord) consultar y conceder la independencia a sus estados títeres.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc diplomacia treguas</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Lista los tratados de paz y fechas de expiración de las treguas vigentes (90 días RP por defecto).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Desarrollo de la Guerra y Modos de Conquista</h2>
+        <p>Para declarar la guerra a una nación defensora, esta debe cumplir el mínimo de ciudadanos registrados (3 por defecto) y no tener una tregua activa contigo. Con <code>war.weekend-only: true</code> (por defecto), las guerras declaradas se programan para iniciar el fin de semana (Sábado a las 13:00 por defecto) y tienen una duración máxima de batalla de <strong>60 minutos</strong> (con prórroga automática si hay un asedio activo al terminar el reloj).</p>
+
+        <h3>Modos de Conquista Territorial</h3>
+        <ul>
+            <li><strong>Modo Puntos (<code>points</code> - Predeterminado):</strong> Se generan 3 puntos estratégicos dentro de la región en disputa. Los soldados atacantes deben tomar y asegurar esos puntos durante 90 segundos cada uno para anexar la región.</li>
+            <li><strong>Modo Chunks (<code>chunk</code>):</strong> El ejército atacante conquista la región desde el perímetro exterior hacia el centro (<code>perimeter-first: true</code>) hasta dominar el 50% de la región.
+                <ul>
+                    <li><strong>Conquista por Dispersión:</strong> En regiones grandes, capturar un chunk principal (rojo) ocupa automáticamente varios chunks de relleno (naranjas) hacia el interior según el tamaño de la región; si los defensores reconquistan el chunk principal, liberan también sus rellenos.</li>
+                    <li><strong>Balanceo por Soldados (<code>soldier-balance: true</code>):</strong> En modo chunk, el bando que tenga menos soldados activos en su censo militar captura o recupera chunks más rápido (<code>Velocidad = máx(1, soldados enemigos / soldados propios)</code> sobre la base de 90s).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>3. Sistema de Moral, Combat Tag e Infamia</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Mecánica</th>
+                    <th>Valores Base</th>
+                    <th>Cómo afecta a los combatientes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Moral y Límite de Bajas</strong></td>
+                    <td>Atacante: <code>30</code> bajas<br>Defensor: <code>50</code> bajas</td>
+                    <td>Cada muerte de un militar reduce la moral de su bando y aplica debuffs progresivos al superar umbrales (Lentitud, Debilidad, Ceguera). Conquistar o recuperar un chunk principal (o punto) descuenta solo <code>-1</code> baja acumulada (o el valor configurado en <code>morale.morale-recovery-per-chunk</code>, sin reiniciarse ni multiplicarse por los chunks de relleno). Si un bando llega al límite máximo de bajas, colapsa y pierde la guerra.</td>
+                </tr>
+                <tr>
+                    <td><strong>Combat Tag (Anti-CombatLog)</strong></td>
+                    <td>Duración: <code>15s</code></td>
+                    <td>Al golpear o ser golpeado en PvP, se muestra una cuenta regresiva en la Action Bar y se bloquean los teletransportes. <strong>Si te desconectas estando en combate, tu personaje muere instantáneamente</strong> y suelta todo su inventario.</td>
+                </tr>
+                <tr>
+                    <td><strong>Infamia Internacional</strong></td>
+                    <td>Límite: <code>10</code> pts<br>Reducción: <code>-1</code>/día RP</td>
+                    <td>Las agresiones bélicas suman puntos de infamia a la nación atacante. Si supera los 10 puntos (ej. en 12, 15 y 18), todos sus ciudadanos sufren penalizaciones pasivas de Lentitud y Debilidad hasta que la infamia descienda en tiempos de paz.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Zonas de Guerra Abiertas (Warzones)</h2>
+        <p>Además de las guerras entre naciones, el servidor puede habilitar regiones especiales como <strong>Zonas de Guerra</strong> de disputa continua:</p>
+        <ul>
+            <li><code>/dc zona-guerra listar</code> (o <code>/dc diplomacia zonas-guerra</code>): Muestra todas las Zonas de Guerra activas y el porcentaje de control requerido.</li>
+            <li><code>/dc zona-guerra ir &lt;REGION&gt;</code>: Despliega a tu soldado directamente en la Zona de Guerra indicada (requiere tener Rango Militar activo).</li>
+        </ul>
+
+        <h2>5. Misiles, Armas Nucleares y Radiación</h2>
+        <p>Si los módulos <code>missiles</code> y <code>nuclear-weapons</code> están activos en el servidor, las naciones en guerra pueden emplear armamento estratégico:</p>
+        <ul>
+            <li><strong>Silos y Misiles Convencionales:</strong> Permiten lanzar ataques balísticos por coordenadas contra objetivos enemigos durante conflictos bélicos.</li>
+            <li><strong>Ojivas Nucleares y Zonas de Radiación:</strong> Un impacto nuclear contamina el área con radiación persistente (visible también en la capa de Radiación del Atlas Web).</li>
+            <li><strong>Protección NBQ:</strong> Entrar en una zona radiactiva aplica daño y efectos severos a menos que el jugador lleve equipado el <strong>Casco Antirradiación (NBQ)</strong>.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

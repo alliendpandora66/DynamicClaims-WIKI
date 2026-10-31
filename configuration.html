@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Configuración Técnica (YAML)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item active">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>3. Operador</span> <span style="color: #475569;">/</span> <span class="current-page">Configuración Técnica (YAML)</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar clave YAML... (Ctrl+K)" autocomplete="off">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner operator">
+            <div>⚙️ <strong>Sección 3: Operador</strong> &mdash; Referencia completa de las 24 configuraciones de <code>ConfigurationCatalog</code>, respaldos automáticos y estructura real de todos los archivos YAML.</div>
+            <div><span class="badge badge-operator">Operador</span></div>
+        </div>
+
+        <h1>Configuración Técnica (YAML) y Referencia Completa</h1>
+        <p>Todos los archivos de configuración se alojan en <code>plugins/DynamicClaims/</code>. Las claves del sistema utilizan minúsculas separadas por guiones (<code>kebab-case</code>, por ejemplo <code>morale.morale-recovery-per-chunk</code>), mientras que los IDs personalizados que defina tu servidor (como <code>industria_mineria_profunda</code>, <code>tanque</code> o <code>vip_plus</code>) conservan su identificador exacto.</p>
+
+        <h2>1. Validación Estricta y Respaldos Automáticos</h2>
+        <p>Al iniciar el servidor o ejecutar <code>/dc admin recargar</code>, el catálogo de configuración verifica los <strong>24 archivos YAML editables</strong>:</p>
+        <ul>
+            <li><strong>Protección ante Errores de Sintaxis:</strong> Si un archivo YAML contiene tabuladores inválidos o un tipo incompatible, la recarga aborta el lote afectado y mantiene la configuración anterior en memoria sin sobrescribir ni perder tus cambios.</li>
+            <li><strong>Respaldo Automático antes de Migrar:</strong> Si el plugin detecta claves históricas con guion bajo (<code>_</code>), crea primero una copia íntegra en <code>plugins/DynamicClaims/backups/configurations/FECHA-ID/</code> y luego escribe el archivo actualizado mediante <code>CoalescedAsyncFileWriter</code>.</li>
+        </ul>
+
+        <h2>2. Mapa de Archivos YAML en `plugins/DynamicClaims/`</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Archivo / Ruta</th>
+                    <th>Propósito Técnico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>config.yml</code></td>
+                    <td>Interruptores de los 36 módulos, nametags, combate, elecciones, tiempo real y RP, conquista, moral, infamia, cupo militar, guerras, guerra civil, anti-glitch, Discord, GeoJSON, pandemias, base de datos, mapa táctico y andamios.</td>
+                </tr>
+                <tr>
+                    <td><code>messages.yml</code></td>
+                    <td>Traducciones, prefijos, formatos de canales de chat y nombres de argumentos de comandos.</td>
+                </tr>
+                <tr>
+                    <td><code>web-map.yml</code></td>
+                    <td>Servidor HTTP del Atlas Web Integrado, cuotas de <code>ultra-api</code>, iconos de capas, bordes vectoriales y permisos del editor web.</td>
+                </tr>
+                <tr>
+                    <td><code>dynmap.yml</code></td>
+                    <td>Hojas de estilo CSS y las 14 plantillas de tarjetas HTML compartidas con Squaremap y Dynmap.</td>
+                </tr>
+                <tr>
+                    <td><code>misiles.yml</code></td>
+                    <td>Política de destrucción de bloques, velocidad suborbital y parámetros de misiles convencionales y nucleares (hongo atómico y radiación residual).</td>
+                </tr>
+                <tr>
+                    <td><code>vehiculos.yml</code></td>
+                    <td>Detección por Metadata/PDC/Scoreboard Tags (<code>wwc_type</code>), reglas por defecto y perfiles por vehículo (<code>tanque</code>, <code>avion</code>, <code>torreta</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>rangos.yml</code></td>
+                    <td>Definición de rangos VIP/Nacionales, prefijos, permisos, <code>one-time-reward</code>, <code>welcome-kit</code> y <code>cooldown-hours</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>tecnologias.yml</code></td>
+                    <td>Árbol tecnológico nacional: categorías, puntos requeridos, fechas mínimas (<code>date</code>), prerrequisitos y efectos (<code>permiso:</code> y <code>boost:</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>recursos_drops.yml</code></td>
+                    <td>Probabilidades de botín personalizado por bloque o mob filtradas por bioma, región o nación.</td>
+                </tr>
+                <tr>
+                    <td><code>industria/config.yml</code><br><code>industria/edificios.yml</code><br><code>industria/crafteos.yml</code><br><code>industria/recursos.yml</code></td>
+                    <td>Herramienta de selección de estructuras, margen de solapamiento, tropas defensivas y catálogo de edificios, recetas y recursos.</td>
+                </tr>
+                <tr>
+                    <td><code>gui/*.yml</code> (13 archivos)</td>
+                    <td>Diseño de los inventarios interactivos (<code>main-menu.yml</code>, <code>population-menu.yml</code>, <code>military-ranks.yml</code>, <code>laws-menu.yml</code>, <code>diplomacy-menu.yml</code>, <code>economy-menu.yml</code>, <code>bank-menu.yml</code>, <code>auction-menu.yml</code>, <code>elections-menu.yml</code>, <code>government-menu.yml</code>, <code>technology-menu.yml</code>, <code>nation-info.yml</code>, <code>player-management.yml</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Desglose Completo de `config.yml`</h2>
+
+        <h3>A. Nametags Relacionales, Combate y Relaciones</h3>
+        <pre><code>nametag:
+  enabled: true
+  mode: SUFFIX # SUFFIX, PREFIX o BOTH
+  suffix-format: " &amp;7[{nation_color}{nation}&amp;7]"
+  relation-colors:
+    same: "&amp;a"
+    ally: "&amp;9"
+    neutral: "&amp;e"
+    enemy: "&amp;c"
+  preserve-existing-format: true # Conserva rangos de LuckPerms / TAB
+  tab-integration: true          # Coordina equipos con el plugin TAB
+  sync-tablist: true
+  tablist-format: "{external}{suffix}"
+
+combat:
+  combat-tag:
+    enabled: true
+    duration: 15                 # Segundos de Combat Tag activo
+    prevent-teleport: true       # Bloquea comandos de teletransporte en combate
+    only-in-war: false           # true = solo etiquetar dentro de zonas de guerra activa
+    punish-on-logout: true       # Mata al jugador si se desconecta en combate
+    action-bar: '&amp;c&amp;l⚔ EN COMBATE ⚔ &amp;7| &amp;fQuedan &amp;e{time}s &amp;7| &amp;c¡No te desconectes!'
+  relation-colors:
+    enemy: '&amp;c'
+    ally: '&amp;a'
+    same-nation: '&amp;b'
+    neutral: '&amp;7'</code></pre>
+
+        <h3>B. Tiempo del Servidor (Zona Horaria Real) y Calendario Roleplay</h3>
+        <pre><code>server-time:
+  timezone: "America/Mexico_City" # Zona horaria para programar guerras y eventos
+  network-time-sync: true         # Sincroniza reloj con API pública (timeapi.io / Cloudflare)
+
+time:
+  day-duration-seconds: 1200      # 1200s (20 min reales) = 1 día del calendario RP
+  start-date: "01.01.2000"        # Fecha inicial en formato DD.MM.YYYY
+  sync-minecraft-time: true       # Sincroniza el sol/luna de Minecraft con la hora RP
+  disable-daylight-cycle-on-sync: true
+  sync-worlds: []                 # Vacío = todos los mundos NORMAL; o ["world", "earth"]</code></pre>
+
+        <h3>C. Conquista Territorial, Escalado por Dispersión y Balanceo por Soldados</h3>
+        <pre><code>conquest:
+  mode: points                    # "points" (puntos de control) o "chunk" (frente continuo)
+  perimeter-first: true           # En modo chunk, obliga a atacar desde el borde exterior
+  capture-seconds: 90             # Segundos base para capturar un chunk o punto
+  victory-percent: 50             # % de chunks para ganar la región en modo chunk
+  points-count: 3                 # Puntos estratégicos generados en modo points
+  soldier-balance: true           # Acelera captura al bando con menos soldados activos
+  auto-rename-on-capture: true    # Renombra Prefijo_Region al transferir por conquista
+  points-radius-scale:
+    - '30:1'
+    - '100:2'
+    - '9999:3'
+  scale-mode: total               # "total" o "bonus"
+  scale:                          # tamaño_maximo_region:chunks_ocupados_por_captura
+    - '30:1'
+    - '100:2'
+    - '300:3'
+    - '700:4'
+    - '1500:6'
+    - '9999:9'
+  main-chunk-color: "#E74C3C"     # Color del chunk principal en el mapa
+  filler-chunk-color: "#F39C12"   # Color de los chunks de relleno asociados</code></pre>
+
+        <h3>D. Moral de Guerra, Infamia, Cupo Militar, Guerras y Guerra Civil</h3>
+        <pre><code>morale:
+  attacker-max-casualties: 30     # Bajas máximas del atacante antes de colapsar (0 = sin límite)
+  defender-max-casualties: 50     # Bajas máximas del defensor antes de colapsar (0 = sin límite)
+  # Bajas que se descuentan al conquistar/reconquistar un chunk principal o punto (0 = sin recuperación)
+  morale-recovery-per-chunk: 1
+  attacker-debuffs:
+    - "10:SLOW:1:60"
+    - "20:WEAKNESS:1:60"
+    - "25:BLINDNESS:1:30"
+  defender-debuffs:
+    - "15:SLOW:1:60"
+    - "30:WEAKNESS:1:60"
+    - "40:BLINDNESS:1:30"
+  bossbar:
+    title-format: "&amp;c⚔ {attacker} &amp;7({attacker_casualties}/{attacker_max}) &amp;8| &amp;e{progress}% &amp;8| &amp;7({defender_casualties}/{defender_max}) &amp;b{defender} 🛡"
+    style: "SEGMENTED_10"
+
+infamy:
+  limit: 10
+  decay-per-day: 1
+  debuffs:
+    - 12:SLOW:1:30
+    - 15:WEAKNESS:1:30
+    - 18:SLOW:2:60
+
+population:
+  military:
+    max-soldiers: 20              # Entero &gt;= 0 o placeholder PAPI (ej. "%mi_cupo_militar%")
+
+war:
+  battle-duration-minutes: 60     # Duración de batalla en minutos (-1 = ilimitada)
+  timer-display: "bossbar"        # "bossbar", "actionbar" o "both"
+  overtime:
+    enabled: true                 # Concede prórroga si hay un asedio en curso al expirar el reloj
+  building:
+    only-main-chunks: true        # Solo permite romper/colocar en chunks principales bajo asedio
+  truce-days: 90                  # Días RP de tregua tras finalizar una guerra
+  preparation-hours: 0
+  max-active-wars: -1
+  max-fronts-per-nation: -1
+  weekend-only: true              # Programa el inicio de las guerras para el fin de semana
+  start-day: 7                    # 7 = Sábado, 1 = Domingo
+  start-hour: 13                  # Hora real (formato 24h)
+  min-registered-players: 3
+  frontline-respawn:
+    enabled: false
+    respect-bed: true
+    only-if-died-in-warzone: true
+
+warzones:
+  capture-seconds: 30
+
+civil-war:
+  enabled: true
+  disapproval-threshold: 51       # % de desaprobación para estallar Guerra Civil
+  min-votes-required: 1
+  min-nation-members: 3
+  rebel-max-casualties: 20
+  defender-max-casualties: 20
+  start-day: 7
+  start-hour: 12
+  duration-hours: 48</code></pre>
+
+        <h3>E. Pandemias, Base de Datos, Rendimiento, Mapa Táctico y Andamios</h3>
+        <pre><code>pandemic:
+  enabled: true
+  tick-interval: 600              # 600 ticks = 30 segundos por ciclo epidemiológico
+  max-active: 3
+  broadcast-infections: true
+  broadcast-deaths: true
+  vaccine-multi-nation-boost-per-nation: 0.2 # +20% velocidad por cada nación cooperante
+  default-values:
+    infection-rate: 0.25
+    mortality-rate: 0.02
+    spread-rate: 0.1
+    incubation-days: 3
+    duration-days: 14
+    vaccine-research-days: 30
+    mutation-chance: 0.05
+  severity-effects:
+    '1': HUNGER:0:10
+    '2': HUNGER:1:10,SLOW:0:10
+    '3': POISON:0:5,SLOW:1:10,WEAKNESS:0:10
+    '4': POISON:1:5,SLOW:2:10,WEAKNESS:1:10,HUNGER:2:10
+    '5': WITHER:0:3,SLOW:2:10,WEAKNESS:2:10,BLINDNESS:0:5
+
+database:
+  enabled: true
+  type: sqlite                    # "sqlite" o "mysql"
+  host: localhost
+  port: 3306
+  database: dynamicclaims
+  username: root
+  password: ''
+  use-ssl: false
+
+performance:
+  lazy-load-claims: false         # true = carga claims bajo demanda según chunks activos
+
+tactical-map:
+  render-terrain: false
+  shared-map-id: -1
+  map-ids: []
+  scales:
+    - id: "1x"
+      chunks-radius: 8
+      name: "1x (Cercano - 16x16 chunks)"
+    - id: "2x"
+      chunks-radius: 16
+      name: "2x (Regional - 32x32 chunks)"
+    - id: "4x"
+      chunks-radius: 32
+      name: "4x (Continental - 64x64 chunks)"
+  colors:
+    own-region: "#2ECC71"
+    same-nation: "#9B59B6"
+    allied-nation: "#00BCFF"
+    enemy-nation: "#E74C3C"
+    neutral-region: "#F39C12"
+    water-ocean: "#1A5276"
+    water-river: "#2980B9"
+    border: "#141414"
+    war-contested: "#C0392B"
+
+scaffold-grapple:
+  enabled: true
+  fly-speed: 0.055
+  max-depth: 12
+  double-shift-ms: 350
+  short-tap-ms: 250</code></pre>
+
+        <h2>4. Configuración de Misiles y Armas Nucleares (`misiles.yml`)</h2>
+        <p>Controla el comportamiento de los misiles balísticos convencionales e intercontinentales nucleares (ICBM), la animación del hongo atómico y la zona de radiación residual:</p>
+        <pre><code>missiles:
+  # Cuándo se permite romper bloques en claims: WAR_ONLY, ALWAYS, NEVER
+  claim-block-damage-policy: "WAR_ONLY"
+  flight-speed-blocks-per-second: 60.0
+  max-suborbital-height: 290
+
+  conventional:
+    display-name: "&amp;6Misil Balístico Convencional ICBM"
+    explosion-power: 12.0
+    direct-damage: 40.0
+    break-blocks: true
+    set-fire: true
+    shockwave-radius: 18.0
+
+  nuclear:
+    display-name: "&amp;c&amp;lMisil Balístico Nuclear ICBM"
+    explosion-power: 28.0
+    direct-damage: 100.0
+    break-blocks: true
+    set-fire: true
+    shockwave-radius: 40.0
+    mushroom-cloud:
+      enabled: true
+      stem-height: 45
+      stem-radius: 3.5
+      cap-radius: 18.0
+      duration-seconds: 20
+      particle-density: 1.0
+    radiation:
+      enabled: true
+      radius: 35.0
+      duration-plugin-days: 3.0
+      use-plugin-days: true
+      duration-seconds: 90
+      wither-amplifier: 2
+      wither-duration-seconds: 6
+      nausea-duration-seconds: 8
+      particle-interval-ticks: 20
+      smoke-density: 1.0</code></pre>
+
+        <h2>5. Configuración de Árbol Tecnológico (`tecnologias.yml`) y Rangos (`rangos.yml`)</h2>
+        <p>En <code>tecnologias.yml</code> puedes definir nodos científicos con prerrequisitos, fechas mínimas de desbloqueo (según el calendario RP) y efectos automáticos de permisos o bonificaciones:</p>
+        <pre><code>tecnologias:
+  industria_manufactura:
+    category: industria
+    name: "&amp;e Manufactura"
+    description: "&amp;7 Desbloquea la produccion en masa de bienes industriales"
+    points: 250
+    date: "15.06.2001"            # Fecha mínima requerida en el calendario del servidor
+    requirements:
+      - industria_fundicion
+    effect:
+      - "permiso: wwc.dc.industria_manufactura"
+      - "boost: investigacion.10" # +10% velocidad de investigación por ciclo</code></pre>
+
+        <p>En <code>rangos.yml</code> defines los rangos reclamables en <code>/dc rango</code> con recompensas únicas y periódicas:</p>
+        <pre><code>rangos:
+  vip_imperial:
+    display-name: "&amp;6&amp;lImperial"
+    prefix: "&amp;8[&amp;6Imperial&amp;8] &amp;r"
+    permission: "dynamicclaims.rank.imperial"
+    one-time-reward:
+      auto-deliver: true
+      commands:
+        - "eco give %player% 5000"
+    rewards:
+      cooldown-hours: 24
+      commands:
+        - "give %player% gold_ingot 16"</code></pre>
+
+        <footer class="footer">
+            <div>DynamicClaims Wiki Oficial — Documentación 100% Verificada</div>
+            <div>Sección: 3. Operador</div>
+        </footer>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

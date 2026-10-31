@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Editores In-Game y Catálogos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item active">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>2. Staff</span> <span style="color: #475569;">/</span> <span class="current-page">Editores In-Game y Catálogos</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar editor de industria, tienda, rangos... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner staff">
+            <div><strong>Sección 2: Staff</strong> &mdash; Creación y edición visual desde Minecraft de industria, tienda, divisas, recursos, crafteos y rangos.</div>
+            <div><span class="badge badge-staff">Staff / Constructores</span></div>
+        </div>
+
+        <h1>Editores In-Game: Industria, Tienda, Divisas, Recursos y Rangos</h1>
+        <p>DynamicClaims incluye editores visuales en inventarios (GUI) para que el Staff pueda diseñar estructuras, configurar producciones, añadir productos a la tienda o crear recetas sin tener que editar archivos YAML manualmente.</p>
+
+        <h2>1. Estructuras, Tipos de Industria y Aeropuertos</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Descripción detallada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin estructura crear &lt;NOMBRE&gt;</code></td>
+                    <td>Entrega la herramienta selectora para marcar las dos esquinas de una construcción en el mundo y guardarla como estructura 3D.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria tipos crear &lt;ID&gt;</code><br><code>/dc admin industria tipos editar &lt;ID&gt;</code><br><code>/dc admin industria tipos menu</code></td>
+                    <td>Crea o edita una definición concreta de edificio (ej: <code>mina_cobre</code>) en un editor visual: categoría funcional, estructura 3D, ítem colocador, capacidad, tiempo de construcción, intervalo de ciclo, modo de probabilidad (tiradas independientes vs. ponderada) y hasta 7 resultados con <code>ItemStack</code> exacto.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria dar &lt;JUGADOR&gt; &lt;EDIFICIO&gt; [CANTIDAD]</code></td>
+                    <td>Entrega en el inventario del jugador el ítem colocador de un edificio industrial registrado.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria receta &lt;crear|editar|eliminar|listar&gt; &lt;NOMBRE&gt;</code></td>
+                    <td>Abre el editor visual de recetas para fábricas (ingredientes, resultado y duración del ciclo).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria recursos &lt;crear|eliminar|listar&gt; [NOMBRE]</code></td>
+                    <td>Registra el ítem sostenido en mano en el catálogo de recursos industriales.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria listar [REGION|todo|huerfanos] [PAGINA]</code><br><code>/dc admin industria info &lt;ID&gt;</code><br><code>/dc admin industria teletransportar &lt;ID&gt;</code></td>
+                    <td>Inspecciona todos los edificios colocados en el servidor, revisa su estado o te teletransporta a su ubicación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria eliminar &lt;REGION&gt; &lt;EDIFICIO&gt; [si|no]</code><br><code>/dc admin industria purgar &lt;REGION&gt; [si|no]</code></td>
+                    <td>Elimina un edificio concreto (si hay varios del mismo tipo en la región se seleccionan como <code>mina_1</code>, <code>mina_2</code>, etc.) o todos los de una región. <strong><code>si</code> elimina también los bloques físicos del mundo y <code>no</code> conserva la construcción.</strong></td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin industria aeropuertos &lt;listar|info|teletransportar|eliminar&gt; ...</code></td>
+                    <td>Gestiona el registro de terminales aéreas operativas en el servidor.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Gestión de Divisas y Tienda Oficial del Servidor</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin tienda crear &lt;precioCompraOro&gt; &lt;precioVentaOro&gt; [ambos|solo-compra|solo-venta]</code></td>
+                    <td>Añade el ítem que tienes en tu mano principal al catálogo de <code>/dc tienda</code> con precios referenciados en oro.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin tienda menu</code><br><code>/dc admin tienda editar &lt;id&gt; &lt;compraOro&gt; &lt;ventaOro&gt; [modo]</code><br><code>/dc admin tienda eliminar &lt;id&gt;</code> / <code>listar</code></td>
+                    <td>Abre el editor visual de la tienda del servidor o modifica/retira productos por su ID.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin divisas crear &lt;CODIGO&gt; &lt;SIMBOLO&gt; &lt;NOMBRE&gt; [oro] [billetes]</code></td>
+                    <td>Registra una nueva divisa especificando código de 3 letras, símbolo, nombre y respaldo inicial.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin divisas asociar &lt;CODIGO&gt; &lt;NACION&gt;</code><br><code>/dc admin divisas desvincular &lt;CODIGO|NACION&gt;</code></td>
+                    <td>Vincula o desvincula una moneda oficial con una nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin divisas oro &lt;CODIGO&gt; &lt;ORO&gt;</code><br><code>/dc admin divisas billetes &lt;CODIGO&gt; &lt;BILLETES&gt;</code></td>
+                    <td>Ajusta directamente las reservas de oro o el total de billetes emitidos de una moneda.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin divisas dar &lt;JUGADOR&gt; &lt;CODIGO&gt; &lt;CANTIDAD&gt;</code><br><code>/dc admin divisas saldo-virtual &lt;JUGADOR&gt; &lt;CODIGO&gt; &lt;CANTIDAD&gt;</code></td>
+                    <td>Entrega billetes físicos a un jugador o fija su saldo bancario virtual en esa divisa. También existen <code>emitir</code>, <code>quemar</code>, <code>modelo &lt;1-4&gt;</code>, <code>eliminar</code>, <code>limpiar-huerfanos</code> y <code>listar</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Recursos Mineros, Crafteos Custom, Rangos y Herramientas</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin recursos &lt;crear|editar|eliminar|listar&gt; [NOMBRE]</code></td>
+                    <td>Abre el editor visual para configurar drops personalizados al picar bloques (probabilidad, herramienta requerida y encantamientos).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin crafteos crear &lt;NOMBRE&gt; [tipo]</code><br><code>/dc admin crafteos &lt;editar|eliminar|listar|recargar&gt;</code></td>
+                    <td>Diseña recetas personalizadas en mesa de crafteo u horno colocando los ingredientes y el resultado directamente en el editor GUI.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin rangos asignar &lt;JUGADOR&gt; &lt;RANGO&gt; [DURACION]</code><br><code>/dc admin rangos eliminar &lt;JUGADOR&gt;</code></td>
+                    <td>Otorga un rango de <code>rangos.yml</code> a un jugador (ej: <code>30d</code>, <code>7d</code> o permanente) o se lo retira.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin rangos editar &lt;RANGO&gt;</code><br><code>/dc admin rangos permiso &lt;crear|eliminar|listar&gt; &lt;RANGO&gt; [PERMISO]</code></td>
+                    <td>Abre el editor visual de recompensas del rango o administra sus nodos de permiso Bukkit. Usa <code>reiniciar-recompensa &lt;JUGADOR&gt;</code> para permitirle reclamar su kit nuevamente.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin herramientas menu</code><br><code>/dc admin herramientas dar &lt;JUGADOR&gt; &lt;HERRAMIENTA&gt;</code></td>
+                    <td>Abre el catálogo de herramientas especiales de DynamicClaims (como la pala de trinchera) o entrega una directamente a un jugador.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

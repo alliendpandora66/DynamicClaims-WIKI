@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Cargos, Elecciones y Rangos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item active">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Cargos, Elecciones y Rangos</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar cargos o rangos... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Explicación clara de los 4 sistemas de autoridad y progresión.</div>
+            <div><span class="badge badge-citizen">Ciudadano</span> <span class="badge badge-military">Militar</span> <span class="badge badge-leader">Líder / Colíder</span></div>
+        </div>
+
+        <h1>Cargos Políticos, Elecciones y Rangos</h1>
+        <p>En DynamicClaims existen <strong>tres sistemas distintos de jerarquía</strong> que nunca deben confundirse entre sí: los <strong>Cargos Políticos/Territoriales</strong>, los <strong>Rangos Militares de Guerra</strong> y los <strong>Rangos del Servidor / VIP</strong>.</p>
+
+        <h2>1. Cargos Políticos y Matriz de Autoridad Nacional</h2>
+        <p>El sistema de permisos por rol (<code>RolePermissions</code>) verifica en tiempo real qué cargo ocupas dentro de tu nación o región antes de autorizar cualquier acción en comandos o menús:</p>
+
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Acción o Facultad</th>
+                    <th>Cargos Autorizados</th>
+                    <th>Reglas y Límites</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Crear la moneda nacional</strong><br>(<code>/dc economia crear-moneda</code>)</td>
+                    <td><strong>Dueño de la Capital</strong> (Líder fundador)</td>
+                    <td>Exclusivo del dueño de la capital; los colíderes no pueden crear la divisa inicial.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nombrar o quitar Colíderes, quitar Moderadores y degradar rangos militares</strong></td>
+                    <td><strong>Dueño de la Capital</strong> o <strong>Líder del Gobierno</strong></td>
+                    <td>Comandos: <code>/dc nacion asignar-colider &lt;JUGADOR&gt;</code>, <code>/dc nacion quitar-colider &lt;JUGADOR&gt;</code>, <code>/dc nacion quitar-moderador &lt;JUGADOR&gt;</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Gestionar Población y Expulsar Ciudadanos</strong><br>(<code>/dc poblacion</code>, <code>/dc nacion expulsar &lt;JUGADOR&gt; [confirmar]</code>)</td>
+                    <td><strong>Dueño de la Capital</strong>, <strong>Líder del Gobierno</strong> o <strong>Colíder</strong></td>
+                    <td>Nadie puede expulsarse a sí mismo, al dueño de la capital ni al líder del gobierno. Un colíder no puede expulsar a otro colíder.</td>
+                </tr>
+                <tr>
+                    <td><strong>Leyes Nacionales, Tesorería, Diplomacia, Alianzas y Asignar Moderadores</strong></td>
+                    <td><strong>Dueño de la Capital</strong> o <strong>Colíder</strong></td>
+                    <td>Incluye <code>/dc leyes</code>, <code>/dc economia</code>, <code>/dc diplomacia</code> y <code>/dc nacion asignar-moderador &lt;JUGADOR&gt;</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Investigar Tecnologías</strong><br>(<code>/dc tecnologias</code>)</td>
+                    <td><strong>Dueño de la Capital</strong>, <strong>Cogobernador de Capital</strong> o <strong>Colíder</strong></td>
+                    <td>Cualquier ciudadano puede donar XP con <code>/dc tecnologias donar &lt;CANTIDAD&gt;</code>, pero solo el mando inicia investigaciones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Invitar residentes y fijar Home regional</strong><br>(<code>/dc invitar</code>, <code>/dc establecer-inicio</code>)</td>
+                    <td><strong>Dueño Regional</strong>, <strong>Cogobernador</strong>, <strong>Alcalde</strong>, <strong>Dueño de Capital</strong> o <strong>Colíder</strong></td>
+                    <td>Válido únicamente para regiones que pertenezcan a tu misma nación.</td>
+                </tr>
+                <tr>
+                    <td><strong>Moderador Nacional</strong></td>
+                    <td>Asignado por Líder o Colíder</td>
+                    <td>Rol representativo y de apoyo comunitario; <strong>no concede</strong> facultades de líder ni colíder sobre leyes, economía o diplomacia.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Elecciones Democráticas y Partidos Políticos</h2>
+        <p>Cuando la ley nacional <code>electionsEnabled</code> está activa, la nación celebra comicios automáticos en el horario configurado del servidor (por defecto, desde el sábado a las 06:00 AM hasta el domingo a las 06:00 PM):</p>
+        <ol>
+            <li><strong>Registro de Candidatura (<code>/dc candidatura</code>):</strong> Cualquier ciudadano de la nación puede postular su partido político usando <code>/dc candidatura &lt;nombre_partido&gt; &lt;ideología&gt; [coLider]</code> o abriendo el menú <code>/dc candidatura registro</code>.
+                <ul>
+                    <li><strong>Ideologías válidas:</strong> <code>IZQUIERDA</code>, <code>CENTRO_IZQUIERDA</code>, <code>CENTRO</code>, <code>CENTRO_DERECHA</code> y <code>DERECHA</code>.</li>
+                </ul>
+            </li>
+            <li><strong>Votación en Urnas (<code>/dc elecciones</code>):</strong> Durante el periodo electoral, los ciudadanos abren <code>/dc elecciones</code> (o desde <code>/dc menu</code> &rarr; Elecciones) y emiten su voto secreto por uno de los candidatos registrados.</li>
+            <li><strong>Proclamación:</strong> Al cerrarse las urnas, el candidato con más votos se convierte en el nuevo <strong>Líder del Gobierno</strong> y la nación adopta la ideología y el nombre del partido vencedor.</li>
+        </ol>
+
+        <h2>3. Rangos Militares y Cupo Nacional de Guerra</h2>
+        <div class="note-box danger">
+            <p><strong>Regla de Oro del Combate Bélico:</strong> Tener un cargo político o ser ciudadano de una nación <strong>NO</strong> te convierte automáticamente en soldado. <strong>Solo los ciudadanos con un Rango Militar reconocido y una plaza activa dentro del cupo nacional pueden participar en guerras</strong> (conquistar o defender chunks, entrar en combate de guerra, sumar bajas, recibir efectos de moral o usar la reaparición del frente). Los civiles quedan excluidos del combate bélico.</p>
+        </div>
+
+        <p>El Líder y los Colíderes gestionan el ejército desde <code>/dc poblacion</code> (o <code>/dc poblacion rangos &lt;JUGADOR&gt;</code>):</p>
+        <ul>
+            <li><strong>Cupo Militar Nacional (<code>max-soldiers</code>):</strong> Cada nación tiene un límite máximo de plazas militares (<strong>20 soldados por defecto</strong>, incluidos los desconectados). Cada ciudadano con rango militar ocupa 1 plaza sin importar su grado.</li>
+            <li><strong>Ascensos y Degradaciones:</strong> El Líder puede asignar, ascender, degradar o retirar cualquier rango militar (volver a Civil libera su plaza). Los Colíderes pueden reclutar civiles y ascender militares a un grado superior, pero no degradarlos.</li>
+        </ul>
+
+        <h3>Escalafón Militar Predeterminado (<code>gui/military-ranks.yml</code>)</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Nivel</th>
+                    <th>Rango Militar</th>
+                    <th>Icono en Menú</th>
+                    <th>Función en la Nación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nivel 1</td>
+                    <td><strong style="color: #94a3b8;">Recluta</strong></td>
+                    <td>Botas de Cuero</td>
+                    <td>Grado inicial de ingreso a las fuerzas armadas; habilita participación bélica.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 2</td>
+                    <td><strong style="color: #f8fafc;">Soldado</strong></td>
+                    <td>Pechera de Cuero</td>
+                    <td>Infantería regular para defensa territorial y captura de frentes.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 3</td>
+                    <td><strong style="color: #4ade80;">Sargento</strong></td>
+                    <td>Botas de Cota de Malla</td>
+                    <td>Suboficial de escuadra en asedios y patrullas fronterizas.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 4</td>
+                    <td><strong style="color: #22c55e;">Comandante</strong></td>
+                    <td>Pechera de Cota de Malla</td>
+                    <td>Mando táctico de pelotones en operaciones de conquista.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 5</td>
+                    <td><strong style="color: #38bdf8;">Oficial</strong></td>
+                    <td>Pechera de Hierro</td>
+                    <td>Oficial de línea encargado de coordinar ofensivas regionales.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 6</td>
+                    <td><strong style="color: #60a5fa;">Coronel</strong></td>
+                    <td>Pechera de Diamante</td>
+                    <td>Alto mando operativo de regimientos y defensa de puntos estratégicos.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 7</td>
+                    <td><strong style="color: #fbbf24;">General</strong></td>
+                    <td>Pechera de Netherite</td>
+                    <td>Estado mayor del ejército nacional.</td>
+                </tr>
+                <tr>
+                    <td>Nivel 8</td>
+                    <td><strong style="color: #f87171;">Ministro de Defensa</strong></td>
+                    <td>Casco de Netherite</td>
+                    <td>Máxima jerarquía militar del escalafón debajo del Líder de la Nación.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Rangos del Servidor / VIP y Recompensas (<code>/dc rango</code>)</h2>
+        <p>De forma completamente independiente al ejército de tu nación, el servidor puede otorgarte un rango global o especial configurado en <code>rangos.yml</code> (por ejemplo: <code>usuario</code>, <code>vip</code>, <code>vip_plus</code>):</p>
+        <ul>
+            <li><code>/dc rango</code> (o <code>/dc menu rango</code>): Abre el menú interactivo de tu perfil de rango para ver tus permisos activos y el estado de tus paquetes de recompensa.</li>
+            <li><code>/dc rango reclamar [unica|periodica|todas]</code>: Entrega directamente en tu inventario los ítems y beneficios del paquete de bienvenida o recompensa de tu rango actual.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

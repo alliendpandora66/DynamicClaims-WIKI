@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Atlas Web, Dynmap y Squaremap</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item active">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>3. Operador</span> <span style="color: #475569;">/</span> <span class="current-page">Atlas Web, Dynmap y Squaremap</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar web-map.yml, dynmap... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner operator">
+            <div><strong>Sección 3: Operador</strong> &mdash; Configuración del servidor HTTP del Atlas Web Integrado (<code>web-map.yml</code>) y tarjetas de <code>dynmap.yml</code>.</div>
+            <div><span class="badge badge-operator">Operador</span></div>
+        </div>
+
+        <h1>Atlas Web Integrado (<code>web-map.yml</code>), Dynmap y Squaremap</h1>
+        <p>DynamicClaims ofrece un <strong>Atlas Web Integrado</strong> con su propio servidor HTTP, motor de terreno con sombreado de relieve y editor territorial completo, sin depender de plugins externos ni CDNs. Además, mantiene compatibilidad total con <strong>Squaremap y Dynmap</strong> mediante <code>dynmap.yml</code>.</p>
+
+        <h2>1. Puesta en Marcha del Atlas Web Integrado (<code>web-map.yml</code>)</h2>
+        <ol>
+            <li>Abre <code>plugins/DynamicClaims/web-map.yml</code> y cambia <code>enabled: true</code>.</li>
+            <li>Configura <code>server.bind</code>, <code>server.port</code> (<code>8081</code> por defecto) y <code>server.public-url</code> (ej: <code>https://mapa.tuservidor.com</code>). Si usas un reverse proxy HTTPS, activa <code>security.secure-cookie: true</code>.</li>
+            <li>Ejecuta <code>/dc admin recargar</code> o <code>/dc admin mapa recargar</code>.</li>
+        </ol>
+
+        <h3>Comandos de Administración del Atlas Web</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Función Técnica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin mapa estado</code></td>
+                    <td>Muestra el estado del servidor HTTP, colas de captura, uso de caché/disco, sesiones y avance del render completo.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin mapa renderizar [MUNDO]</code></td>
+                    <td>Encola nuevamente los chunks cargados actualmente en el mundo para actualizar sus tiles PNG.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin mapa render-completo [MUNDO] [X1 Z1 X2 Z2]</code></td>
+                    <td>Lee gradualmente los archivos <code>.mca</code> existentes en disco (sin generar terreno nuevo) para renderizar todo el mundo o el rectángulo de coordenadas de bloque indicado. Se pausa automáticamente si el MSPT sube de <code>pause-above-mspt</code> y se reanuda tras reiniciar si <code>resume-on-start: true</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin mapa cancelar</code></td>
+                    <td>Detiene un render completo en curso y libera sus recursos.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin mapa recargar</code></td>
+                    <td>Recarga <code>web-map.yml</code>, los archivos editables de <code>web-map/</code>, fuentes y banderas conservando las sesiones abiertas.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin mapa abrir</code> / <code>contraseña</code> / <code>quitar-contraseña</code></td>
+                    <td>Gestiona el acceso web personal de la cuenta del administrador conectado.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Banderas Nacionales, Fuentes, Skins y Editor en el Atlas</h2>
+        <ul>
+            <li><strong>Banderas Nacionales (<code>web-map/flags/</code>):</strong> Coloca imágenes (<code>.png</code>, <code>.jpg</code>, <code>.webp</code>, <code>.svg</code>, etc.) con el nombre de la nación en <code>plugins/DynamicClaims/web-map/flags/</code> (ej: <code>Mexico.png</code>). Se detectan automáticamente cada pocos segundos y se auto-escalan sin requerir otro render.</li>
+            <li><strong>Tipografía Personalizada (<code>web-map/fonts/</code>):</strong> Coloca un archivo <code>.woff2</code>, <code>.ttf</code> u <code>.otf</code> en <code>web-map/fonts/</code> y escribe su nombre exacto en <code>labels.font-file</code> para dibujar los nombres curvos de los países con tu fuente.</li>
+            <li><strong>Avatares de Jugadores y Líderes (<code>skins.provider</code>):</strong> Admite <code>auto</code> (textura de Paper/Mojang con respaldo MineSkin), <code>mineskin</code> o <code>mojang</code>.</li>
+            <li><strong>Permisos de Claims para Dueños de Región:</strong> En <code>web-map.yml</code>, <code>claims.allow-region-owners: false</code> reserva por defecto los claims al Staff. Si lo cambias a <code>true</code>, los dueños de región con <code>dynamicclaims.webmap.claim</code> podrán reclamar y liberar chunks propios desde el navegador respetando <code>require-adjacent</code> y <code>max-distance-chunks</code>.</li>
+        </ul>
+
+        <h2>3. Integración con Squaremap y Dynmap (<code>dynmap.yml</code>)</h2>
+        <p>Si además utilizas Squaremap o Dynmap, el archivo <code>plugins/DynamicClaims/dynmap.yml</code> centraliza el estilo de polígonos (<code>NationColorManager</code> con paletas <code>earth</code>, <code>vibrant</code>, <code>pastel</code>, <code>nordic</code>, <code>retro</code>, <code>custom</code>) y las <strong>14 tarjetas HTML</strong> de información al hacer clic en el mapa:</p>
+        <ul>
+            <li><strong>Tarjetas editables en <code>cards.*</code>:</strong> <code>region</code>, <code>political</code>, <code>alliance</code>, <code>resource</code>, <code>industry</code>, <code>war</code>, <code>pending_war</code>, <code>war_point</code>, <code>war_chunk</code>, <code>siege</code>, <code>warzone</code>, <code>warzone_chunk</code>, <code>warzone_siege</code> y <code>radiation</code>.</li>
+            <li>Todos los cambios en <code>dynmap.yml</code> se aplican en caliente con <code>/dc admin recargar</code>.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Menú Principal (/dc menu)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item active">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Menú Principal (/dc menu)</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar menú o guía... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Todos los paneles visuales, atajos de comando y Códice de Guía.</div>
+            <div><span class="badge badge-citizen">Cualquier Jugador</span></div>
+        </div>
+
+        <h1>Menú Principal (<code>/dc menu</code>) y Guía Interactiva</h1>
+        <p>No necesitas memorizar comandos largos para jugar en DynamicClaims: ejecutando <code>/dc menu</code> abres el panel central desde el que puedes acceder con un clic a todos los sistemas del servidor.</p>
+
+        <h2>1. Los 14 Módulos del Menú Principal y sus Atajos</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Slot</th>
+                    <th>Sección en el Menú</th>
+                    <th>Comando Directo / Atajo</th>
+                    <th>Para qué sirve</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Slot 10</td>
+                    <td><strong>Leyes Nacionales</strong></td>
+                    <td><code>/dc leyes</code> o <code>/dc menu leyes</code></td>
+                    <td>Consulta o modifica las 7 leyes constitucionales y abre <code>/dc leyes personalizadas</code>.</td>
+                </tr>
+                <tr>
+                    <td>Slot 12</td>
+                    <td><strong>Tesorería del Estado</strong></td>
+                    <td><code>/dc economia</code> o <code>/dc menu economia</code></td>
+                    <td>Gestión de reservas de oro, emisión de billetes y diseño de moneda.</td>
+                </tr>
+                <tr>
+                    <td>Slot 14</td>
+                    <td><strong>Urnas Electorales</strong></td>
+                    <td><code>/dc elecciones</code> o <code>/dc menu elecciones</code></td>
+                    <td>Votación democrática e inscripción de candidaturas (<code>/dc menu candidatura</code>).</td>
+                </tr>
+                <tr>
+                    <td>Slot 16</td>
+                    <td><strong>Gobierno y Aprobación</strong></td>
+                    <td><code>/dc gobierno</code> o <code>/dc menu gobierno</code></td>
+                    <td>Voto de aprobación/rechazo popular y elección de líder rebelde opositor.</td>
+                </tr>
+                <tr>
+                    <td>Slot 19</td>
+                    <td><strong>Cancillería y Diplomacia</strong></td>
+                    <td><code>/dc diplomacia</code> o <code>/dc menu diplomacia</code></td>
+                    <td>Alianzas, guerras, subyugación, soberanía de títeres, treguas y warzones.</td>
+                </tr>
+                <tr>
+                    <td>Slot 21</td>
+                    <td><strong>Casa de Moneda (Divisas)</strong></td>
+                    <td><code>/dc divisas</code> o <code>/dc menu divisas</code></td>
+                    <td>Cotización en tiempo real de todas las monedas frente al Patrón Oro.</td>
+                </tr>
+                <tr>
+                    <td>Slot 23</td>
+                    <td><strong>Censo y Población</strong></td>
+                    <td><code>/dc poblacion</code> o <code>/dc menu poblacion</code></td>
+                    <td>Lista de ciudadanos, asignación de Rangos Militares y expulsiones nacionales.</td>
+                </tr>
+                <tr>
+                    <td>Slot 25</td>
+                    <td><strong>Gestión Territorial</strong></td>
+                    <td><code>/dc territorios menu</code></td>
+                    <td>Panel de regiones y banderas locales (reclamar/liberar desde aquí requiere Staff).</td>
+                </tr>
+                <tr>
+                    <td>Slot 28</td>
+                    <td><strong>Árbol de Tecnologías</strong></td>
+                    <td><code>/dc tecnologias</code> o <code>/dc menu tecnologias</code></td>
+                    <td>Investigación en las 4 ramas científicas y donación ciudadana de XP.</td>
+                </tr>
+                <tr>
+                    <td>Slot 30</td>
+                    <td><strong>Mercado Global (Subastas)</strong></td>
+                    <td><code>/dc mercado</code> o <code>/dc menu mercado</code></td>
+                    <td>Compraventa de ítems entre jugadores en 5 categorías y cartera de cobros.</td>
+                </tr>
+                <tr>
+                    <td>Slot 32</td>
+                    <td><strong>Banco Central</strong></td>
+                    <td><code>/dc banco</code> o <code>/dc menu banco</code></td>
+                    <td>Depósito y retiro entre billetes físicos y saldo bancario virtual.</td>
+                </tr>
+                <tr>
+                    <td>Slot 34</td>
+                    <td><strong>Bioseguridad (Pandemias)</strong></td>
+                    <td><code>/dc pandemias</code> o <code>/dc menu pandemias</code></td>
+                    <td>Monitoreo de virus activos e investigación multinacional de vacunas.</td>
+                </tr>
+                <tr>
+                    <td>Slot 38</td>
+                    <td><strong>Códice y Guía</strong></td>
+                    <td><code>/dc guia</code> o <code>/dc menu guia</code></td>
+                    <td>Manual interactivo de recetas custom, minerales con drops y tutoriales.</td>
+                </tr>
+                <tr>
+                    <td>Slot 40</td>
+                    <td><strong>Ficha de Nación</strong></td>
+                    <td><code>/dc menu info</code></td>
+                    <td>Resumen ejecutivo de tu nación, capital, gobernante, población y alianzas.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Códice de Guía, Recetas y Recursos (<code>/dc guia</code>)</h2>
+        <p>Si el servidor tiene minerales personalizados (custom drops) o recetas de crafteo exclusivas, puedes consultarlos en cualquier momento sin salir del juego:</p>
+        <ul>
+            <li><code>/dc guia</code>: Abre el índice general del Códice interactivo.</li>
+            <li><code>/dc guia recetas</code>: Muestra todas las recetas personalizadas de mesa de crafteo u horno y cómo disponer sus ingredientes.</li>
+            <li><code>/dc guia recursos</code>: Muestra qué bloques naturales sueltan minerales especiales, con qué probabilidad y qué herramienta o encantamiento exigen.</li>
+        </ul>
+
+        <h2>3. Estándar de Controles en Todos los Menús</h2>
+        <p>Todas las pantallas gráficas de DynamicClaims siguen la misma disposición en su fila inferior para evitar clics accidentales:</p>
+        <ul>
+            <li><strong>Columna 1 (Izquierda - Flecha):</strong> Volver al menú anterior.</li>
+            <li><strong>Columna 3 (Concreto Verde):</strong> Confirmar o Guardar cambios.</li>
+            <li><strong>Columnas 4 y 6 (Flechas):</strong> Página anterior y Página siguiente (solo aparecen cuando hay más de una página).</li>
+            <li><strong>Columna 5 (Centro - Barrera):</strong> Cerrar menú (cerrar una ventana de confirmación o edición <strong>nunca</strong> ejecuta la acción ni consume tu objeto).</li>
+            <li><strong>Columna 7 (Concreto Rojo):</strong> Cancelar operación y regresar.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

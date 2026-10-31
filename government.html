@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Gobierno y Guerra Civil</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item active">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Gobierno y Guerra Civil</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en gobierno... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Legitimidad política, aprobación popular e insurrección armada.</div>
+            <div><span class="badge badge-citizen">Ciudadano</span> <span class="badge badge-military">Militar</span> <span class="badge badge-leader">Líder</span></div>
+        </div>
+
+        <h1>Gobierno, Aprobación Popular y Guerra Civil</h1>
+        <p>En DynamicClaims el mandato de un gobernante depende del respaldo real de sus ciudadanos. Incluso si una nación desactiva las elecciones periódicas, los habitantes pueden expresar su conformidad o rechazo en todo momento. Si la desaprobación supera la mayoría, la nación entra en camino hacia una <strong>Guerra Civil</strong>.</p>
+
+        <h2>1. Votación de Aprobación Ciudadana (<code>/dc gobierno</code>)</h2>
+        <p>Todo ciudadano perteneciente a una nación puede abrir el panel de estabilidad política ejecutando <code>/dc gobierno</code> (o desde <code>/dc menu</code> &rarr; Gobierno):</p>
+        <ul>
+            <li><strong>Voto de Aprobación (Bloque de Esmeralda):</strong> Respalda la gestión del líder actual y eleva el índice de estabilidad nacional.</li>
+            <li><strong>Voto de Desaprobación (Bloque de Redstone):</strong> Registra tu inconformidad con el gobierno actual y aumenta el porcentaje de rechazo popular.</li>
+            <li><strong>Cambio de Postura:</strong> Puedes actualizar tu voto cuando lo desees; el porcentaje se recalcula instantáneamente sobre los votos emitidos.</li>
+        </ul>
+
+        <h2>2. Selección del Líder Rebelde (<code>/dc gobierno candidatos</code>)</h2>
+        <p>Los ciudadanos que reprueban al gobierno pueden elegir quién encabezará la oposición en caso de estallar una insurrección:</p>
+        <ul>
+            <li>Abre el submenú haciendo clic en el botón de candidatos dentro de <code>/dc gobierno</code> o ejecutando directamente <code>/dc gobierno candidatos</code>.</li>
+            <li>El ciudadano que acumule más votos opositores queda designado como <strong>Líder Rebelde</strong>.</li>
+            <li>Si la rebelión triunfa en el campo de batalla, el Líder Rebelde asumirá automáticamente la jefatura del estado y la propiedad de la capital.</li>
+        </ul>
+
+        <h2>3. Condiciones y Fases de la Guerra Civil</h2>
+        <p>Para que una Guerra Civil se convoque automáticamente, deben cumplirse tres requisitos simultáneos (valores predeterminados del servidor):</p>
+        <ol>
+            <li><strong>Población Mínima:</strong> La nación debe contar con al menos <strong>3 ciudadanos</strong> registrados (<code>min-nation-members: 3</code>).</li>
+            <li><strong>Quórum de Votos:</strong> Debe haberse emitido al menos <strong>1 voto</strong> válido (<code>min-votes-required: 1</code>).</li>
+            <li><strong>Umbral de Desaprobación:</strong> El rechazo popular debe ser igual o superior al <strong>51%</strong> (<code>disapproval-threshold: 51</code>).</li>
+        </ol>
+
+        <h3>Fase 1: Guerra Civil Programada (SCHEDULED)</h3>
+        <p>Al superarse el 51% de desaprobación, el conflicto queda programado para el horario semanal configurado en el servidor (por defecto, <strong>Sábado a las 12:00 PM</strong>). Se emite un aviso global en el servidor y en el canal de noticias de Discord.</p>
+
+        <h3>Fase 2: Combate Activo entre Leales y Rebeldes (ACTIVE)</h3>
+        <p>Cuando llega la hora programada, comienza el enfrentamiento armado interno (duración máxima predeterminada de 48 horas):</p>
+        <ul>
+            <li><strong>Participación Militar Obligatoria:</strong> Al igual que en las guerras internacionales, solo los ciudadanos con <strong>rango militar reconocido y plaza activa</strong> participan en el combate de la Guerra Civil y contabilizan bajas.</li>
+            <li><strong>Fuego Interno Habilitado:</strong> Los militares del bando <strong>Leal (Gobierno)</strong> y los del bando <strong>Rebelde (Oposición)</strong> pueden combatir entre sí dentro del territorio nacional.</li>
+            <li><strong>BossBar de Bajas:</strong> Ambos bandos ven en la parte superior de la pantalla el marcador de bajas sufridas frente al límite máximo de resistencia (20 bajas por bando por defecto).</li>
+        </ul>
+
+        <h3>Fase 3: Desenlace Político</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Resultado</th>
+                    <th>Cómo se alcanza</th>
+                    <th>Consecuencia en la Nación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Victoria Rebelde</strong></td>
+                    <td>El bando del gobierno alcanza su límite máximo de bajas (20 bajas por defecto).</td>
+                    <td>El líder actual es derrocado. El <strong>Líder Rebelde</strong> pasa a ser el nuevo gobernante de la nación y propietario de la capital. Se restablece la paz interna.</td>
+                </tr>
+                <tr>
+                    <td><strong>Victoria Leal (Gobierno)</strong></td>
+                    <td>El bando rebelde alcanza su límite máximo de bajas (20 bajas por defecto) o expira el tiempo del conflicto.</td>
+                    <td>La insurrección queda sofocada. Los votos de desaprobación se reinician y el líder en funciones conserva el mando.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

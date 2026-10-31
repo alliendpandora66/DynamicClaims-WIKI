@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Pandemias y Vacunas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item active">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Pandemias y Vacunas</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en pandemias... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Epidemiología, síntomas por severidad y cooperación científica en vacunas.</div>
+            <div><span class="badge badge-citizen">Ciudadano</span> <span class="badge badge-leader">Líder / Colíder</span></div>
+        </div>
+
+        <h1>Pandemias, Bioseguridad y Vacunas</h1>
+        <p>El servidor cuenta con un motor epidemiológico que simula brotes de enfermedades infecciosas. Los virus se propagan entre ciudadanos y fronteras colindantes, atraviesan una fase de incubación y obligan a las naciones a cooperar científicamente para sintetizar una vacuna.</p>
+
+        <h2>1. Comandos de Consulta Sanitaria</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Rol Requerido</th>
+                    <th>Función</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc pandemias</code><br><em>(o <code>/dc menu pandemias</code>)</em></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Abre el panel de Bioseguridad con la lista de cepas activas, estadísticas de contagio y progreso de vacunas.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc pandemias info &lt;PANDEMIA&gt;</code></td>
+                    <td><span class="badge badge-citizen">Cualquier jugador</span></td>
+                    <td>Muestra el detalle de una pandemia específica, su severidad actual y las naciones que investigan su cura.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Contagio, Incubación y Mutación</h2>
+        <ul>
+            <li><strong>Incubación Asintomática (3 días RP por defecto):</strong> Durante los primeros días tras contraer el patógeno, el jugador porta el virus sin sufrir debuffs visibles.</li>
+            <li><strong>Propagación Fronteriza:</strong> Las naciones que comparten frontera con un país infectado tienen una probabilidad diaria (10% por defecto) de que el brote cruce a su territorio.</li>
+            <li><strong>Mutaciones (5% diario por defecto):</strong> Con el paso de los días, el virus puede mutar alterando sus parámetros epidemiológicos.</li>
+            <li><strong>BossBar de Infección:</strong> Los jugadores infectados ven una barra superior que indica el nombre del patógeno y la evolución de la enfermedad.</li>
+        </ul>
+
+        <h2>3. Los 5 Niveles de Severidad y Efectos</h2>
+        <p>Una vez superada la incubación, el jugador experimenta efectos periódicos según el nivel de severidad de la cepa (valores base de <code>config.yml</code>):</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Severidad</th>
+                    <th>Efectos Aplicados</th>
+                    <th>Impacto en Supervivencia y Combate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Nivel 1 (Leve)</strong></td>
+                    <td><code>Hambre I</code> (10s)</td>
+                    <td>Aumento moderado del consumo de comida.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nivel 2 (Moderado)</strong></td>
+                    <td><code>Hambre II</code> + <code>Lentitud I</code> (10s)</td>
+                    <td>Reducción de velocidad de desplazamiento y mayor desgaste de saturación.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nivel 3 (Grave)</strong></td>
+                    <td><code>Veneno I</code> (5s) + <code>Lentitud II</code> (10s) + <code>Debilidad I</code> (10s)</td>
+                    <td>Pérdida gradual de salud y menor daño cuerpo a cuerpo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nivel 4 (Crítico)</strong></td>
+                    <td><code>Veneno II</code> (5s) + <code>Lentitud III</code> (10s) + <code>Debilidad II</code> (10s) + <code>Hambre III</code> (10s)</td>
+                    <td>Incapacidad severa para combatir o desplazarse sin asistencia médica.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nivel 5 (Letal)</strong></td>
+                    <td><code>Wither I</code> (3s) + <code>Lentitud III</code> (10s) + <code>Debilidad III</code> (10s) + <code>Ceguera I</code> (5s)</td>
+                    <td>Pérdida de visión y daño letal por descomposición (Wither).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Desarrollo Multinacional de Vacunas (+20% por Aliado)</h2>
+        <ul>
+            <li><strong>Inicio del Proyecto:</strong> Los líderes nacionales pueden iniciar o sumarse al desarrollo de la vacuna desde el panel <code>/dc pandemias</code> (tiempo base predeterminado: 30 días RP).</li>
+            <li><strong>Bono de Cooperación Internacional:</strong> Por cada nación adicional que colabore en la investigación de la vacuna, la velocidad de síntesis aumenta un <strong>+20%</strong> (<code>vaccine-multi-nation-boost-per-nation: 0.2</code>).</li>
+            <li><strong>Inmunización:</strong> Cuando el progreso alcanza el 100%, la vacuna queda lista para inmunizar a los ciudadanos frente a esa cepa.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

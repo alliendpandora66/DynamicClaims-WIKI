@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Industria y Edificios</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item active">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Industria y Edificios</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en industria... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Construcción holográfica 3D, operación de fábricas, minas y aeropuertos.</div>
+            <div><span class="badge badge-citizen">Miembro de Región</span> <span class="badge badge-mayor">Alcalde / Dueño</span></div>
+        </div>
+
+        <h1>Complejos Industriales, Edificios y Aeropuertos</h1>
+        <p>Las regiones pueden desarrollar su capacidad productiva construyendo estructuras industriales dentro de su territorio reclamado. Cada edificio opera de manera autónoma por ciclos o procesa recetas industriales.</p>
+
+        <div class="note-box tip">
+            <p><strong>¿Buscas cómo crear nuevos tipos de edificios o recetas como administrador?</strong> Consulta la guía de <a href="staff-content.html">Editores In-Game y Catálogos (Sección 2: Staff)</a>.</p>
+        </div>
+
+        <h2>1. Las 10 Categorías de Edificios Industriales</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Rol Productivo</th>
+                    <th>Cómo lo utiliza el jugador</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mina (<code>MINE</code>)</strong></td>
+                    <td>Extracción mineral</td>
+                    <td>Genera minerales y recursos brutos de forma autónoma en cada ciclo de producción mientras el chunk esté cargado.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fábrica (<code>FACTORY</code>)</strong></td>
+                    <td>Manufactura y recetas</td>
+                    <td>Transforma materias primas en componentes industriales, aleaciones o equipamiento seleccionando una receta en su menú.</td>
+                </tr>
+                <tr>
+                    <td><strong>Granja (<code>FARM</code>)</strong></td>
+                    <td>Agricultura</td>
+                    <td>Produce cosechas y recursos agrícolas periódicamente en su bandeja de salida.</td>
+                </tr>
+                <tr>
+                    <td><strong>Aserradero (<code>WOODCUTTER</code>)</strong></td>
+                    <td>Silvicultura</td>
+                    <td>Genera troncos, maderas y derivados forestales por ciclo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Almacén (<code>WAREHOUSE</code>)</strong></td>
+                    <td>Logística regional</td>
+                    <td>Centro de acopio que abastece de ingredientes y recoge productos de los edificios de la región.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ayuntamiento (<code>TOWN_HALL</code>)</strong></td>
+                    <td>Gobernanza local</td>
+                    <td>Edificio central administrativo de una región o municipio.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fuerte (<code>FORT</code>)</strong></td>
+                    <td>Defensa militar</td>
+                    <td>Instalación castrense para fortificación territorial y producción defensiva.</td>
+                </tr>
+                <tr>
+                    <td><strong>Aeropuerto (<code>AIRPORT</code>)</strong></td>
+                    <td>Transporte aéreo</td>
+                    <td>Conecta regiones distantes permitiendo viajes rápidos de pasajeros entre terminales operativas.</td>
+                </tr>
+                <tr>
+                    <td><strong>Restaurante (<code>RESTAURANT</code>)</strong></td>
+                    <td>Servicios y víveres</td>
+                    <td>Elabora raciones y consumibles configurados en el servidor.</td>
+                </tr>
+                <tr>
+                    <td><strong>Casa (<code>HOUSE</code>)</strong></td>
+                    <td>Residencial</td>
+                    <td>Estructura habitacional y de urbanismo regional.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Cómo Construir un Edificio (Previsualización Holográfica 3D)</h2>
+        <ol>
+            <li><strong>Obtén el Ítem Colocador:</strong> Consigue el objeto de construcción del edificio (mediante crafteo, tienda o entrega del servidor) y verifica en el Códice (<code>/dc guia</code>) si requiere una tecnología o permiso desbloqueado.</li>
+            <li><strong>Previsualización Holográfica 3D:</strong> Al usar el ítem dentro de tu región, el sistema proyecta partículas tridimensionales que muestran exactamente el contorno y volumen que ocupará la estructura.</li>
+            <li><strong>Rotación y Confirmación:</strong> Puedes orientar el edificio hacia cualquiera de los 4 puntos cardinales (Norte, Sur, Este, Oeste). El sistema comprueba que todos los bloques quepan dentro de tu región sin solaparse con otro edificio antes de iniciar la construcción.</li>
+        </ol>
+
+        <h2>3. Operación del Edificio en su Interfaz Gráfica</h2>
+        <p>Una vez finalizada la construcción, haz clic derecho sobre el bloque de control del edificio para abrir su panel:</p>
+        <ul>
+            <li><strong>Bandeja de Entrada y Salida:</strong> Deposita las materias primas requeridas (en fábricas) y retira los ítems producidos acumulados en el almacén de salida.</li>
+            <li><strong>Selector de Recetas:</strong> En edificios con recetas industriales, elige qué producto fabricar y consulta los ingredientes exactos y el tiempo de cada ciclo.</li>
+            <li><strong>Producción Autónoma:</strong> Los edificios extractivos (como minas, granjas o aserraderos) producen resultados automáticamente en cada intervalo mientras el edificio esté terminado y su chunk permanezca cargado.</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

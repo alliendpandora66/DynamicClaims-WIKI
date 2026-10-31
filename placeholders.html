@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables PlaceholderAPI - DynamicClaims Wiki</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="nav-breadcrumb">
+            <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">☰</button>
+            <span>DynamicClaims Wiki</span> / <span>3. Operador</span> / <strong>Variables PlaceholderAPI</strong>
+        </div>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="wiki-search" class="search-input" placeholder="Buscar comandos, mecánicas... (Ctrl + K)" autocomplete="off">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item active">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <main class="main-content">
+        <div class="section-banner op">
+            ⚙️ <strong>Sección 3: Operador</strong> — Catálogo completo y verificado de variables PlaceholderAPI (<code>%dynamicclaims_*%</code> y relacionales <code>%rel_dynamicclaims_*%</code>) registradas por <code>DynamicClaimsExpansion</code>.
+        </div>
+
+        <h1>Variables PlaceholderAPI (PAPI)</h1>
+        <p class="lead">DynamicClaims se registra automáticamente en <strong>PlaceholderAPI</strong> al iniciar el servidor (identificador <code>dynamicclaims</code>). No necesitas descargar expansiones desde eCloud.</p>
+
+        <h2>1. Territorio, Nación y Nametags</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_region%</code></td>
+                    <td>—</td>
+                    <td>Región donde está parado el jugador actualmente (o <code>Zona Libre</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation%</code></td>
+                    <td><code>%dynamicclaims_nacion%</code><br><code>%dynamicclaims_pais%</code></td>
+                    <td>Nación donde está parado el jugador; si está en zona libre, devuelve la nación a la que pertenece el jugador (o <code>Ninguno</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_raw%</code></td>
+                    <td><code>%dynamicclaims_nacion_raw%</code><br><code>%dynamicclaims_pais_raw%</code></td>
+                    <td>Nombre de la nación a la que pertenece el jugador (o cadena vacía <code>""</code> si no tiene nación). Ideal para condicionales.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_has_nation%</code></td>
+                    <td><code>%dynamicclaims_tiene_nacion%</code></td>
+                    <td><code>true</code> si el jugador pertenece a una nación, <code>false</code> en caso contrario.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_color%</code></td>
+                    <td><code>%dynamicclaims_color_nacion%</code></td>
+                    <td>Código de color de Minecraft (ej. <code>&amp;c</code>, <code>&amp;9</code>) más cercano al color hexadecimal de la nación del jugador (o <code>&amp;7</code> si no tiene).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_prefix%</code></td>
+                    <td><code>%dynamicclaims_prefijo_nacion%</code></td>
+                    <td>Prefijo formateado con el color de la nación: <code>&amp;9[Francia] &amp;r</code> (o vacío si no tiene nación).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_suffix%</code></td>
+                    <td><code>%dynamicclaims_sufijo_nacion%</code><br><code>%dynamicclaims_nation_badge%</code></td>
+                    <td>Sufijo formateado con el color de la nación: <code> &amp;9[Francia]&amp;r</code> (o vacío si no tiene nación).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Escalafón Militar y Cupos Nacionales</h2>
+        <p>Variables conectadas directamente con el sistema de <a href="roles.html">Rangos Militares (<code>/dc poblacion</code>)</a>:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_military_count%</code></td>
+                    <td><code>%dynamicclaims_soldados%</code></td>
+                    <td>Cantidad actual de soldados dados de alta en la nación del jugador (ej. <code>12</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_military_max%</code></td>
+                    <td><code>%dynamicclaims_max_soldados%</code></td>
+                    <td>Cupo máximo de soldados permitido en la nación del jugador según <code>war.max-soldiers</code> (ej. <code>30</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_military_available%</code></td>
+                    <td><code>%dynamicclaims_cupos_militares%</code></td>
+                    <td>Cupos militares disponibles restantes en la nación (ej. <code>18</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_military_rank%</code></td>
+                    <td><code>%dynamicclaims_rango_militar%</code></td>
+                    <td>Nombre del rango militar del jugador (ej. <code>Capitán</code>, <code>Soldado</code>) o <code>Civil</code> si no pertenece al ejército.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_is_military%</code></td>
+                    <td><code>%dynamicclaims_es_militar%</code></td>
+                    <td><code>Sí</code> si el jugador es militar activo en su nación, <code>No</code> si es civil.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_war_participant%</code></td>
+                    <td><code>%dynamicclaims_participa_guerra%</code></td>
+                    <td><code>Sí</code> si el jugador está obligado a participar en guerras (militares, alcaldes, colíderes y líderes), <code>No</code> si es civil exento.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Guerras y Combate (Combat Tag)</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_is_at_war%</code></td>
+                    <td><code>%dynamicclaims_is_en_guerra%</code></td>
+                    <td><code>true</code> si la nación del jugador tiene al menos una guerra activa, <code>false</code> si está en paz.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_war_enemies%</code></td>
+                    <td><code>%dynamicclaims_naciones_enemigas%</code></td>
+                    <td>Lista separada por comas de naciones enemigas en guerra actual (o <code>Ninguno</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_combat_tagged%</code></td>
+                    <td><code>%dynamicclaims_en_combate%</code></td>
+                    <td><code>true</code> si el jugador tiene Combat Tag activo, <code>false</code> en caso contrario.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_combat_time%</code></td>
+                    <td><code>%dynamicclaims_tiempo_combate%</code></td>
+                    <td>Segundos restantes de Combat Tag (ej. <code>14</code> o <code>0</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Economía, Divisas y Recursos</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_balance.player%</code></td>
+                    <td><code>%dynamicclaims_balance_player%</code></td>
+                    <td>Saldo del jugador en la divisa de su nación (o Vault si no usa divisa nacional), formateado a 2 decimales (ej. <code>1540.50</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_moneda_codigo%</code></td>
+                    <td><code>%dynamicclaims_money.player%</code><br><code>%dynamicclaims_money_player%</code></td>
+                    <td>Código ISO de 3 letras de la moneda de la nación donde se encuentra el jugador (ej. <code>USD</code>, <code>EUR</code> o <code>N/A</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_moneda_nombre%</code></td>
+                    <td>—</td>
+                    <td>Nombre completo de la divisa de la nación actual (ej. <code>Dólar Americano</code> o <code>Sin moneda</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_moneda_simbolo%</code></td>
+                    <td>—</td>
+                    <td>Símbolo monetario de la divisa nacional (ej. <code>$</code>, <code>€</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_moneda_valor%</code></td>
+                    <td>—</td>
+                    <td>Valor intrínseco en oro de cada billete según el Patrón Oro (ej. <code>1.2500</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_reservas_oro%</code></td>
+                    <td>—</td>
+                    <td>Reservas de oro depositadas en el Banco Central de la nación actual (ej. <code>500.00</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_papeles_impresos%</code></td>
+                    <td>—</td>
+                    <td>Masa monetaria (billetes en circulación) de la nación actual (ej. <code>400.00</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_resumen_moneda%</code></td>
+                    <td>—</td>
+                    <td>Resumen compacto: <code>USD ($) - 1.2500 oro/papel</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_resources%</code></td>
+                    <td>—</td>
+                    <td>Recursos estratégicos configurados para la región donde está parado el jugador (o <code>Ninguno</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Placeholders Relacionales (`%rel_dynamicclaims_*%`)</h2>
+        <p>Para plugins compatibles con Placeholders Relacionales (como <strong>TAB</strong> o <strong>NameTagEdit</strong>), DynamicClaims evalúa la relación diplomática entre el jugador que mira (<em>viewer</em>) y el jugador objetivo (<em>target</em>):</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Relacional</th>
+                    <th>Valor Devuelto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%rel_dynamicclaims_relation%</code></td>
+                    <td><code>SAME_NATION</code> (misma nación), <code>ALLY</code> (aliados), <code>ENEMY</code> (en guerra activa) o <code>NEUTRAL</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_relation_color%</code></td>
+                    <td>Color según relación: <code>&amp;2</code> (Misma nación), <code>&amp;a</code> (Aliado), <code>&amp;c</code> (Enemigo en guerra) o <code>&amp;f</code> (Neutral).</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_relation_formatted%</code></td>
+                    <td>Etiqueta traducible con color: <code>&amp;2[Tu Nación]</code>, <code>&amp;a[Aliado]</code>, <code>&amp;c[Enemigo]</code> o <code>&amp;f[Neutral]</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_is_enemy%</code></td>
+                    <td><code>true</code> si las naciones de ambos jugadores están en guerra activa, <code>false</code> en caso contrario.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_nation_prefix%</code><br><code>%rel_dynamicclaims_prefijo_nacion%</code></td>
+                    <td>Prefijo de la nación del jugador objetivo coloreado según su relación diplomática con quien lo mira: <code>&amp;c[Alemania] &amp;r</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_nation_suffix%</code><br><code>%rel_dynamicclaims_sufijo_nacion%</code><br><code>%rel_dynamicclaims_nation_badge%</code></td>
+                    <td>Sufijo de la nación del jugador objetivo coloreado según su relación diplomática con quien lo mira: <code> &amp;a[Francia]&amp;r</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="footer">
+            <div>DynamicClaims Wiki Oficial — Documentación 100% Verificada</div>
+            <div>Sección: 3. Operador</div>
+        </footer>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

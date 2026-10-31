@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Chat, Mapas y Utilidades</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item active">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Chat, Mapas y Utilidades</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar chat, mapa web, minimapa... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Canales de chat, Minimapa Táctico en mano, Atlas Web Integrado y Andamios.</div>
+            <div><span class="badge badge-citizen">Cualquier Jugador</span></div>
+        </div>
+
+        <h1>Canales de Chat, Mapas (Táctico y Atlas Web) y Utilidades</h1>
+        <p>DynamicClaims proporciona canales de comunicación privados para tu región, nación o alianza, tres herramientas cartográficas distintas y un sistema de desplazamiento rápido en andamios.</p>
+
+        <h2>1. Canales de Chat (<code>/dc chat</code>)</h2>
+        <p>Si escribes un mensaje después del comando, se envía puntualmente a ese canal; si ejecutas el comando sin mensaje, cambias tu canal de chat predeterminado:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Canal</th>
+                    <th>Comando</th>
+                    <th>Quién lo lee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Global</strong></td>
+                    <td><code>/dc chat global [MENSAJE]</code></td>
+                    <td>Todos los jugadores conectados en el servidor.</td>
+                </tr>
+                <tr>
+                    <td><strong>Región</strong></td>
+                    <td><code>/dc chat region [MENSAJE]</code></td>
+                    <td>Miembros que pertenecen a tu misma región.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nación</strong></td>
+                    <td><code>/dc chat nacion [MENSAJE]</code></td>
+                    <td>Todos los ciudadanos de tu nación en cualquier mundo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Alianza</strong></td>
+                    <td><code>/dc chat alianza [MENSAJE]</code></td>
+                    <td>Ciudadanos de todas las naciones que integran tu misma alianza militar.</td>
+                </tr>
+                <tr>
+                    <td><strong>Estado actual</strong></td>
+                    <td><code>/dc chat info</code></td>
+                    <td>Muestra en qué canal estás hablando actualmente, tu región y tu nación.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><em>Nota sobre Nametags:</em> Sobre la cabeza de cada jugador (y en el Tablist) verás el nombre de su nación coloreado según tu relación diplomática con él: <span style="color: #4ade80;">Verde</span> (misma nación), <span style="color: #60a5fa;">Azul</span> (aliado), <span style="color: #facc15;">Amarillo</span> (neutral) o <span style="color: #f87171;">Rojo</span> (enemigo).</p>
+
+        <h2>2. Mapa de Chunks en Chat y Minimapa Táctico en Mano</h2>
+        <ul>
+            <li><strong>Mapa ASCII en Chat (<code>/dc mapa [auto]</code>):</strong> Muestra en el chat la cuadrícula de chunks alrededor de tu posición. Con <code>/dc mapa auto</code> se actualiza automáticamente al caminar de un chunk a otro.</li>
+            <li><strong>Minimapa Táctico en Mano:</strong> Cuando sostienes un Mapa Táctico de DynamicClaims, puedes cambiar el nivel de zoom al instante presionando la tecla de cambiar de mano (<strong>Tecla <code>F</code></strong>):
+                <ul>
+                    <li><strong>Zoom 1x (Cercano):</strong> Radio de 8 chunks (área de 16&times;16 chunks / 256&times;256 bloques).</li>
+                    <li><strong>Zoom 2x (Regional):</strong> Radio de 16 chunks (área de 32&times;32 chunks / 512&times;512 bloques).</li>
+                    <li><strong>Zoom 4x (Continental):</strong> Radio de 32 chunks (área de 64&times;64 chunks / 1024&times;1024 bloques).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Colores Diplomáticos del Minimapa Táctico</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Color en el Mapa</th>
+                    <th>Código HEX</th>
+                    <th>Significado Territorial</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong style="color: #2ECC71;">■ Verde Esmeralda</strong></td>
+                    <td><code>#2ECC71</code></td>
+                    <td>Tu propia región de residencia.</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #9B59B6;">■ Morado / Amatista</strong></td>
+                    <td><code>#9B59B6</code></td>
+                    <td>Otras regiones que pertenecen a tu misma nación.</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #00BCFF;">■ Cian / Celeste</strong></td>
+                    <td><code>#00BCFF</code></td>
+                    <td>Territorio de naciones aliadas.</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #E74C3C;">■ Rojo</strong></td>
+                    <td><code>#E74C3C</code></td>
+                    <td>Territorio de naciones enemigas (y <code>#C0392B</code> para chunks bajo asedio).</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #F39C12;">■ Naranja</strong></td>
+                    <td><code>#F39C12</code></td>
+                    <td>Regiones neutrales o independientes.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Atlas Web Integrado (<code>/dc mapa-web</code>)</h2>
+        <p>DynamicClaims incluye su propio mapa web interactivo en el navegador (<strong>Atlas</strong>) donde puedes explorar el mundo, buscar naciones/regiones, ver capas (Guerras, Alianzas, Política, Industria, Radiación, Jugadores) y gestionar tus territorios autorizados incluso estando desconectado de Minecraft:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Qué hace</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc mapa-web</code></td>
+                    <td>Genera un enlace personal con código temporal de un solo uso para iniciar sesión automáticamente en el Atlas Web.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc mapa-web contraseña &lt;CONTRASEÑA&gt;</code><br><em>(también <code>contrasena</code> sin ñ)</em></td>
+                    <td>Establece o cambia tu contraseña permanente (mínimo 10 caracteres por defecto) para entrar al Atlas Web con tu nick desde cualquier dispositivo.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc mapa-web contraseña</code></td>
+                    <td>Genera una contraseña aleatoria segura y te muestra un botón en el chat para copiarla sin que quede escrita en tu historial de comandos.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc mapa-web quitar-contraseña</code></td>
+                    <td>Elimina tu contraseña permanente y cierra inmediatamente todas tus sesiones activas en navegadores.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Controles útiles dentro del Atlas Web</h3>
+        <ul>
+            <li><strong>Búsqueda y Capas:</strong> Usa el botón superior <strong>Buscar territorios</strong> para localizar cualquier región o nación, y los botones de <strong>Capas</strong> para mostrar u ocultar fronteras regionales, guerras, alianzas o estilo visual.</li>
+            <li><strong>Menú con Clic Derecho:</strong> En la vista normal del mapa, haz clic derecho sobre cualquier punto para centrar la cámara, acercar zoom, copiar coordenadas de bloque o chunk, o abrir la ficha de la región/nación.</li>
+            <li><strong>Gestión de Leyes y Claims:</strong> Si eres Líder o Colíder (con <code>dynamicclaims.webmap.flags</code>), puedes cambiar las 7 leyes de tu nación desde su tarjeta. Si eres dueño de región y el servidor habilita <code>claims.allow-region-owners: true</code>, podrás usar el <strong>Editor Territorial</strong> (herramientas Chunks, Seleccionar área, Pintar y Rellenar) con clic derecho y confirmar tus claims.</li>
+        </ul>
+
+        <h2>4. Desplazamiento en Andamios (<code>/dc andamio</code>)</h2>
+        <p>Cuando el módulo <code>scaffold-grapple</code> está activo, puedes sujetarte y desplazarte por estructuras de andamios y cuerdas de forma ágil. Si necesitas soltarte manualmente en cualquier momento, ejecuta <code>/dc andamio soltar</code> (o <code>/dc andamio</code>).</p>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

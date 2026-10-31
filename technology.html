@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicClaims - Tecnología e Investigación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item active">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>1. Usuario</span> <span style="color: #475569;">/</span> <span class="current-page">Tecnología e Investigación</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en tecnología... (Ctrl+K)">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner user">
+            <div><strong>Sección 1: Usuario / Jugador Común</strong> &mdash; Árbol científico nacional, ramas de progreso y donación de experiencia.</div>
+            <div><span class="badge badge-citizen">Ciudadano (Donar XP)</span> <span class="badge badge-leader">Líder / Colíder (Investigar)</span></div>
+        </div>
+
+        <h1>Tecnología e Investigación Científica</h1>
+        <p>Las naciones avanzan tecnológicamente invirtiendo puntos de ciencia en el <strong>Árbol Tecnológico</strong>. Cuando una tecnología se completa, sus efectos, recetas y permisos asociados se aplican automáticamente a <strong>todos los ciudadanos de la nación</strong> (y se reaplican al reconectarse al servidor).</p>
+
+        <h2>1. Comandos de Tecnología para Jugadores</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Rol Requerido</th>
+                    <th>Función</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc tecnologias</code><br><em>(o <code>/dc menu tecnologias</code>)</em></td>
+                    <td><span class="badge badge-citizen">Ciudadano</span></td>
+                    <td>Abre el panel principal del Árbol de Investigación de tu nación.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc tecnologias donar &lt;CANTIDAD&gt;</code></td>
+                    <td><span class="badge badge-citizen">Cualquier ciudadano</span></td>
+                    <td>Convierte tus puntos de experiencia (XP) de Minecraft en puntos de investigación para tu nación (por defecto, <code>10 XP = 1 punto de ciencia</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>/dc tecnologias categoria &lt;CATEGORIA&gt;</code></td>
+                    <td><span class="badge badge-citizen">Ciudadano</span></td>
+                    <td>Abre directamente una rama específica del árbol científico.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc tecnologias detalle &lt;TECNOLOGIA&gt;</code></td>
+                    <td><span class="badge badge-citizen">Ciudadano</span> / <span class="badge badge-leader">Líder</span></td>
+                    <td>Muestra los requisitos, coste, progreso e inicia o invierte puntos en esa tecnología (iniciar/asignar requiere ser Dueño de Capital, Cogobernador de Capital o Colíder).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Las 4 Ramas del Conocimiento</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Rama Científica</th>
+                    <th>Enfoque Estratégico</th>
+                    <th>Beneficios Colectivos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Industria</strong></td>
+                    <td>Producción, minería y manufactura</td>
+                    <td>Desbloquea tipos de edificios industriales, recetas avanzadas y optimiza la extracción de recursos.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Ciencia</strong></td>
+                    <td>Medicina, bioseguridad y laboratorios</td>
+                    <td>Aumenta la velocidad de investigación y síntesis de vacunas frente a pandemias.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Militar</strong></td>
+                    <td>Defensa, armamento y logística</td>
+                    <td>Habilita equipamiento militar avanzado, fortalece la resistencia bélica y desbloquea armamento estratégico.</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Sociedad</strong></td>
+                    <td>Diplomacia, urbanismo y estado</td>
+                    <td>Otorga bonificaciones cívicas y permisos colectivos a los habitantes del país.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Cómo se obtienen Puntos de Investigación</h2>
+        <ul>
+            <li><strong>Generación Pasiva Nacional:</strong> Cada nación genera automáticamente una base de puntos por ciclo de tiempo (por defecto, <code>10 puntos</code> cada <code>3600 segundos</code> / 1 hora).</li>
+            <li><strong>Donación Ciudadana de XP:</strong> Todos los habitantes pueden acelerar el desarrollo científico de su patria donando su experiencia con <code>/dc tecnologias donar &lt;CANTIDAD&gt;</code> o desde el botón de donación dentro del menú.</li>
+            <li><strong>Prerrequisitos y Fechas:</strong> Cada nodo indica en el menú con colores si ya está completado (<span style="color: #4ade80;">Verde</span>), disponible para investigar (<span style="color: #facc15;">Amarillo</span>) o bloqueado por requerir tecnologías previas o una fecha mínima del calendario Roleplay (<span style="color: #f87171;">Rojo</span>).</li>
+        </ul>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>

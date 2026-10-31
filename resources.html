@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos, Drops, Vehículos y GeoJSON - DynamicClaims Wiki</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icono.png">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="icono.png" alt="DynamicClaims" class="sidebar-logo-img"> DynamicClaims
+        </div>
+
+        <a href="index.html" class="nav-item">Inicio</a>
+
+        <div class="nav-section user-sec">1. Usuario / Jugador Común</div>
+        <a href="nations.html" class="nav-item">Territorios, Ciudadanía y Leyes</a>
+        <a href="roles.html" class="nav-item">Cargos, Elecciones y Rangos</a>
+        <a href="government.html" class="nav-item">Gobierno y Guerra Civil</a>
+        <a href="wars.html" class="nav-item">Guerras, Asedios y Misiles</a>
+        <a href="economy.html" class="nav-item">Economía, Banco y Divisas</a>
+        <a href="auctions.html" class="nav-item">Mercado Global y Tienda</a>
+        <a href="technology.html" class="nav-item">Tecnología e Investigación</a>
+        <a href="industry.html" class="nav-item">Industria y Edificios</a>
+        <a href="pandemic.html" class="nav-item">Pandemias y Vacunas</a>
+        <a href="localization.html" class="nav-item">Chat, Mapas y Utilidades</a>
+        <a href="gui.html" class="nav-item">Menú Principal (/dc menu)</a>
+
+        <div class="nav-section staff-sec">2. Staff</div>
+        <a href="staff.html" class="nav-item">Gestión de Jugadores y Códigos</a>
+        <a href="staff-events.html" class="nav-item">Arbitraje: Guerras y Eventos</a>
+        <a href="staff-content.html" class="nav-item">Editores In-Game y Catálogos</a>
+        <a href="commands.html" class="nav-item">Catálogo Oficial de Comandos</a>
+
+        <div class="nav-section op-sec">3. Operador</div>
+        <a href="operator.html" class="nav-item">Instalación, Módulos y BD</a>
+        <a href="configuration.html" class="nav-item">Configuración Técnica (YAML)</a>
+        <a href="dynmap.html" class="nav-item">Atlas Web, Dynmap y Squaremap</a>
+        <a href="discord.html" class="nav-item">Discord (Webhook y Bot JDA)</a>
+        <a href="resources.html" class="nav-item active">Recursos, Drops y GeoJSON</a>
+        <a href="placeholders.html" class="nav-item">Variables PlaceholderAPI</a>
+        <a href="scripting.html" class="nav-item">Scripting API (GraalJS)</a>
+        <a href="developer.html" class="nav-item">Java API y UltraAPI v2</a>
+    </aside>
+
+    <header class="top-nav">
+        <div class="breadcrumb">
+            <span>DynamicClaims</span> <span style="color: #475569;">/</span> <span>3. Operador</span> <span style="color: #475569;">/</span> <span class="current-page">Recursos, Drops y GeoJSON</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en recursos y GeoJSON... (Ctrl+K)" autocomplete="off">
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="section-banner operator">
+            <div>⚙️ <strong>Sección 3: Operador</strong> &mdash; Configuración de botín personalizado (<code>recursos_drops.yml</code>), excepciones de vehículos bélicos (<code>vehiculos.yml</code>) e importación de fronteras reales con GeoJSON y ZNodes.</div>
+            <div><span class="badge badge-operator">Operador</span></div>
+        </div>
+
+        <h1>Recursos, Drops, Vehículos (`vehiculos.yml`) e Importación GeoJSON</h1>
+        <p>Guía técnica para configurar la extracción de recursos estratégicos por territorio, integrar plugins de vehículos/artillería con el sistema de regiones y proyectar mapas de la Tierra real en tu servidor.</p>
+
+        <h2>1. Drops de Bloques y Mobs (`recursos_drops.yml`)</h2>
+        <p>El archivo <code>plugins/DynamicClaims/recursos_drops.yml</code> permite que bloques minados o entidades abatidas suelten ítems registrados en el catálogo de Recursos Personalizados (<a href="staff-content.html"><code>/dc admin recursos</code></a>), filtrando por bioma, región o nación.</p>
+
+        <div class="callout info">
+            <div class="callout-title">🛡️ Anti-Exploit de Bloques Colocados (`PlacedBlockTracker`)</div>
+            <p>DynamicClaims rastrea los bloques colocados por jugadores mediante <code>PlacedBlockTracker</code> (consultable también vía API con <code>isBlockPlayerPlaced(Block)</code>). Si un jugador coloca una mena y la vuelve a picar, <strong>no recibirá drops personalizados</strong>, impidiendo granjas infinitas con Toque de Seda.</p>
+        </div>
+
+        <pre><code>block_drops:
+  IRON_ORE:
+    - resource: "acero_puro"
+      chance: 15.0        # Probabilidad porcentual (0.0 a 100.0)
+      min_amount: 1
+      max_amount: 2
+      biomes: []          # Vacío = todos los biomas (ej. [TAIGA, DRIPSTONE_CAVES])
+      regions: []         # Vacío = todas las regiones (o restringir a ["Ruhr", "Urales"])
+      nations: []         # Vacío = todas las naciones
+  DEEPSLATE_IRON_ORE:
+    - resource: "acero_puro"
+      chance: 25.0
+      min_amount: 1
+      max_amount: 3
+
+mob_drops:
+  ZOMBIE:
+    - resource: "tejido_infectado"
+      chance: 5.0
+      min_amount: 1
+      max_amount: 1
+      biomes: []
+      regions: []
+      nations: []</code></pre>
+
+        <h2>2. Excepciones para Vehículos y Artillería (`vehiculos.yml`)</h2>
+        <p>El archivo <code>plugins/DynamicClaims/vehiculos.yml</code> permite que tanques, aviones, torretas y proyectiles de otros plugins tengan reglas específicas de rotura de bloques y PvP en regiones reclamadas, zonas de guerra y tierras libres. DynamicClaims detecta el tipo de vehículo buscando la clave <code>settings.tag-key</code> (por defecto <code>"wwc_type"</code>) en:</p>
+        <ol>
+            <li><strong>Metadata de Bukkit</strong> (<code>entity.hasMetadata("wwc_type")</code>).</li>
+            <li><strong>PersistentDataContainer (PDC)</strong> del proyectil, vehículo o conductor.</li>
+            <li><strong>Scoreboard Tags</strong> (por ejemplo <code>"wwc_type:tanque"</code> o <code>"tanque"</code>).</li>
+        </ol>
+
+        <pre><code>settings:
+  enabled: true
+  tag-key: "wwc_type" # Clave buscada en Metadata, PDC y Scoreboard Tags
+
+default-rules:
+  block-destruction:
+    allow-in-claims: false
+    allow-in-war: true
+    allow-in-wilderness: true
+    whitelist-blocks: []
+    blacklist-blocks:
+      - BEDROCK
+      - BARRIER
+      - CHEST
+      - TRAPPED_CHEST
+      - ENDER_CHEST
+      - SPAWNER
+  pvp:
+    bypass-claim-pvp-protection: false
+    allow-in-war: true
+    allow-damage-to-vehicle-in-claims: true
+    allow-mount-in-claims: true
+
+types:
+  tanque:
+    block-destruction:
+      allow-in-claims: true
+      allow-in-war: true
+      allow-in-wilderness: true
+      whitelist-blocks: []
+      blacklist-blocks:
+        - BEDROCK
+        - BARRIER
+        - SPAWNER
+    pvp:
+      bypass-claim-pvp-protection: true
+      allow-in-war: true
+      allow-damage-to-vehicle-in-claims: true
+      allow-mount-in-claims: true
+
+  avion:
+    block-destruction:
+      allow-in-claims: false
+      allow-in-war: true
+      allow-in-wilderness: true
+      whitelist-blocks: []
+      blacklist-blocks:
+        - BEDROCK
+        - BARRIER
+    pvp:
+      bypass-claim-pvp-protection: false
+      allow-in-war: true
+      allow-damage-to-vehicle-in-claims: true
+      allow-mount-in-claims: true</code></pre>
+
+        <h2>3. Importación Geográfica Masiva (GeoJSON y ZNodes)</h2>
+        <p>Para servidores geopolíticos a escala de la Tierra (Earth SMP), DynamicClaims convierte polígonos reales (latitud/longitud) o exportaciones de <em>ZNodes</em> en regiones y naciones reclamadas por chunks.</p>
+
+        <h3>Configuración de Proyección Geográfica (`config.yml`)</h3>
+        <pre><code>geojson:
+  projection: equirectangular # "equirectangular" o "mercator"
+  world-width: 73728          # Ancho total del mapa en bloques (eje X, 360° de longitud)
+  world-height: 36864         # Alto total del mapa en bloques (eje Z, 180° de latitud)
+  origin-x: 0                 # Coordenada X del bloque equivalente a longitud 0° (Greenwich)
+  origin-z: 0                 # Coordenada Z del bloque equivalente a latitud 0° (Ecuador)
+  world: world</code></pre>
+
+        <h3>Comandos de Importación</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Permiso</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/dc admin importar geojson nacion &lt;archivo.geojson&gt; &lt;nación&gt; [mundo] [color_hex]</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Crea o actualiza la nación indicada, genera sus regiones a partir de las geometrías del GeoJSON y reclama todos los chunks interiores.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin importar geojson region &lt;archivo.geojson&gt; [nombre_region] [mundo]</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Importa un polígono GeoJSON directamente como una o varias regiones en el mundo especificado.</td>
+                </tr>
+                <tr>
+                    <td><code>/dc admin importar znodes &lt;towns.json&gt; &lt;world.json&gt; [mundo]</code></td>
+                    <td><span class="badge-op">dynamicclaims.admin</span></td>
+                    <td>Migra territorios, ciudades y naciones desde archivos de exportación del sistema ZNodes.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="footer">
+            <div>DynamicClaims Wiki Oficial — Documentación 100% Verificada</div>
+            <div>Sección: 3. Operador</div>
+        </footer>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>
