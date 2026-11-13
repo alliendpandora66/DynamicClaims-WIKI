@@ -237,6 +237,14 @@
             <li><code>EXPLOSIONS</code>: Protege las construcciones contra explosiones de TNT, Creepers y cristales.</li>
             <li><code>INTERACT</code>: Controla el uso local de contenedores, puertas y mecanismos por parte de no residentes.</li>
         </ul>
+
+        <h2>5. Nomenclatura, Cooldowns y Zonas Seguras</h2>
+        <ul>
+            <li><strong>Formato de nombres:</strong> Las regiones y naciones admiten de <code>1</code> a <code>48</code> caracteres (letras, números, guion <code>-</code> y guion bajo <code>_</code>; sin espacios ni puntos). Al incorporarse una región a una nación, su identificador interno adopta el formato <code>NACION_REGION</code> (mientras el Atlas Web muestra únicamente el nombre corto).</li>
+            <li><strong>Cooldown de entrada/salida (<code>region.join-leave-cooldown</code>):</strong> Tras abandonar una región (<code>/dc salir</code>), el jugador debe esperar <code>300</code> segundos (5 minutos por defecto) antes de poder unirse a otra o reingresar.</li>
+            <li><strong>Calentamiento y enfriamiento de <code>/dc inicio</code>:</strong> Exige permanecer inmóvil <code>10s</code> (<code>teleport.home-warmup</code>) y respetar un cooldown de <code>60s</code> (<code>teleport.home-cooldown</code>), salvo jugadores con <code>dynamicclaims.bypass.warmup</code> / <code>dynamicclaims.bypass.cooldown</code> o acceso administrativo.</li>
+            <li><strong>Zonas Seguras de Aeropuerto:</strong> El perímetro de los edificios de categoría Aeropuerto actúa como zona neutral libre de PvP (<code>AIRPORT_SAFE_ZONE</code>), protegiendo embarques incluso si el entorno tiene PvP habilitado.</li>
+        </ul>
     </main>
 
     <script src="search.js"></script>

@@ -143,11 +143,11 @@
         </ol>
 
         <h2>3. Operación del Edificio en su Interfaz Gráfica</h2>
-        <p>Una vez finalizada la construcción, haz clic derecho sobre el bloque de control del edificio para abrir su panel:</p>
+        <p>Una vez finalizada la construcción (respetando el margen de separación mínimo <code>overlap-padding: 2</code> en <code>industria/config.yml</code>), haz clic derecho sobre el bloque de control del edificio o ejecuta <code>/dc ingreso &lt;EDIFICIO&gt; [INDICE]</code> (EN: <code>/dc enter</code>) para abrir su panel:</p>
         <ul>
             <li><strong>Bandeja de Entrada y Salida:</strong> Deposita las materias primas requeridas (en fábricas) y retira los ítems producidos acumulados en el almacén de salida.</li>
-            <li><strong>Selector de Recetas:</strong> En edificios con recetas industriales, elige qué producto fabricar y consulta los ingredientes exactos y el tiempo de cada ciclo.</li>
-            <li><strong>Producción Autónoma:</strong> Los edificios extractivos (como minas, granjas o aserraderos) producen resultados automáticamente en cada intervalo mientras el edificio esté terminado y su chunk permanezca cargado.</li>
+            <li><strong>Selector de Recetas y Ciclo de Proceso:</strong> En edificios con recetas industriales, elige qué producto fabricar; el motor evalúa procesos cada <code>1s</code> (<code>processing.sync-seconds</code>) y sincroniza mantenimiento administrativo cada <code>60s</code>.</li>
+            <li><strong>Producción Autónoma, Fuertes y Aeropuertos:</strong> Los extractores generan recursos automáticamente mientras el edificio esté completo y cargado. Los <strong>Fuertes</strong> pueden desplegar tropas defensivas exclusivamente durante guerras activas sobre la región (<code>military.enabled: true</code>), y los <strong>Aeropuertos</strong> habilitan rutas aéreas hacia otras regiones/naciones y crean una zona segura libre de PvP.</li>
         </ul>
     </main>
 

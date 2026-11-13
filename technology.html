@@ -134,11 +134,12 @@
             </tbody>
         </table>
 
-        <h2>3. Cómo se obtienen Puntos de Investigación</h2>
+        <h2>3. Cómo se obtienen Puntos de Investigación y Efectos</h2>
         <ul>
             <li><strong>Generación Pasiva Nacional:</strong> Cada nación genera automáticamente una base de puntos por ciclo de tiempo (por defecto, <code>10 puntos</code> cada <code>3600 segundos</code> / 1 hora).</li>
             <li><strong>Donación Ciudadana de XP:</strong> Todos los habitantes pueden acelerar el desarrollo científico de su patria donando su experiencia con <code>/dc tecnologias donar &lt;CANTIDAD&gt;</code> o desde el botón de donación dentro del menú.</li>
-            <li><strong>Prerrequisitos y Fechas:</strong> Cada nodo indica en el menú con colores si ya está completado (<span style="color: #4ade80;">Verde</span>), disponible para investigar (<span style="color: #facc15;">Amarillo</span>) o bloqueado por requerir tecnologías previas o una fecha mínima del calendario Roleplay (<span style="color: #f87171;">Rojo</span>).</li>
+            <li><strong>Prerrequisitos y Fechas (<code>tecnologias.yml</code>):</strong> Cada nodo indica en el menú con colores si ya está completado (<span style="color: #4ade80;">Verde</span>), disponible para investigar (<span style="color: #facc15;">Amarillo</span>) o bloqueado por requerir tecnologías previas o una fecha mínima del calendario Roleplay (<span style="color: #f87171;">Rojo</span>).</li>
+            <li><strong>Recompensas Automáticas (<code>effect</code>):</strong> Al completarse una investigación, el sistema aplica automáticamente permisos permanentes reaplicables al entrar el jugador (<code>permiso: &lt;nodo&gt;</code>) y multiplicadores porcentuales como velocidad de ciencia (<code>boost: investigacion.&lt;%&gt;</code>).</li>
         </ul>
     </main>
 

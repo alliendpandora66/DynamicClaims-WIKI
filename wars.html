@@ -69,7 +69,7 @@
         <p>Los conflictos armados en DynamicClaims combinan diplomacia formal, asedios estratégicos, desgaste de moral por bajas, estados vasallos (títeres), zonas de guerra abiertas y armamento de largo alcance.</p>
 
         <div class="note-box warning">
-            <p><strong>Requisito para combatir:</strong> Solo los ciudadanos que posean un <strong>Rango Militar reconocido y una plaza activa</strong> dentro del cupo nacional (<code>/dc poblacion</code>) pueden capturar o recuperar territorio, infligir o recibir daño de guerra, contabilizar bajas o desplegarse en Zonas de Guerra. Los civiles no participan en el combate bélico.</p>
+            <p><strong>Requisito para combatir y Cupo Militar Nacional:</strong> Solo los ciudadanos que posean un <strong>Rango Militar reconocido y una plaza activa</strong> dentro del cupo nacional (<code>/dc poblacion</code>, configurable vía <code>population.military.max-soldiers</code>) pueden capturar o recuperar territorio, infligir o recibir daño de guerra, contabilizar bajas o desplegarse en Zonas de Guerra. Los civiles no participan en el combate bélico. Consulta los detalles del escalafón en <a href="roles.html">Cargos, Elecciones y Rangos</a>.</p>
         </div>
 
         <h2>1. Diplomacia, Alianzas y Declaración de Guerra</h2>
@@ -106,17 +106,17 @@
                 <tr>
                     <td><code>/dc diplomacia guerra regiones [NACION]</code></td>
                     <td><span class="badge badge-leader">Líder / Colíder</span></td>
-                    <td>Selecciona la región objetivo para iniciar una guerra de conquista territorial.</td>
+                    <td>Selecciona la región objetivo para iniciar una guerra de conquista territorial (validando un <strong>Casus Belli</strong> o reclamo territorial válido cuando corresponda).</td>
                 </tr>
                 <tr>
                     <td><code>/dc diplomacia guerra subyugacion [NACION]</code></td>
                     <td><span class="badge badge-leader">Líder / Colíder</span></td>
-                    <td>Prepara una guerra de <strong>Subyugación</strong> con el objetivo de convertir a la nación derrotada en un <strong>Estado Títere (Vasallo)</strong>.</td>
+                    <td>Prepara una guerra de <strong>Subyugación</strong> con el objetivo de convertir a la nación derrotada en un <strong>Estado Títere (Vasallo)</strong> subordinado a tu nación (<strong>Overlord / Soberano</strong>).</td>
                 </tr>
                 <tr>
                     <td><code>/dc diplomacia soberania</code></td>
                     <td><span class="badge badge-leader">Líder / Colíder</span></td>
-                    <td>Permite a una nación hegemónica (Overlord) consultar y conceder la independencia a sus estados títeres.</td>
+                    <td>Permite a una nación hegemónica (<em>Overlord</em>) consultar sus estados títeres y concederles la independencia diplomática cuando lo decida.</td>
                 </tr>
                 <tr>
                     <td><code>/dc diplomacia treguas</code></td>
@@ -129,15 +129,17 @@
         <h2>2. Desarrollo de la Guerra y Modos de Conquista</h2>
         <p>Para declarar la guerra a una nación defensora, esta debe cumplir el mínimo de ciudadanos registrados (3 por defecto) y no tener una tregua activa contigo. Con <code>war.weekend-only: true</code> (por defecto), las guerras declaradas se programan para iniciar el fin de semana (Sábado a las 13:00 por defecto) y tienen una duración máxima de batalla de <strong>60 minutos</strong> (con prórroga automática si hay un asedio activo al terminar el reloj).</p>
 
-        <h3>Modos de Conquista Territorial</h3>
+        <h3>Modos de Conquista Territorial y Reglas de Combate</h3>
         <ul>
             <li><strong>Modo Puntos (<code>points</code> - Predeterminado):</strong> Se generan 3 puntos estratégicos dentro de la región en disputa. Los soldados atacantes deben tomar y asegurar esos puntos durante 90 segundos cada uno para anexar la región.</li>
             <li><strong>Modo Chunks (<code>chunk</code>):</strong> El ejército atacante conquista la región desde el perímetro exterior hacia el centro (<code>perimeter-first: true</code>) hasta dominar el 50% de la región.
                 <ul>
                     <li><strong>Conquista por Dispersión:</strong> En regiones grandes, capturar un chunk principal (rojo) ocupa automáticamente varios chunks de relleno (naranjas) hacia el interior según el tamaño de la región; si los defensores reconquistan el chunk principal, liberan también sus rellenos.</li>
-                    <li><strong>Balanceo por Soldados (<code>soldier-balance: true</code>):</strong> En modo chunk, el bando que tenga menos soldados activos en su censo militar captura o recupera chunks más rápido (<code>Velocidad = máx(1, soldados enemigos / soldados propios)</code> sobre la base de 90s).</li>
+                    <li><strong>Balanceo por Soldados (<code>soldier-balance: true</code>):</strong> En modo chunk, el bando que tenga menos soldados activos en su censo militar captura o recupera chunks más rápido (<code>Velocidad = máx(1, soldados enemigos / soldados propios)</code> sobre la base de 90s; por ejemplo, con 10 enemigos frente a 5 soldados propios, el bando inferior obtiene factor <code>2x</code>).</li>
                 </ul>
             </li>
+            <li><strong>Prórroga (<code>war.overtime.enabled: true</code>) y Construcción:</strong> Si un asedio está en progreso al agotarse los 60 minutos de batalla, la guerra concede prórroga automática. Además, con <code>war.building.only-main-chunks: true</code>, solo se permite construir o romper bloques en los chunks principales activamente bajo asedio.</li>
+            <li><strong>Reaparición en el Frente (<code>war.frontline-respawn</code>):</strong> Opcionalmente configurable para redesplegar cerca del frente si murió en zona de guerra (<code>respect-bed: true</code> conserva la cama si existe).</li>
         </ul>
 
         <h2>3. Sistema de Moral, Combat Tag e Infamia</h2>
@@ -175,13 +177,34 @@
             <li><code>/dc zona-guerra ir &lt;REGION&gt;</code>: Despliega a tu soldado directamente en la Zona de Guerra indicada (requiere tener Rango Militar activo).</li>
         </ul>
 
-        <h2>5. Misiles, Armas Nucleares y Radiación</h2>
-        <p>Si los módulos <code>missiles</code> y <code>nuclear-weapons</code> están activos en el servidor, las naciones en guerra pueden emplear armamento estratégico:</p>
-        <ul>
-            <li><strong>Silos y Misiles Convencionales:</strong> Permiten lanzar ataques balísticos por coordenadas contra objetivos enemigos durante conflictos bélicos.</li>
-            <li><strong>Ojivas Nucleares y Zonas de Radiación:</strong> Un impacto nuclear contamina el área con radiación persistente (visible también en la capa de Radiación del Atlas Web).</li>
-            <li><strong>Protección NBQ:</strong> Entrar en una zona radiactiva aplica daño y efectos severos a menos que el jugador lleve equipado el <strong>Casco Antirradiación (NBQ)</strong>.</li>
-        </ul>
+        <h2>5. Misiles, Armas Nucleares y Radiación (<code>misiles.yml</code>)</h2>
+        <p>Si los módulos <code>missiles</code> y <code>nuclear-weapons</code> están activos en el servidor, las naciones en guerra pueden emplear armamento estratégico (con política de destrucción de bloques <code>WAR_ONLY</code> por defecto y trayectoria suborbital a <code>60.0</code> bloques/s hasta altura <code>290</code>):</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Tipo de Ojiva</th>
+                    <th>Parámetros Base (<code>misiles.yml</code>)</th>
+                    <th>Efecto Estratégico y Contramedida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Misil Convencional ICBM</strong></td>
+                    <td>Explosión: <code>12.0</code> | Daño: <code>40.0</code><br>Onda expansiva: <code>18.0</code> bl.</td>
+                    <td>Silos y lanzamiento por coordenadas en guerra; incendia y destruye bloques según la política de <code>misiles.yml</code>.</td>
+                </tr>
+                <tr>
+                    <td><strong>Misil Nuclear ICBM</strong></td>
+                    <td>Explosión: <code>28.0</code> | Daño: <code>100.0</code><br>Onda expansiva: <code>40.0</code> bl.</td>
+                    <td>Genera hongo atómico (<code>stem-height: 45</code>, <code>cap-radius: 18.0</code>) y zona de radiación persistente de <code>35.0</code> bloques durante <code>3.0</code> días RP.</td>
+                </tr>
+                <tr>
+                    <td><strong>Radiación y Protección NBQ</strong></td>
+                    <td>Wither II (<code>6s</code>) + Náuseas (<code>8s</code>)</td>
+                    <td>Visible en la capa de Radiación del Atlas Web. Se mitiga equipando el <strong>Casco Antirradiación (NBQ)</strong>; desactivar <code>nuclear-weapons</code> pausa el contador residual.</td>
+                </tr>
+            </tbody>
+        </table>
     </main>
 
     <script src="search.js"></script>

@@ -91,12 +91,12 @@
             </tbody>
         </table>
 
-        <h2>2. Contagio, Incubación y Mutación</h2>
+        <h2>2. Contagio, Incubación y Mutación (Valores Base en <code>config.yml</code>)</h2>
         <ul>
-            <li><strong>Incubación Asintomática (3 días RP por defecto):</strong> Durante los primeros días tras contraer el patógeno, el jugador porta el virus sin sufrir debuffs visibles.</li>
-            <li><strong>Propagación Fronteriza:</strong> Las naciones que comparten frontera con un país infectado tienen una probabilidad diaria (10% por defecto) de que el brote cruce a su territorio.</li>
-            <li><strong>Mutaciones (5% diario por defecto):</strong> Con el paso de los días, el virus puede mutar alterando sus parámetros epidemiológicos.</li>
-            <li><strong>BossBar de Infección:</strong> Los jugadores infectados ven una barra superior que indica el nombre del patógeno y la evolución de la enfermedad.</li>
+            <li><strong>Ciclo Epidemiológico:</strong> Evaluado cada <code>600 ticks</code> (<code>30 segundos</code>), con un máximo simultáneo de <code>3</code> pandemias activas (<code>pandemic.max-active</code>) y duración predeterminada de <code>14 días RP</code>.</li>
+            <li><strong>Infección y Mortalidad Base:</strong> Probabilidad base de contagio <code>0.25</code> (<code>25%</code>), tasa base de mortalidad <code>0.02</code> (<code>2%</code>) e incubación asintomática de <code>3 días RP</code> antes de mostrar debuffs.</li>
+            <li><strong>Propagación Fronteriza y Mutación:</strong> Las naciones vecinas tienen un <code>10%</code> de probabilidad diaria (<code>spread-rate: 0.1</code>) de recibir el brote, y la cepa posee un <code>5%</code> diario de mutar (<code>mutation-chance: 0.05</code>).</li>
+            <li><strong>BossBar de Infección:</strong> Los jugadores infectados ven una barra superior que indica el nombre del patógeno y su estado (<code>%dynamicclaims_is_infected%</code>).</li>
         </ul>
 
         <h2>3. Los 5 Niveles de Severidad y Efectos</h2>

@@ -174,14 +174,34 @@
             <li><code>/dc guia recursos</code>: Muestra qué bloques naturales sueltan minerales especiales, con qué probabilidad y qué herramienta o encantamiento exigen.</li>
         </ul>
 
-        <h2>3. Estándar de Controles en Todos los Menús</h2>
-        <p>Todas las pantallas gráficas de DynamicClaims siguen la misma disposición en su fila inferior para evitar clics accidentales:</p>
+        <h2>3. Estándar de Controles y los 84 Inventarios (<code>gui/*.yml</code>)</h2>
+        <p>Todas las pantallas gráficas de DynamicClaims siguen el estándar <code>MenuLayout</code> / <code>MenuUtils</code> en su fila inferior (columnas 1 a 9, indexadas desde <code>0</code>) para evitar clics accidentales:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Control</th>
+                    <th>Columna (Última Fila)</th>
+                    <th>Slot Inventario 54</th>
+                    <th>Slot Inventario 27</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Volver</strong> (Flecha)</td><td>Columna 1</td><td><code>45</code></td><td><code>18</code></td></tr>
+                <tr><td><strong>Confirmar / Guardar</strong> (Concreto Verde)</td><td>Columna 3</td><td><code>47</code></td><td><code>20</code></td></tr>
+                <tr><td><strong>Página Anterior</strong> (Flecha)</td><td>Columna 4</td><td><code>48</code></td><td><code>21</code></td></tr>
+                <tr><td><strong>Cerrar Menú</strong> (Barrera &mdash; descarta borradores sin consumir ítems)</td><td>Columna 5</td><td><code>49</code></td><td><code>22</code></td></tr>
+                <tr><td><strong>Página Siguiente</strong> (Flecha)</td><td>Columna 6</td><td><code>50</code></td><td><code>23</code></td></tr>
+                <tr><td><strong>Cancelar</strong> (Concreto Rojo)</td><td>Columna 7</td><td><code>51</code></td><td><code>24</code></td></tr>
+            </tbody>
+        </table>
+
+        <h3>Mapa Agrupado de las 84 Plantillas GUI (<code>src/main/resources/gui/</code>)</h3>
         <ul>
-            <li><strong>Columna 1 (Izquierda - Flecha):</strong> Volver al menú anterior.</li>
-            <li><strong>Columna 3 (Concreto Verde):</strong> Confirmar o Guardar cambios.</li>
-            <li><strong>Columnas 4 y 6 (Flechas):</strong> Página anterior y Página siguiente (solo aparecen cuando hay más de una página).</li>
-            <li><strong>Columna 5 (Centro - Barrera):</strong> Cerrar menú (cerrar una ventana de confirmación o edición <strong>nunca</strong> ejecuta la acción ni consume tu objeto).</li>
-            <li><strong>Columna 7 (Concreto Rojo):</strong> Cancelar operación y regresar.</li>
+            <li><strong>Núcleo, Ciudadanía y Leyes:</strong> <code>main-menu</code>, <code>nation-info</code>, <code>join-nation-*</code>, <code>claims-menu</code>, <code>laws-menu</code>, <code>custom-rules-menu</code>, <code>population-*</code>, <code>player-management</code>, <code>military-ranks</code>, <code>rank-rewards</code>.</li>
+            <li><strong>Diplomacia, Guerra y Misiles:</strong> 14 vistas <code>diplomacy-*</code> (alianzas, aliados, enemigos, casus belli, subyugación, liberación de títeres, treguas, guerras, warzones, notificaciones) + <code>silo-coordinate-menu</code>.</li>
+            <li><strong>Industria y Aeropuertos:</strong> 7 vistas <code>industry-*</code> (extracción, fábrica, almacenamiento, panel militar, estructura) + <code>airport-nations</code> y <code>airport-regions</code>.</li>
+            <li><strong>Economía, Comercio y Ciencia:</strong> <code>economy-*</code>, <code>bank-*</code>, <code>currencies-menu</code>, 5 vistas <code>auction-*</code>, <code>shop-menu</code>, <code>elections-*</code>, <code>government-*</code>, 3 vistas <code>technology-*</code>, 5 vistas <code>pandemic-*</code> y 5 vistas <code>guidebook-*</code>.</li>
+            <li><strong>Editores de Staff (<code>admin-*</code>):</strong> 15 paneles administrativos in-game para industria, recetas, recursos, tienda, rangos, permisos, códigos de liderazgo y herramientas.</li>
         </ul>
     </main>
 

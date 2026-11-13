@@ -93,14 +93,14 @@
         </ol>
 
         <h3>Fase 1: Guerra Civil Programada (SCHEDULED)</h3>
-        <p>Al superarse el 51% de desaprobación, el conflicto queda programado para el horario semanal configurado en el servidor (por defecto, <strong>Sábado a las 12:00 PM</strong>). Se emite un aviso global en el servidor y en el canal de noticias de Discord.</p>
+        <p>Al superarse el 51% de desaprobación, el conflicto queda programado para el horario semanal configurado en <code>config.yml</code> bajo <code>civil-war:</code> (por defecto, <strong><code>start-day: 7</code> [Sábado] a las <code>start-hour: 12</code></strong>). Se emite un aviso global en el servidor y en el canal de noticias de Discord.</p>
 
         <h3>Fase 2: Combate Activo entre Leales y Rebeldes (ACTIVE)</h3>
-        <p>Cuando llega la hora programada, comienza el enfrentamiento armado interno (duración máxima predeterminada de 48 horas):</p>
+        <p>Cuando llega la hora programada, comienza el enfrentamiento armado interno (duración máxima predeterminada de <code>duration-hours: 48</code> horas):</p>
         <ul>
             <li><strong>Participación Militar Obligatoria:</strong> Al igual que en las guerras internacionales, solo los ciudadanos con <strong>rango militar reconocido y plaza activa</strong> participan en el combate de la Guerra Civil y contabilizan bajas.</li>
             <li><strong>Fuego Interno Habilitado:</strong> Los militares del bando <strong>Leal (Gobierno)</strong> y los del bando <strong>Rebelde (Oposición)</strong> pueden combatir entre sí dentro del territorio nacional.</li>
-            <li><strong>BossBar de Bajas:</strong> Ambos bandos ven en la parte superior de la pantalla el marcador de bajas sufridas frente al límite máximo de resistencia (20 bajas por bando por defecto).</li>
+            <li><strong>BossBar de Bajas:</strong> Ambos bandos ven en la parte superior de la pantalla el marcador de bajas sufridas frente al límite máximo de resistencia (<code>rebel-max-casualties: 20</code> y <code>defender-max-casualties: 20</code> por defecto).</li>
         </ul>
 
         <h3>Fase 3: Desenlace Político</h3>

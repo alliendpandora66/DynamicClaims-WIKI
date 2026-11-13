@@ -93,6 +93,71 @@
                     <td><code>false</code></td>
                     <td>Habilita sugerencias de herramientas de liderazgo, pero <strong>NO</strong> concede administración global ni convierte al portador en líder de naciones ajenas.</td>
                 </tr>
+                <tr>
+                    <td><code>dynamicclaims.chat.color</code></td>
+                    <td><code>false</code></td>
+                    <td>Permite usar códigos de color en mensajes de chat (también aceptado para <code>OP</code> y permisos admin).</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.command.rango</code></td>
+                    <td><code>true</code></td>
+                    <td>Nodo declarado para configuraciones de rangos (<code>/dc rango</code> no lo exige como requisito obligatorio de acceso).</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.vip.chat</code></td>
+                    <td><code>false</code></td>
+                    <td>Concede <code>dynamicclaims.chat.color</code> como nodo hijo (no crea un canal adicional).</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.vip.fly</code> / <code>dynamicclaims.claim.bonus</code></td>
+                    <td><code>false</code></td>
+                    <td>Nodos reservados para integraciones externas (el plugin no implementa vuelo VIP ni bonos automáticos de claims por estos nodos).</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.bypass.combat</code></td>
+                    <td><code>false</code></td>
+                    <td>Excluye al jugador de restricciones y castigos del Combat Tag.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.bypass.cooldown</code></td>
+                    <td><code>false</code></td>
+                    <td>Omite el enfriamiento entre usos de <code>/dc inicio</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.bypass.warmup</code></td>
+                    <td><code>false</code></td>
+                    <td>Omite la espera previa de teletransporte en <code>/dc inicio</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.tool.trench</code></td>
+                    <td><code>op</code></td>
+                    <td>Autoriza el uso de la pala de trinchera.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.tool.trench.bypass-territory</code></td>
+                    <td><code>op</code></td>
+                    <td>Omite las comprobaciones territoriales al usar la pala de trinchera.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.webmap</code></td>
+                    <td><code>true</code></td>
+                    <td>Permite generar enlace y contraseña personal del Atlas Web (funciona incluso desconectado).</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.webmap.claim</code></td>
+                    <td><code>true</code></td>
+                    <td>Permite reclamar y liberar chunks propios desde el Atlas Web cuando <code>claims.allow-region-owners: true</code> está activo en <code>web-map.yml</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.webmap.flags</code></td>
+                    <td><code>true</code></td>
+                    <td>Permite editar las leyes permitidas de su nación en el Atlas Web siendo líder o colíder.</td>
+                </tr>
+                <tr>
+                    <td><code>dynamicclaims.webmap.hide</code></td>
+                    <td><code>false</code></td>
+                    <td>Oculta la posición del jugador en la capa pública de jugadores del Atlas Web.</td>
+                </tr>
             </tbody>
         </table>
 

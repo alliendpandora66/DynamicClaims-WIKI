@@ -61,11 +61,11 @@
 
     <main class="main-content">
         <div class="section-banner operator">
-            <div><strong>Sección 3: Operador</strong> &mdash; Despliegue del servidor, gestión de los 36 módulos, persistencia SQL y recuperación.</div>
+            <div><strong>Sección 3: Operador</strong> &mdash; Despliegue del servidor, gestión de los 35 módulos, persistencia SQL y recuperación.</div>
             <div><span class="badge badge-operator">Operador / Consola</span></div>
         </div>
 
-        <h1>Instalación, Arquitectura de 36 Módulos, Base de Datos y Mantenimiento</h1>
+        <h1>Instalación, Arquitectura de 35 Módulos, Base de Datos y Mantenimiento</h1>
         <p>Guía técnica para el propietario u operador del servidor encargada de la instalación, activación de subsistemas, persistencia de datos y diagnóstico de integridad.</p>
 
         <h2>1. Requisitos del Servidor e Instalación</h2>
@@ -106,8 +106,8 @@
             </tbody>
         </table>
 
-        <h2>2. Los 36 Módulos Configurables y su Grafo de Dependencias</h2>
-        <p>DynamicClaims divide su arquitectura en <strong>36 módulos</strong> declarados bajo <code>modules.&lt;id&gt;.enabled</code> en <code>config.yml</code>. Todos están habilitados por defecto (excepto el servidor HTTP del Atlas Web, que además requiere <code>enabled: true</code> en <code>web-map.yml</code>).</p>
+        <h2>2. Los 35 Módulos Configurables y su Grafo de Dependencias</h2>
+        <p>DynamicClaims divide su arquitectura en <strong>35 módulos</strong> definidos en <code>ModuleId</code> y declarados bajo <code>modules.&lt;id&gt;.enabled</code> en <code>config.yml</code>. Todos están habilitados por defecto (el servidor HTTP del Atlas Web requiere además <code>enabled: true</code> en <code>web-map.yml</code>). El motor de Scripting (<code>GraalJS</code>) se carga de forma independiente y perezosa según los scripts presentes en <code>scripts/</code>.</p>
         <ul>
             <li><code>/dc admin modulos listar</code>: Muestra el estado de todos los módulos.</li>
             <li><code>/dc admin modulos configurar &lt;MODULO&gt; info</code>: Muestra su descripción, estado configurado, estado efectivo, dependencias directas/indirectas y módulos dependientes.</li>
@@ -154,9 +154,9 @@
                     <td><code>web-map</code> requiere <code>claims</code>, <code>regions</code> y <code>nations</code>; sus capas opcionales siguen el estado de cada módulo.</td>
                 </tr>
                 <tr>
-                    <td><strong>Seguridad y Extensión</strong></td>
-                    <td><code>security</code>, <code>scripting</code></td>
-                    <td>Anti-glitch y motor GraalJS con carga perezosa (ahorra ~50 MB de RAM si <code>scripts/</code> está vacío).</td>
+                    <td><strong>Seguridad</strong></td>
+                    <td><code>security</code></td>
+                    <td>Anti-glitch territorial. <em>Nota: el motor GraalJS (<code>scripts/</code>) es independiente de <code>modules:</code> y usa carga perezosa (ahorra ~50 MB de RAM si <code>scripts/</code> está vacío).</em></td>
                 </tr>
             </tbody>
         </table>
@@ -205,6 +205,14 @@
                 </tr>
             </tbody>
         </table>
+
+        <h2>4. Arquitectura de Hilos, Recarga Segura y Troubleshooting</h2>
+        <ul>
+            <li><strong>Hilo Principal y Persistencia Asíncrona:</strong> Todas las consultas SQL pasan ordenadamente por <code>DatabaseManager.runAsync()</code> bajo <code>dbLock</code>; la escritura YAML se agrupa mediante <code>CoalescedAsyncFileWriter</code>; GeoJSON/ZNodes rasterizan polígonos en segundo plano y aplican claims/hogares en el hilo principal mediante <code>MainThread</code>.</li>
+            <li><strong>Estándar de Recarga (<code>ReloadPlan</code>):</strong> <code>/dc admin recargar</code> valida primero sintaxis YAML externa, respalda configuraciones modificadas en <code>backups/configurations/</code>, recarga mensajes, conexión SQL, reloj RP, territorios, menús y capas de mapa en orden seguro.</li>
+            <li><strong>MSPT elevado durante <code>render-completo</code>:</strong> Ajusta <code>full-render.pause-above-mspt</code> en <code>web-map.yml</code>; el proceso se pausa y reanuda automáticamente tras reiniciar si <code>resume-on-start: true</code>.</li>
+            <li><strong>Permisos offline en Atlas Web:</strong> Con LuckPerms instalado se consultan contextos estáticos offline; sin LuckPerms, asegúrate de que el dueño regional o líder haya iniciado sesión al menos una vez para conservar en caché su último estado de permisos.</li>
+        </ul>
     </main>
 
     <script src="search.js"></script>

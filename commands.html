@@ -62,349 +62,337 @@
     <main class="main-content">
 <!-- Generado por tools/generate_command_docs.py; editar catálogo y messages.yml. -->
 <h1>Comandos oficiales de DynamicClaims</h1>
-<p>El único comando registrado es /dc; /dynamicclaims:dc accede al mismo registro. No se registran alias. &lt;ARGUMENTO&gt; indica un dato obligatorio y [ARGUMENTO] uno opcional. Los grupos muestran sus acciones con TAB. Los identificadores y las opciones disponibles dependen del servidor.</p>
+<p>El único comando registrado es /dc; /dynamicclaims:dc accede al mismo registro. No se registran alias. &lt;ARGUMENTO&gt; indica un dato obligatorio y [ARGUMENTO] uno opcional. Las rutas bilingües admiten vocabularios ES (messages.yml) y EN (messages_en.yml). Los grupos muestran sus acciones con TAB. Los identificadores y las opciones disponibles dependen del servidor.</p>
 <p>Ayuda: <code>/dc ayuda [PAGINA]</code>, <code>/dc nacion ayuda</code> y <code>/dc admin ayuda [PAGINA]</code>. La recarga general utiliza <code>/dc admin recargar</code> o <code>/dynamicclaims:dc admin recargar</code>.</p>
 <p>Administración acepta OP, <code>dynamicclaims.command.admin</code> o el nodo heredado <code>dynamicclaims.admin</code>. Las acciones regionales y nacionales comprueban además pertenencia y cargos. <code>dynamicclaims.leader</code> no concede administración global. Crear regiones y naciones, reclamar, liberar y listar territorios requiere acceso administrativo en la implementación actual.</p>
 <p>Consulta <a href="../docs/PERMISSIONS.md">todos los permisos y valores predeterminados</a>, <a href="../docs/ROLE_PERMISSIONS.md">las políticas por rol</a> y <a href="../docs/COMMANDS.md">las equivalencias para actualizar comandos antiguos</a>.</p>
 <p>Para eliminar edificios repetidos: <code>/dc admin industria eliminar Roma mina_1 si</code>. <code>si</code> elimina los bloques y <code>no</code> los conserva. La expulsión nacional usa <code>/dc nacion expulsar JUGADOR [confirmar]</code>; se vuelve a comprobar la autorización al confirmar.</p>
-<table class="wiki-table"><thead><tr><th>Comando y argumentos</th><th>Tipo</th><th>Acceso</th></tr></thead><tbody>
-<tr><td><code>/dc aceptar [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc admin</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin auditar [reparar]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin ayuda [PAGINA]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin cancelar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos auditar [PAGINA]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos crear &lt;NACION&gt; &lt;JUGADOR&gt; [dias]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos eliminar &lt;CODIGO&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos info &lt;CODIGO&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos limpiar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos listar [pagina]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin codigos menu</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin confirmar [DURACION|cancelar]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin crafteos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin crafteos crear &lt;nombre&gt; [tipo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin crafteos editar &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin crafteos eliminar &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin crafteos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin crafteos recargar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin diagnostico</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin discord</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin discord info</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin discord panel</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin discord recargar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas asociar &lt;codigo&gt; &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas billetes &lt;codigo&gt; &lt;billetes&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas crear &lt;codigo&gt; &lt;simbolo&gt; &lt;nombre&gt; [oro_inicial] [billetes_iniciales]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas dar &lt;jugador&gt; &lt;codigo&gt; &lt;cantidad&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas desvincular &lt;codigo|nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas eliminar &lt;codigo&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas emitir &lt;codigo&gt; &lt;cantidad&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas limpiar-huerfanos</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas modelo &lt;codigo|nación&gt; &lt;1-4&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas oro &lt;codigo&gt; &lt;oro&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas quemar &lt;codigo&gt; &lt;cantidad&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin divisas saldo-virtual &lt;jugador&gt; &lt;codigo&gt; &lt;cantidad&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin establecer-inicios &lt;all | nación | región&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin estructura crear &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin gobierno</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin gobierno info &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin gobierno iniciar-guerra-civil &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin gobierno limpiar-votos &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin gobierno terminar-guerra-civil &lt;nación&gt; &lt;rebeldes|leales&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra cancelar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra chunks &lt;cantidad&gt; [guerra]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra info [guerra]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra iniciar &lt;nacion_atacante&gt; &lt;nacion_defensora&gt; [region_objetivo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra terminar [true|false] [guerra|all]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guerra tregua &lt;establecer|eliminar|listar&gt; [nacion1] [nacion2] [dias]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guia</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guia dar &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin guia libro [JUGADOR]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin herramientas</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin herramientas dar &lt;jugador&gt; &lt;herramienta&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin herramientas menu</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin importar</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin importar geojson</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin importar geojson nacion &lt;archivo&gt; &lt;nación&gt; [mundo] [color_hex]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin importar geojson region &lt;archivo&gt; [nombre_region] [mundo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin importar znodes &lt;towns.json&gt; &lt;world.json&gt; [mundo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria aeropuertos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria aeropuertos eliminar &lt;ID&gt; [si|no]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria aeropuertos info &lt;ID&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria aeropuertos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria aeropuertos teletransportar &lt;ID&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria crear &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria dar &lt;Jugador&gt; &lt;Edificio&gt; [Cantidad]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria editar &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria eliminar &lt;REGION&gt; &lt;EDIFICIO&gt; [si|no]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria eliminar-tipo &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria info &lt;id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria listar [región|todo|huerfanos] [pagina]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria produccion &lt;EDIFICIO&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria purgar &lt;REGION&gt; [si|no]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria receta &lt;crear|editar|eliminar|listar&gt; &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria recursos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria recursos crear &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria recursos eliminar &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria recursos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria teletransportar &lt;id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria tipos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria tipos crear &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria tipos editar &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria tipos eliminar &lt;NOMBRE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria tipos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin industria tipos menu</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin jugadores</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin jugadores expulsar &lt;JUGADOR&gt; &lt;REGION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin jugadores info &lt;jugador&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin jugadores listar &lt;region|nacion&gt; &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin jugadores rol &lt;JUGADOR&gt; &lt;REGION&gt; &lt;lider|colider|alcalde|miembro&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin jugadores unir &lt;JUGADOR&gt; &lt;REGION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin leyes</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin leyes global &lt;FLAG&gt; &lt;habilitar|deshabilitar&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin leyes listar [global|NACION]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin leyes nacion &lt;NACION&gt; &lt;FLAG&gt; &lt;habilitar|deshabilitar|heredar&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa abrir</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa cancelar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa contrasena [CONTRASEÑA]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa contraseña [CONTRASEÑA]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa estado</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa quitar-contrasena</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa quitar-contraseña</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa recargar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa render-completo [MUNDO] [X1 Z1 X2 Z2]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin mapa renderizar [MUNDO]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin migrar-bd</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin militares</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin militares info &lt;NACION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin militares max &lt;NACION&gt; &lt;CANTIDAD&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin militares restablecer &lt;NACION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin modulos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin modulos configurar &lt;MODULO&gt; &lt;activar|desactivar|info&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin modulos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin nacion</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin nacion capital &lt;NACION&gt; &lt;REGION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin nacion crear &lt;NACION&gt; &lt;REGION_CAPITAL&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin nacion eliminar &lt;NACION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin nacion renombrar &lt;NACION&gt; &lt;NUEVO_NOMBRE&gt; [confirmar]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia configurar &lt;nombre&gt; &lt;parametro&gt; &lt;valor&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia crear &lt;nombre&gt; &lt;severidad 1-5&gt; &lt;nacion_origen&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia info &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia terminar &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia vacuna &lt;nombre_pandemia&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin pandemia vacunar &lt;nombre_pandemia&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos crear &lt;nación&gt; &lt;candidato&gt; &lt;nombre_partido&gt; &lt;tipo_partido&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos eliminar [nación] &lt;partido_o_candidato&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos ganador &lt;nación&gt; &lt;candidato&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos limpiar-huerfanos</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos listar [nación]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos reiniciar &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin partidos tipo &lt;nación&gt; &lt;candidato&gt; &lt;tipo_partido&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin prueba &lt;votaciones&gt; &lt;iniciar|terminar|abrir&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin purgar-mapa &lt;nación | all&gt; [min-chunks]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin radiacion</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin radiacion limpiar &lt;todo|radio|id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin radiacion listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos asignar &lt;jugador&gt; &lt;rango&gt; [duración]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos editar &lt;rango&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos eliminar &lt;jugador&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos info &lt;jugador&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos permiso &lt;crear|eliminar|listar&gt; &lt;rango&gt; [permiso]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos recargar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin rangos reiniciar-recompensa &lt;jugador&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin recargar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin recursos</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin recursos crear &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin recursos editar &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin recursos eliminar &lt;nombre&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin recursos listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region bandera &lt;NACION|REGION&gt; &lt;LEY&gt; &lt;true|false&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region crear &lt;REGION&gt; [PROPIETARIO|-] [MUNDO]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region eliminar &lt;REGION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region propietario &lt;REGION&gt; &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region renombrar &lt;REGION&gt; &lt;NUEVO_NOMBRE&gt; [confirmar]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin region transferir &lt;REGION&gt; &lt;NACION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin revertir &lt;tiempo (1s,10m,1h,1d)&gt; [action] [target]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin sanear</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin scripts</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin scripts cargar &lt;archivo.js&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin scripts descargar &lt;archivo.js&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin scripts diagnostico [jugador]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin scripts listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin scripts recargar [archivo.js]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin sincronizar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia dar &lt;nación&gt; &lt;tech_id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia desbloquear-todo &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia eliminar &lt;nación&gt; &lt;tech_id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia establecer-puntos &lt;nación&gt; &lt;tech_id&gt; &lt;puntos&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia info &lt;tech_id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia listar &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia puntos &lt;nación&gt; &lt;cantidad&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia reiniciar &lt;nación&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia reparar [NACION|todo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tecnologia validar [NACION|todo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tiempo</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tiempo establecer &lt;HH:MM|DD.MM.AA&gt; [HH:MM|DD.MM.AA]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tiempo sumar &lt;1d|1h|1m|1s...&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tienda</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tienda crear &lt;precioCompraOro&gt; &lt;precioVentaOro&gt; [ambos|solo-compra|solo-venta]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tienda editar &lt;id&gt; &lt;precioCompraOro&gt; &lt;precioVentaOro&gt; [modo]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tienda eliminar &lt;id&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tienda listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin tienda menu</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin titeres</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin titeres crear &lt;OVERLORD&gt; &lt;TITERE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin titeres eliminar &lt;TITERE&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin titeres listar [NACION]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin uuid</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin uuid info &lt;NACION&gt; [REGION]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin uuid regenerar &lt;NACION&gt; [REGION]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin verificar-integridad</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin zona-guerra</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
-<tr><td><code>/dc admin zona-guerra crear &lt;región&gt; [meta%]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin zona-guerra eliminar &lt;región&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin zona-guerra info &lt;región&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin zona-guerra listar</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc admin zona-guerra meta &lt;región&gt; &lt;meta%&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc andamio [soltar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc ayuda [PAGINA]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc banco</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc banco depositar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc banco retirar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc cancelar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc candidatura &lt;nombre&gt; &lt;tipo&gt; [coLider]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc candidatura registro</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat alianza [MENSAJE]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat espiar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat global [MENSAJE]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat nacion [MENSAJE]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc chat region [MENSAJE]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc codigo &lt;CODIGO&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc crear &lt;REGION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc diplomacia</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia aliados</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia alianza</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia alianza color</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia alianza gestionar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia alianza miembros</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia enemigos</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia guerra</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia guerra gestion</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia guerra regiones [NACION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia guerra subyugacion [NACION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia notificaciones</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia soberania</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia treguas</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc diplomacia zonas-guerra</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc divisas</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc economia</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc economia crear-moneda</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc economia modelo</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc elecciones [info]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc establecer-inicio [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc gobierno</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc gobierno candidatos</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc guia</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc guia recetas</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc guia recursos</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc inicio [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc invitar &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc leyes [pvp si|no]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc leyes personalizadas</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc liberar [RADIO|auto|rellenar|todo|confirmar|cancelar] [confirmar|cancelar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc limites</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mapa [auto]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mapa-web</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mapa-web contrasena [CONTRASEÑA]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mapa-web contraseña [CONTRASEÑA]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mapa-web quitar-contrasena</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mapa-web quitar-contraseña</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu banco</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu candidatura</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu diplomacia</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu divisas</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu economia</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu elecciones</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu gobierno</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu guia</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu leyes</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu mercado</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu pandemias</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu poblacion</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu rango</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc menu tecnologias</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mercado [vender PRECIO]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mercado cartera</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc mercado ofertas</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion aliado &lt;NACION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion asignar-colider &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion asignar-moderador &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion ayuda</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion capital &lt;REGION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion colideres</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion crear &lt;NACION&gt; [REGION_CAPITAL]</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc nacion enemigo &lt;NACION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion expulsar &lt;JUGADOR&gt; [confirmar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion info [NACION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion listar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion quitar-colider &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion quitar-moderador &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion salir [REGION] [confirmar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc nacion unirse &lt;NACION&gt; &lt;REGION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc pandemias</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc pandemias info &lt;PANDEMIA&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc poblacion</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc poblacion gestionar &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc poblacion rangos &lt;JUGADOR&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc rango [menu|reclamar] [unica|periodica|todas]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc rechazar [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc reclamar [RADIO|auto|rellenar|confirmar|cancelar] [confirmar|cancelar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region aceptar [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region ayuda</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region crear &lt;REGION&gt;</code></td><td>Acción</td><td>Administración</td></tr>
-<tr><td><code>/dc region establecer-inicio [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region info [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region inicio [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region invitar &lt;JUGADOR&gt; [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region rechazar [REGION]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region salir [REGION] [confirmar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc region unirse &lt;REGION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc salir [REGION] [confirmar]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc scripts ejecutar &lt;NOMBRE&gt; [ARGUMENTOS...]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc tecnologias [donar CANTIDAD]</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc tecnologias categoria &lt;CATEGORIA&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc tecnologias detalle &lt;TECNOLOGIA&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc territorio</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc territorios</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc territorios menu</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc tienda</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc unirse &lt;REGION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc unirse menu</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc unirse regiones &lt;NACION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc zona-guerra</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc zona-guerra ir &lt;REGION&gt;</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
-<tr><td><code>/dc zona-guerra listar</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<table class="wiki-table"><thead><tr><th>Comando y argumentos (ES)</th><th>Equivalente (EN)</th><th>Tipo</th><th>Acceso</th></tr></thead><tbody>
+<tr><td><code>/dc aceptar [REGION]</code></td><td><code>/dc accept</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc admin</code></td><td><code>/dc admin</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin auditar [reparar]</code></td><td><code>/dc admin audit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin ayuda [PAGINA]</code></td><td><code>/dc admin help</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin cancelar</code></td><td><code>/dc admin cancel</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos</code></td><td><code>/dc admin codes</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos auditar [PAGINA]</code></td><td><code>/dc admin codes audit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos crear &lt;NACION&gt; &lt;JUGADOR&gt; [dias]</code></td><td><code>/dc admin codes create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos eliminar &lt;CODIGO&gt;</code></td><td><code>/dc admin codes delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos info &lt;CODIGO&gt;</code></td><td><code>/dc admin codes info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos limpiar</code></td><td><code>/dc admin codes cleanup</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos listar [pagina]</code></td><td><code>/dc admin codes list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin codigos menu</code></td><td><code>/dc admin codes menu</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin confirmar [DURACION|cancelar]</code></td><td><code>/dc admin confirm</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin crafteos</code></td><td><code>/dc admin crafts</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin crafteos crear &lt;nombre&gt; [tipo]</code></td><td><code>/dc admin crafts create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin crafteos editar &lt;nombre&gt;</code></td><td><code>/dc admin crafts edit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin crafteos eliminar &lt;nombre&gt;</code></td><td><code>/dc admin crafts delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin crafteos listar</code></td><td><code>/dc admin crafts list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin crafteos recargar</code></td><td><code>/dc admin crafts reload</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin diagnostico</code></td><td><code>/dc admin benchmark</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin discord</code></td><td><code>/dc admin discord</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin discord info</code></td><td><code>/dc admin discord info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin discord panel</code></td><td><code>/dc admin discord panel</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin discord recargar</code></td><td><code>/dc admin discord reload</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas</code></td><td><code>/dc admin currencies</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas asociar &lt;codigo&gt; &lt;nación&gt;</code></td><td><code>/dc admin currencies link</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas billetes &lt;codigo&gt; &lt;billetes&gt;</code></td><td><code>/dc admin currencies notes</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas crear &lt;codigo&gt; &lt;simbolo&gt; &lt;nombre&gt; [oro_inicial] [billetes_iniciales]</code></td><td><code>/dc admin currencies create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas dar &lt;jugador&gt; &lt;codigo&gt; &lt;cantidad&gt;</code></td><td><code>/dc admin currencies give</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas desvincular &lt;codigo|nación&gt;</code></td><td><code>/dc admin currencies unlink</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas eliminar &lt;codigo&gt;</code></td><td><code>/dc admin currencies delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas emitir &lt;codigo&gt; &lt;cantidad&gt;</code></td><td><code>/dc admin currencies print</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas limpiar-huerfanos</code></td><td><code>/dc admin currencies purge-orphans</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas listar</code></td><td><code>/dc admin currencies list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas modelo &lt;codigo|nación&gt; &lt;1-4&gt;</code></td><td><code>/dc admin currencies model</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas oro &lt;codigo&gt; &lt;oro&gt;</code></td><td><code>/dc admin currencies gold</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas quemar &lt;codigo&gt; &lt;cantidad&gt;</code></td><td><code>/dc admin currencies burn</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin divisas saldo-virtual &lt;jugador&gt; &lt;codigo&gt; &lt;cantidad&gt;</code></td><td><code>/dc admin currencies virtual-balance</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin establecer-inicios &lt;all | nación | región&gt;</code></td><td><code>/dc admin auto-sethome</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin estructura crear &lt;nombre&gt;</code></td><td><code>/dc admin structure create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin gobierno</code></td><td><code>/dc admin government</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin gobierno info &lt;nación&gt;</code></td><td><code>/dc admin government info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin gobierno iniciar-guerra-civil &lt;nación&gt;</code></td><td><code>/dc admin government start-civil-war</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin gobierno limpiar-votos &lt;nación&gt;</code></td><td><code>/dc admin government reset-votes</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin gobierno terminar-guerra-civil &lt;nación&gt; &lt;rebeldes|leales&gt;</code></td><td><code>/dc admin government end-civil-war</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra</code></td><td><code>/dc admin war</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra cancelar</code></td><td><code>/dc admin war cancel</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra chunks &lt;cantidad&gt; [guerra]</code></td><td><code>/dc admin war chunks</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra info [guerra]</code></td><td><code>/dc admin war info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra iniciar &lt;nacion_atacante&gt; &lt;nacion_defensora&gt; [region_objetivo]</code></td><td><code>/dc admin war start</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra listar</code></td><td><code>/dc admin war list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra terminar [true|false] [guerra|all]</code></td><td><code>/dc admin war end</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guerra tregua &lt;establecer|eliminar|listar&gt; [nacion1] [nacion2] [dias]</code></td><td><code>/dc admin war truce</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guia</code></td><td><code>/dc admin guide</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guia dar &lt;JUGADOR&gt;</code></td><td><code>/dc admin guide give</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin guia libro [JUGADOR]</code></td><td><code>/dc admin guide book</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin herramientas</code></td><td><code>/dc admin tools</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin herramientas dar &lt;jugador&gt; &lt;herramienta&gt;</code></td><td><code>/dc admin tools give</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin herramientas menu</code></td><td><code>/dc admin tools menu</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin importar</code></td><td><code>/dc admin import</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin importar geojson</code></td><td><code>/dc admin import geojson</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin importar geojson nacion &lt;archivo&gt; &lt;nación&gt; [mundo] [color_hex]</code></td><td><code>/dc admin import geojson nation</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin importar geojson region &lt;archivo&gt; [nombre_region] [mundo]</code></td><td><code>/dc admin import geojson region</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin importar znodes &lt;towns.json&gt; &lt;world.json&gt; [mundo]</code></td><td><code>/dc admin import znodes</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria</code></td><td><code>/dc admin industry</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria aeropuertos</code></td><td><code>/dc admin industry airports</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria aeropuertos eliminar &lt;ID&gt; [si|no]</code></td><td><code>/dc admin industry airports delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria aeropuertos info &lt;ID&gt;</code></td><td><code>/dc admin industry airports info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria aeropuertos listar</code></td><td><code>/dc admin industry airports list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria aeropuertos teletransportar &lt;ID&gt;</code></td><td><code>/dc admin industry airports teleport</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria crear &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria dar &lt;Jugador&gt; &lt;Edificio&gt; [Cantidad]</code></td><td><code>/dc admin industry give</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria editar &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry edit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria eliminar &lt;REGION&gt; &lt;EDIFICIO&gt; [si|no]</code></td><td><code>/dc admin industry delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria eliminar-tipo &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry delete-type</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria info &lt;id&gt;</code></td><td><code>/dc admin industry info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria listar [región|todo|huerfanos] [pagina]</code></td><td><code>/dc admin industry list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria produccion &lt;EDIFICIO&gt;</code></td><td><code>/dc admin industry production</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria purgar &lt;REGION&gt; [si|no]</code></td><td><code>/dc admin industry purge</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria receta &lt;crear|editar|eliminar|listar&gt; &lt;nombre&gt;</code></td><td><code>/dc admin industry recipe</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria recursos</code></td><td><code>/dc admin industry resources</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria recursos crear &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry resources create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria recursos eliminar &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry resources delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria recursos listar</code></td><td><code>/dc admin industry resources list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria teletransportar &lt;id&gt;</code></td><td><code>/dc admin industry teleport</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria tipos</code></td><td><code>/dc admin industry types</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria tipos crear &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry types create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria tipos editar &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry types edit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria tipos eliminar &lt;NOMBRE&gt;</code></td><td><code>/dc admin industry types delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria tipos listar</code></td><td><code>/dc admin industry types list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin industria tipos menu</code></td><td><code>/dc admin industry types menu</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin jugadores</code></td><td><code>/dc admin players</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin jugadores expulsar &lt;JUGADOR&gt; &lt;REGION&gt;</code></td><td><code>/dc admin players kick</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin jugadores info &lt;jugador&gt;</code></td><td><code>/dc admin players info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin jugadores listar &lt;region|nacion&gt; &lt;nombre&gt;</code></td><td><code>/dc admin players list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin jugadores rol &lt;JUGADOR&gt; &lt;REGION&gt; &lt;lider|colider|alcalde|miembro&gt;</code></td><td><code>/dc admin players role</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin jugadores unir &lt;JUGADOR&gt; &lt;REGION&gt;</code></td><td><code>/dc admin players join</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin leyes</code></td><td><code>/dc admin laws</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin leyes global &lt;FLAG&gt; &lt;habilitar|deshabilitar&gt;</code></td><td><code>/dc admin laws global</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin leyes listar [global|NACION]</code></td><td><code>/dc admin laws list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin leyes nacion &lt;NACION&gt; &lt;FLAG&gt; &lt;habilitar|deshabilitar|heredar&gt;</code></td><td><code>/dc admin laws nation</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa</code></td><td><code>/dc admin map</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa abrir</code></td><td><code>/dc admin map open</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa cancelar</code></td><td><code>/dc admin map cancel</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa contraseña [CONTRASEÑA]</code></td><td><code>/dc admin map password</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa estado</code></td><td><code>/dc admin map status</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa quitar-contraseña</code></td><td><code>/dc admin map remove-password</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa recargar</code></td><td><code>/dc admin map reload</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa render-completo [MUNDO] [X1 Z1 X2 Z2]</code></td><td><code>/dc admin map full-render</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin mapa renderizar [MUNDO]</code></td><td><code>/dc admin map render</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin migrar-bd</code></td><td><code>/dc admin migrate-db</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin militares</code></td><td><code>/dc admin military</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin militares info &lt;NACION&gt;</code></td><td><code>/dc admin military info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin militares max &lt;NACION&gt; &lt;CANTIDAD&gt;</code></td><td><code>/dc admin military max</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin militares restablecer &lt;NACION&gt;</code></td><td><code>/dc admin military reset</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin modulos</code></td><td><code>/dc admin modules</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin modulos configurar &lt;MODULO&gt; &lt;activar|desactivar|info&gt;</code></td><td><code>/dc admin modules configure</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin modulos listar</code></td><td><code>/dc admin modules list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin nacion</code></td><td><code>/dc admin nation</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin nacion capital &lt;NACION&gt; &lt;REGION&gt;</code></td><td><code>/dc admin nation capital</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin nacion crear &lt;NACION&gt; &lt;REGION_CAPITAL&gt;</code></td><td><code>/dc admin nation create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin nacion eliminar &lt;NACION&gt;</code></td><td><code>/dc admin nation delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin nacion renombrar &lt;NACION&gt; &lt;NUEVO_NOMBRE&gt; [confirmar]</code></td><td><code>/dc admin nation rename</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia</code></td><td><code>/dc admin pandemic</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia configurar &lt;nombre&gt; &lt;parametro&gt; &lt;valor&gt;</code></td><td><code>/dc admin pandemic configure</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia crear &lt;nombre&gt; &lt;severidad 1-5&gt; &lt;nacion_origen&gt;</code></td><td><code>/dc admin pandemic create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia info &lt;nombre&gt;</code></td><td><code>/dc admin pandemic info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia listar</code></td><td><code>/dc admin pandemic list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia terminar &lt;nombre&gt;</code></td><td><code>/dc admin pandemic end</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia vacuna &lt;nombre_pandemia&gt;</code></td><td><code>/dc admin pandemic vaccine</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin pandemia vacunar &lt;nombre_pandemia&gt;</code></td><td><code>/dc admin pandemic vaccinate</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos</code></td><td><code>/dc admin parties</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos crear &lt;nación&gt; &lt;candidato&gt; &lt;nombre_partido&gt; &lt;tipo_partido&gt;</code></td><td><code>/dc admin parties create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos eliminar [nación] &lt;partido_o_candidato&gt;</code></td><td><code>/dc admin parties delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos ganador &lt;nación&gt; &lt;candidato&gt;</code></td><td><code>/dc admin parties winner</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos limpiar-huerfanos</code></td><td><code>/dc admin parties purge-orphans</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos listar [nación]</code></td><td><code>/dc admin parties list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos reiniciar &lt;nación&gt;</code></td><td><code>/dc admin parties reset</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin partidos tipo &lt;nación&gt; &lt;candidato&gt; &lt;tipo_partido&gt;</code></td><td><code>/dc admin parties type</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin prueba &lt;votaciones&gt; &lt;iniciar|terminar|abrir&gt;</code></td><td><code>/dc admin test</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin purgar-mapa &lt;nación | all&gt; [min-chunks]</code></td><td><code>/dc admin purge-map</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin radiacion</code></td><td><code>/dc admin radiation</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin radiacion limpiar &lt;todo|radio|id&gt;</code></td><td><code>/dc admin radiation clear</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin radiacion listar</code></td><td><code>/dc admin radiation list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos</code></td><td><code>/dc admin ranks</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos asignar &lt;jugador&gt; &lt;rango&gt; [duración]</code></td><td><code>/dc admin ranks set</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos editar &lt;rango&gt;</code></td><td><code>/dc admin ranks edit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos eliminar &lt;jugador&gt;</code></td><td><code>/dc admin ranks remove</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos info &lt;jugador&gt;</code></td><td><code>/dc admin ranks info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos listar</code></td><td><code>/dc admin ranks list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos permiso &lt;crear|eliminar|listar&gt; &lt;rango&gt; [permiso]</code></td><td><code>/dc admin ranks permission</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos recargar</code></td><td><code>/dc admin ranks reload</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin rangos reiniciar-recompensa &lt;jugador&gt;</code></td><td><code>/dc admin ranks reset-reward</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin recargar</code></td><td><code>/dc admin reload</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin recursos</code></td><td><code>/dc admin resources</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin recursos crear &lt;nombre&gt;</code></td><td><code>/dc admin resources create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin recursos editar &lt;nombre&gt;</code></td><td><code>/dc admin resources edit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin recursos eliminar &lt;nombre&gt;</code></td><td><code>/dc admin resources delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin recursos listar</code></td><td><code>/dc admin resources list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region</code></td><td><code>/dc admin region</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region bandera &lt;NACION|REGION&gt; &lt;LEY&gt; &lt;true|false&gt;</code></td><td><code>/dc admin region flag</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region crear &lt;REGION&gt; [PROPIETARIO|-] [MUNDO]</code></td><td><code>/dc admin region create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region eliminar &lt;REGION&gt;</code></td><td><code>/dc admin region delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region propietario &lt;REGION&gt; &lt;JUGADOR&gt;</code></td><td><code>/dc admin region owner</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region renombrar &lt;REGION&gt; &lt;NUEVO_NOMBRE&gt; [confirmar]</code></td><td><code>/dc admin region rename</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin region transferir &lt;REGION&gt; &lt;NACION&gt;</code></td><td><code>/dc admin region transfer</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin revertir &lt;tiempo (1s,10m,1h,1d)&gt; [action] [target]</code></td><td><code>/dc admin rollback</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin sanear</code></td><td><code>/dc admin sanitize</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin sincronizar</code></td><td><code>/dc admin sync</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia</code></td><td><code>/dc admin technology</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia dar &lt;nación&gt; &lt;tech_id&gt;</code></td><td><code>/dc admin technology give</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia desbloquear-todo &lt;nación&gt;</code></td><td><code>/dc admin technology unlock-all</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia eliminar &lt;nación&gt; &lt;tech_id&gt;</code></td><td><code>/dc admin technology remove</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia establecer-puntos &lt;nación&gt; &lt;tech_id&gt; &lt;puntos&gt;</code></td><td><code>/dc admin technology set-points</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia info &lt;tech_id&gt;</code></td><td><code>/dc admin technology info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia listar &lt;nación&gt;</code></td><td><code>/dc admin technology list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia puntos &lt;nación&gt; &lt;cantidad&gt;</code></td><td><code>/dc admin technology points</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia reiniciar &lt;nación&gt;</code></td><td><code>/dc admin technology reset</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia reparar [NACION|todo]</code></td><td><code>/dc admin technology fix</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tecnologia validar [NACION|todo]</code></td><td><code>/dc admin technology validate</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tiempo</code></td><td><code>/dc admin time</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tiempo establecer &lt;HH:MM|DD.MM.AA&gt; [HH:MM|DD.MM.AA]</code></td><td><code>/dc admin time set</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tiempo sumar &lt;1d|1h|1m|1s...&gt;</code></td><td><code>/dc admin time add</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tienda</code></td><td><code>/dc admin shop</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tienda crear &lt;precioCompraOro&gt; &lt;precioVentaOro&gt; [ambos|solo-compra|solo-venta]</code></td><td><code>/dc admin shop create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tienda editar &lt;id&gt; &lt;precioCompraOro&gt; &lt;precioVentaOro&gt; [modo]</code></td><td><code>/dc admin shop edit</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tienda eliminar &lt;id&gt;</code></td><td><code>/dc admin shop delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tienda listar</code></td><td><code>/dc admin shop list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin tienda menu</code></td><td><code>/dc admin shop menu</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin titeres</code></td><td><code>/dc admin puppets</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin titeres crear &lt;OVERLORD&gt; &lt;TITERE&gt;</code></td><td><code>/dc admin puppets create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin titeres eliminar &lt;TITERE&gt;</code></td><td><code>/dc admin puppets delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin titeres listar [NACION]</code></td><td><code>/dc admin puppets list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin uuid</code></td><td><code>/dc admin uuid</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin uuid info &lt;NACION&gt; [REGION]</code></td><td><code>/dc admin uuid info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin uuid regenerar &lt;NACION&gt; [REGION]</code></td><td><code>/dc admin uuid regenerate</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin verificar-integridad</code></td><td><code>/dc admin check-integrity</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin zona-guerra</code></td><td><code>/dc admin warzone</code></td><td>Grupo: consultar TAB</td><td>Administración</td></tr>
+<tr><td><code>/dc admin zona-guerra crear &lt;región&gt; [meta%]</code></td><td><code>/dc admin warzone create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin zona-guerra eliminar &lt;región&gt;</code></td><td><code>/dc admin warzone delete</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin zona-guerra info &lt;región&gt;</code></td><td><code>/dc admin warzone info</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin zona-guerra listar</code></td><td><code>/dc admin warzone list</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc admin zona-guerra meta &lt;región&gt; &lt;meta%&gt;</code></td><td><code>/dc admin warzone goal</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc andamio [soltar]</code></td><td><code>/dc grapple</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc ayuda [PAGINA]</code></td><td><code>/dc help</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc banco</code></td><td><code>/dc bank</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc banco depositar</code></td><td><code>/dc bank deposit</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc banco retirar</code></td><td><code>/dc bank withdraw</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc cancelar</code></td><td><code>/dc cancel</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc candidatura &lt;nombre&gt; &lt;tipo&gt; [coLider]</code></td><td><code>/dc candidacy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc candidatura registro</code></td><td><code>/dc candidacy register</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat</code></td><td><code>/dc chat</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat alianza [MENSAJE]</code></td><td><code>/dc chat alliance</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat espiar</code></td><td><code>/dc chat spy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat global [MENSAJE]</code></td><td><code>/dc chat global</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat info</code></td><td><code>/dc chat info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat nacion [MENSAJE]</code></td><td><code>/dc chat nation</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc chat region [MENSAJE]</code></td><td><code>/dc chat region</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc codigo &lt;CODIGO&gt;</code></td><td><code>/dc code</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc crear &lt;REGION&gt;</code></td><td><code>/dc create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc diplomacia</code></td><td><code>/dc diplomacy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia aliados</code></td><td><code>/dc diplomacy allies</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia alianza</code></td><td><code>/dc diplomacy alliance</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia alianza color</code></td><td><code>/dc diplomacy alliance color</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia alianza gestionar</code></td><td><code>/dc diplomacy alliance manage</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia alianza miembros</code></td><td><code>/dc diplomacy alliance members</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia enemigos</code></td><td><code>/dc diplomacy enemies</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia guerra</code></td><td><code>/dc diplomacy war</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia guerra gestion</code></td><td><code>/dc diplomacy war manage</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia guerra regiones [NACION]</code></td><td><code>/dc diplomacy war regions</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia guerra subyugacion [NACION]</code></td><td><code>/dc diplomacy war subjugation</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia notificaciones</code></td><td><code>/dc diplomacy notifications</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia soberania</code></td><td><code>/dc diplomacy sovereignty</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia treguas</code></td><td><code>/dc diplomacy truces</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc diplomacia zonas-guerra</code></td><td><code>/dc diplomacy warzones</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc divisas</code></td><td><code>/dc currencies</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc economia</code></td><td><code>/dc economy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc economia crear-moneda</code></td><td><code>/dc economy create-currency</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc economia modelo</code></td><td><code>/dc economy model</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc elecciones [info]</code></td><td><code>/dc elections</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc establecer-inicio [REGION]</code></td><td><code>/dc sethome</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc gobierno</code></td><td><code>/dc government</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc gobierno candidatos</code></td><td><code>/dc government candidates</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc guia</code></td><td><code>/dc guide</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc guia recetas</code></td><td><code>/dc guide recipes</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc guia recursos</code></td><td><code>/dc guide resources</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc info</code></td><td><code>/dc info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc ingreso &lt;EDIFICIO&gt; [INDICE]</code></td><td><code>/dc enter</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc inicio [REGION]</code></td><td><code>/dc home</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc invitar &lt;JUGADOR&gt;</code></td><td><code>/dc invite</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc leyes [pvp si|no]</code></td><td><code>/dc laws</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc leyes personalizadas</code></td><td><code>/dc laws custom</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc liberar [RADIO|auto|rellenar|todo|confirmar|cancelar] [confirmar|cancelar]</code></td><td><code>/dc unclaim</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc limites</code></td><td><code>/dc borders</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mapa [auto]</code></td><td><code>/dc map</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mapa-web</code></td><td><code>/dc web-map</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mapa-web contraseña [CONTRASEÑA]</code></td><td><code>/dc web-map password</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mapa-web quitar-contraseña</code></td><td><code>/dc web-map remove-password</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu</code></td><td><code>/dc menu</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu banco</code></td><td><code>/dc menu bank</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu candidatura</code></td><td><code>/dc menu candidacy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu diplomacia</code></td><td><code>/dc menu diplomacy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu divisas</code></td><td><code>/dc menu currencies</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu economia</code></td><td><code>/dc menu economy</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu elecciones</code></td><td><code>/dc menu elections</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu gobierno</code></td><td><code>/dc menu government</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu guia</code></td><td><code>/dc menu guide</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu info</code></td><td><code>/dc menu info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu leyes</code></td><td><code>/dc menu laws</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu mercado</code></td><td><code>/dc menu market</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu pandemias</code></td><td><code>/dc menu pandemics</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu poblacion</code></td><td><code>/dc menu population</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu rango</code></td><td><code>/dc menu rank</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc menu tecnologias</code></td><td><code>/dc menu technologies</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mercado [vender PRECIO]</code></td><td><code>/dc market</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mercado cartera</code></td><td><code>/dc market wallet</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc mercado ofertas</code></td><td><code>/dc market listings</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion</code></td><td><code>/dc nation</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion asignar-colider &lt;JUGADOR&gt;</code></td><td><code>/dc nation add-coleader</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion asignar-moderador &lt;JUGADOR&gt;</code></td><td><code>/dc nation set-moderator</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion ayuda</code></td><td><code>/dc nation help</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion capital &lt;REGION&gt;</code></td><td><code>/dc nation capital</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion colideres</code></td><td><code>/dc nation coleaders</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion crear &lt;NACION&gt; [REGION_CAPITAL]</code></td><td><code>/dc nation create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc nacion expulsar &lt;JUGADOR&gt; [confirmar]</code></td><td><code>/dc nation kick</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion info [NACION]</code></td><td><code>/dc nation info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion listar</code></td><td><code>/dc nation list</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion quitar-colider &lt;JUGADOR&gt;</code></td><td><code>/dc nation remove-coleader</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion quitar-moderador &lt;JUGADOR&gt;</code></td><td><code>/dc nation remove-moderator</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion salir [REGION] [confirmar]</code></td><td><code>/dc nation leave</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc nacion unirse &lt;NACION&gt; &lt;REGION&gt;</code></td><td><code>/dc nation join</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc pandemias</code></td><td><code>/dc pandemics</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc pandemias info &lt;PANDEMIA&gt;</code></td><td><code>/dc pandemics info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc poblacion</code></td><td><code>/dc population</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc poblacion gestionar &lt;JUGADOR&gt;</code></td><td><code>/dc population manage</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc poblacion rangos &lt;JUGADOR&gt;</code></td><td><code>/dc population ranks</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc rango [menu|reclamar] [unica|periodica|todas]</code></td><td><code>/dc rank</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc rechazar [REGION]</code></td><td><code>/dc deny</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc reclamar [RADIO|auto|rellenar|confirmar|cancelar] [confirmar|cancelar]</code></td><td><code>/dc claim</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region</code></td><td><code>/dc region</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region aceptar [REGION]</code></td><td><code>/dc region accept</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region ayuda</code></td><td><code>/dc region help</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region crear &lt;REGION&gt;</code></td><td><code>/dc region create</code></td><td>Acción</td><td>Administración</td></tr>
+<tr><td><code>/dc region establecer-inicio [REGION]</code></td><td><code>/dc region sethome</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region info [REGION]</code></td><td><code>/dc region info</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region inicio [REGION]</code></td><td><code>/dc region home</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region invitar &lt;JUGADOR&gt; [REGION]</code></td><td><code>/dc region invite</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region rechazar [REGION]</code></td><td><code>/dc region deny</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region salir [REGION] [confirmar]</code></td><td><code>/dc region leave</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc region unirse &lt;REGION&gt;</code></td><td><code>/dc region join</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc salir [REGION] [confirmar]</code></td><td><code>/dc leave</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc tecnologias [donar CANTIDAD]</code></td><td><code>/dc technologies</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc tecnologias categoria &lt;CATEGORIA&gt;</code></td><td><code>/dc technologies category</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc tecnologias detalle &lt;TECNOLOGIA&gt;</code></td><td><code>/dc technologies detail</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc territorio</code></td><td><code>/dc territory</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc territorios</code></td><td><code>/dc territories</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc territorios menu</code></td><td><code>/dc territories menu</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc tienda</code></td><td><code>/dc shop</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc unirse &lt;REGION&gt;</code></td><td><code>/dc join</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc unirse menu</code></td><td><code>/dc join menu</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc unirse regiones &lt;NACION&gt;</code></td><td><code>/dc join regions</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc zona-guerra</code></td><td><code>/dc warzone</code></td><td>Grupo: consultar TAB</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc zona-guerra ir &lt;REGION&gt;</code></td><td><code>/dc warzone go</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
+<tr><td><code>/dc zona-guerra listar</code></td><td><code>/dc warzone list</code></td><td>Acción</td><td>Según acción, cargo y módulo</td></tr>
 </tbody></table>
 </main>
 

@@ -104,11 +104,18 @@
     mention-roles: true     # Menciona automáticamente (@Nación) en alertas bélicas</code></pre>
         </div>
 
-        <h2>2. Puesta en Marcha del Bot JDA y Comandos</h2>
+        <h2>2. Puesta en Marcha del Bot JDA, Eventos y Comandos</h2>
         <ol>
             <li>Coloca el token de tu aplicación de Discord en <code>discord.bot.token</code> y asegúrate de que el bot tenga permisos de <em>Manage Roles</em>, <em>Send Messages</em> y <em>View Channels</em> en tu servidor de Discord.</li>
-            <li>En el canal de Discord donde quieras publicar el selector de naciones, escribe el comando con el prefijo configurado (por defecto <code>!set_chanel</code>) o utiliza los comandos administrativos dentro de Minecraft.</li>
+            <li>En el canal de Discord donde quieras publicar el selector de naciones, escribe el comando con el prefijo configurado (por defecto <code>!set_chanel</code>) o utiliza los comandos administrativos dentro de Minecraft. Si configuras <code>role-prefix</code>, los roles auto-creados usarán ese prefijo; con <code>auto-update-panel: true</code>, el mensaje fijado (<code>role-message-id</code>) se actualiza al crear/borrar países.</li>
         </ol>
+
+        <h3>Los 13 Eventos Configurables en `discord.webhook.events`</h3>
+        <ul>
+            <li><strong>Conflictos y Diplomacia:</strong> <code>war-declared</code>, <code>war-started</code>, <code>war-ended</code>, <code>alliance-created</code>, <code>alliance-dissolved</code>.</li>
+            <li><strong>Bioseguridad:</strong> <code>pandemic-started</code>, <code>pandemic-ended</code>, <code>pandemic-spread</code>, <code>pandemic-mutated</code>, <code>vaccine-started</code>, <code>vaccine-completed</code>.</li>
+            <li><strong>Naciones:</strong> <code>nation-created</code>, <code>nation-deleted</code>. (Todas las peticiones HTTP/JDA se ejecutan fuera del hilo principal respetando <code>timeout-seconds: 10</code>).</li>
+        </ul>
 
         <table class="wiki-table">
             <thead>

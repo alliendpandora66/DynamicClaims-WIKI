@@ -10,25 +10,25 @@ const searchData = [
         url: "nations.html",
         title: "Territorios, Ciudadanía y Leyes",
         category: "1. Usuario / Jugador Común",
-        content: "Regiones y naciones soberanas. Unirse a región (/dc unirse), salir (/dc salir), código de liderazgo (/dc codigo), teletransporte (/dc inicio, /dc establecer-inicio), invitar (/dc invitar). Las 7 leyes nacionales: openNation, electionsEnabled, pvpEnabled, alliesCanBuild, alliesCanInteract, neutralsCanBuild, neutralsCanInteract. 5 banderas regionales: PVP, FIRE_SPREAD, MOB_SPAWNING, EXPLOSIONS, INTERACT."
+        content: "Regiones y naciones soberanas. Unirse a región (/dc unirse), salir (/dc salir, cooldown 300s), código de liderazgo (/dc codigo), teletransporte (/dc inicio, warmup 10s, cooldown 60s, /dc establecer-inicio), invitar (/dc invitar), aeropuertos zona segura, nomenclatura 1-48 caracteres. Las 7 leyes nacionales: openNation, electionsEnabled, pvpEnabled, alliesCanBuild, alliesCanInteract, neutralsCanBuild, neutralsCanInteract. 5 banderas regionales: PVP, FIRE_SPREAD, MOB_SPAWNING, EXPLOSIONS, INTERACT."
     },
     {
         url: "roles.html",
         title: "Cargos Políticos, Elecciones y Rangos",
         category: "1. Usuario / Jugador Común",
-        content: "Diferencia entre Cargos Políticos (Dueño de Capital, Líder del Gobierno, Colíder, Moderador, Alcalde, Cogobernador), Elecciones democráticas (/dc candidatura, /dc elecciones, ideologías IZQUIERDA CENTRO DERECHA), Rangos Militares (/dc poblacion, cupo max-soldiers 20 plazas, requisito obligatorio para participar en guerras) y Rangos VIP del servidor (/dc rango, /dc rango reclamar)."
+        content: "Matriz RolePermissions de Cargos Políticos (Dueño de Capital, Líder del Gobierno, Colíder, Moderador, Alcalde, Cogobernador), Elecciones democráticas (/dc candidatura, /dc elecciones, ideologías IZQUIERDA CENTRO DERECHA), Rangos Militares (/dc poblacion, cupo max-soldiers 20 plazas o placeholder externo, requisito obligatorio para participar en guerras) y Rangos VIP del servidor (/dc rango, /dc rango reclamar)."
     },
     {
         url: "government.html",
         title: "Gobierno, Aprobación y Guerra Civil",
         category: "1. Usuario / Jugador Común",
-        content: "Legitimidad política y aprobación popular en /dc gobierno. Voto a favor o en contra, postulación y votación de candidato rebelde opositor (/dc gobierno candidatos). Guerra Civil programada al alcanzar 51% de desaprobación, bajas por bando y derrocamiento del líder."
+        content: "Legitimidad política y aprobación popular en /dc gobierno. Voto a favor o en contra, postulación y votación de candidato rebelde opositor (/dc gobierno candidatos). Guerra Civil programada (start-day 7, start-hour 12, duration-hours 48, min-nation-members 3, min-votes-required 1) al alcanzar 51% de desaprobación, bajas por bando (20 vs 20) y derrocamiento del líder."
     },
     {
         url: "wars.html",
         title: "Guerras, Asedios, Misiles y Zonas de Guerra",
         category: "1. Usuario / Jugador Común",
-        content: "Declaración de guerra y alianzas en /dc diplomacia. Conquista por puntos (points) o chunks (chunk), frente perimetral, dispersión por escala y balanceo de velocidad por soldados (soldier-balance). Moral de combate (-1 baja por captura o morale-recovery-per-chunk), treguas de 90 días, estados títeres y vasallaje (/dc diplomacia soberania), Zonas de Guerra (/dc zona-guerra), misiles convencionales, armas nucleares, radiación, casco NBQ, Combat Tag e Infamia."
+        content: "Declaración de guerra, casus belli y alianzas en /dc diplomacia. Conquista por puntos (points) o chunks (chunk), frente perimetral, dispersión por escala, balanceo de velocidad por soldados (soldier-balance), prórroga overtime, frontline-respawn y building only-main-chunks. Moral de combate (-1 baja por captura), treguas de 90 días, estados títeres y vasallaje, Zonas de Guerra (/dc zona-guerra), misiles.yml ICBM convencionales y nucleares, radiación, casco NBQ, Combat Tag e Infamia."
     },
     {
         url: "economy.html",
@@ -64,20 +64,20 @@ const searchData = [
         url: "localization.html",
         title: "Chat, Mapas (Táctico y Atlas Web) y Utilidades",
         category: "1. Usuario / Jugador Común",
-        content: "Canales de chat (/dc chat global, region, nacion, alianza, info), nametags relacionales, mapa en chat (/dc mapa), bordes (/dc limites), Minimapa Táctico en mano con zoom 1x 2x 4x con tecla F, Atlas Web Integrado (/dc mapa-web, contraseña permanente, editor territorial) y desplazamiento en andamios (/dc andamio)."
+        content: "Canales de chat (/dc chat global, region, nacion, alianza, info), nametags relacionales, mapa en chat (/dc mapa), bordes (/dc limites), Minimapa Táctico en mano con zoom 1x 2x 4x con tecla F, Atlas Web Integrado (/dc mapa-web, contraseña permanente, editor territorial), desplazamiento en andamios (/dc andamio) e idiomas bilingües messages.yml y messages_en.yml."
     },
     {
         url: "gui.html",
         title: "Menú Principal (/dc menu) y Guía Interactiva",
         category: "1. Usuario / Jugador Común",
-        content: "Los 14 módulos del menú principal /dc menu, atajos directos a submenús, estándar de botones de navegación, seguridad anti-glitch y Códice de Guía interactiva (/dc guia, /dc guia recetas, /dc guia recursos)."
+        content: "Los 14 módulos del menú principal /dc menu, atajos directos a submenús, estándar de botones MenuLayout (slots 45 47 48 49 50 51), las 84 plantillas gui/*.yml, seguridad anti-glitch y Códice de Guía interactiva (/dc guia, /dc guia recetas, /dc guia recursos)."
     },
     // 2. STAFF
     {
         url: "staff.html",
         title: "Guía de Staff: Jugadores, Territorios y Códigos",
         category: "2. Staff",
-        content: "Permisos de Staff (dynamicclaims.command.admin), bypass administrativo, creación de regiones y naciones (/dc admin region crear, /dc admin nacion crear), reclamo de chunks (/dc reclamar, /dc liberar), gestión de jugadores y roles (/dc admin jugadores), códigos de liderazgo (/dc admin codigos) y modo espía (/dc chat espiar)."
+        content: "Permisos Bukkit de Staff y jugadores (dynamicclaims.command.admin, dynamicclaims.admin, dynamicclaims.admin.spy, dynamicclaims.leader, dynamicclaims.chat.color, dynamicclaims.vip.chat, dynamicclaims.vip.fly, dynamicclaims.claim.bonus, dynamicclaims.bypass.combat, dynamicclaims.bypass.cooldown, dynamicclaims.bypass.warmup, dynamicclaims.tool.trench, dynamicclaims.webmap.claim, dynamicclaims.webmap.flags, dynamicclaims.webmap.hide), creación de regiones y naciones, reclamo de chunks, códigos de liderazgo (/dc admin codigos) y modo espía."
     },
     {
         url: "staff-events.html",
@@ -95,32 +95,32 @@ const searchData = [
         url: "commands.html",
         title: "Catálogo Oficial de Comandos (/dc)",
         category: "2. Staff",
-        content: "Referencia completa generada de todas las rutas bajo /dc y /dynamicclaims:dc, argumentos obligatorios y opcionales, grupos con autocompletado TAB y niveles de acceso."
+        content: "Referencia completa generada de todas las rutas bilingües ES y EN bajo /dc y /dynamicclaims:dc (incluyendo /dc ingreso /dc enter), argumentos obligatorios y opcionales, grupos con autocompletado TAB y niveles de acceso."
     },
     // 3. OPERADOR
     {
         url: "operator.html",
-        title: "Instalación, Módulos (36), Base de Datos y Mantenimiento",
+        title: "Instalación, Módulos (35), Base de Datos y Mantenimiento",
         category: "3. Operador",
-        content: "Requisitos técnicos (Java 21, Paper 1.21.4, PlaceholderAPI). Los 36 módulos configurables en caliente (/dc admin modulos) y su grafo de dependencias. Base de datos SQLite y MySQL (/dc admin migrar-bd), auditoría (/dc admin auditar), diagnóstico, integridad, saneamiento, rollback (/dc admin revertir), purga de mapa y UUIDs territoriales (/dc admin uuid)."
+        content: "Requisitos técnicos (Java 21, Paper 1.21.4, PlaceholderAPI). Los 35 módulos configurables en caliente (/dc admin modulos) y su grafo de dependencias. Persistencia SQLite/MySQL (DatabaseManager.runAsync, CoalescedAsyncFileWriter, MainThread), estándar de recarga ReloadPlan en 6 fases, auditoría, diagnóstico, rollback, UUIDs territoriales y guía de troubleshooting."
     },
     {
         url: "configuration.html",
         title: "Configuración Técnica (YAML) y Migraciones",
         category: "3. Operador",
-        content: "Las 24 configuraciones del ConfigurationCatalog, respaldos automáticos en backups/configurations/, convenciones kebab-case y desglose completo de config.yml, misiles.yml, vehiculos.yml, rangos.yml, tecnologias.yml, industria/config.yml y gui/*.yml."
+        content: "Las 13 configuraciones de ConfigurationCatalog, 84 plantillas gui/*.yml, respaldos en backups/configurations/, convenciones kebab-case y desglose completo de config.yml (chat, region, teleport, elections, anti-glitch, modules, geojson), messages.yml, messages_en.yml, industria/config.yml, misiles.yml, vehiculos.yml, rangos.yml y tecnologias.yml."
     },
     {
         url: "dynmap.html",
         title: "Atlas Web Integrado, Dynmap y Squaremap",
         category: "3. Operador",
-        content: "Configuración de web-map.yml para el servidor HTTP del Atlas Web Integrado, reverse proxy HTTPS, renderizado (/dc admin mapa render-completo), temas, fuentes personalizadas en web-map/fonts/, banderas en web-map/flags/, skins (Mojang/MineSkin) y las 14 tarjetas HTML de dynmap.yml para Squaremap y Dynmap."
+        content: "Configuración de web-map.yml, reverse proxy HTTPS (security.behind-proxy), límites HTTP en memoria (4 MiB / 32 MiB), WebMapIcons, renderizado (/dc admin mapa render-completo), paquetes de recursos resourcepack (default, sirtheim, abyss), permisos offline con LuckPerms, fuentes, banderas, skins y las 14 tarjetas HTML de dynmap.yml (popup-css, card-colors, fragments)."
     },
     {
         url: "discord.html",
         title: "Integración con Discord (Webhook y Bot JDA)",
         category: "3. Operador",
-        content: "Configuración real en config.yml de discord.webhook (13 eventos geopolíticos) y discord.bot (JDA, token, prefix !set_chanel, role-channel-id, auto-update-panel, mention-roles) y comandos /dc admin discord info, panel y recargar."
+        content: "Configuración real en config.yml de discord.webhook con sus 13 eventos (war-declared, war-started, war-ended, alliance-created, alliance-dissolved, pandemic-started, pandemic-ended, pandemic-spread, pandemic-mutated, vaccine-started, vaccine-completed, nation-created, nation-deleted) y Bot JDA (!set_chanel, role-prefix, auto-update-panel, mention-roles)."
     },
     {
         url: "resources.html",
@@ -132,7 +132,7 @@ const searchData = [
         url: "placeholders.html",
         title: "Variables PlaceholderAPI y Nametags (TAB)",
         category: "3. Operador",
-        content: "Todos los placeholders de %dynamicclaims_*%: nación, región, color, prefijo, sufijo, guerra, combate, moneda, reservas de oro, saldo bancario, cupo militar (military_count, military_max, military_available, military_rank, is_military, war_participant) y relacionales %rel_dynamicclaims_*% para TAB."
+        content: "Catálogo completo de los 162 placeholders %dynamicclaims_*% y relacionales %rel_dynamicclaims_*%: ubicación actual (in_claimed, location_region, location_nation), cargos y alcalde (role, is_alcalde), diplomacia e infamia (alliance, overlord, is_puppet, infamy), gobierno y elecciones (gov_approval, civil_war_active, election_active), tiempo RP (rp_date, rp_time), tecnología, industria, pandemias, economía, cupo militar y relacionales (same_nation, is_ally, in_war)."
     },
     {
         url: "scripting.html",
@@ -144,7 +144,7 @@ const searchData = [
         url: "developer.html",
         title: "Java API (DynamicClaimsAPI) y UltraAPI v2",
         category: "3. Operador",
-        content: "Integración Maven (classifier ultra-api) y descubrimiento por ServicesManager. Fachada DynamicClaimsAPI (14 dominios), eventos Spigot (RegionClaimEvent, RegionUnclaimEvent, NationCreateEvent, WarStartEvent, WarEndEvent, TechnologyResearchedEvent, CustomRuleChangeEvent) y UltraAPI v2 (289 operaciones, UltraGameplay, UltraData, UUIDs persistentes, leyes/flags custom y capas vectoriales UltraLayer + AtlasDrawing con 39 iconos)."
+        content: "Integración Maven (classifier ultra-api) y descubrimiento por ServicesManager (isAvailable, isGameplayAvailable, stats). Fachada DynamicClaimsAPI (14 dominios), eventos Spigot (RegionClaimEvent, RegionUnclaimEvent, NationCreateEvent, WarStartEvent, WarEndEvent, TechnologyResearchedEvent, CustomRuleChangeEvent) y UltraAPI v2 (289 operaciones, UltraGameplay, UltraData, UUIDs persistentes, leyes/flags custom y capas vectoriales UltraLayer + AtlasDrawing con 38 iconos)."
     }
 ];
 

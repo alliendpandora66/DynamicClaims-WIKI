@@ -86,11 +86,15 @@
             <tbody>
                 <tr>
                     <td><code>config.yml</code></td>
-                    <td>Interruptores de los 36 módulos, nametags, combate, elecciones, tiempo real y RP, conquista, moral, infamia, cupo militar, guerras, guerra civil, anti-glitch, Discord, GeoJSON, pandemias, base de datos, mapa táctico y andamios.</td>
+                    <td><code>config-version</code>, interruptores de los 35 módulos (<code>modules.*</code>), nametags, combate, elecciones, códigos de liderazgo (<code>leadership-codes</code>), menús (<code>menus</code>), tiempo real y RP, conquista, moral, infamia, cupo militar, guerras, guerra civil, anti-glitch, Discord, GeoJSON (<code>geojson</code>), pandemias, base de datos, mapa táctico y andamios.</td>
                 </tr>
                 <tr>
-                    <td><code>messages.yml</code></td>
-                    <td>Traducciones, prefijos, formatos de canales de chat y nombres de argumentos de comandos.</td>
+                    <td><code>messages.yml</code><br><code>messages_en.yml</code></td>
+                    <td>Traducciones bilingües (Español / Inglés), prefijos, formatos de canales de chat y nombres de argumentos de comandos.</td>
+                </tr>
+                <tr>
+                    <td><code>claims.yml</code></td>
+                    <td>Archivo legado mantenido vacío por compatibilidad; los territorios, colores nacionales (<code>nation_colors.yml</code>) y demás registros se persisten en SQLite/MySQL y archivos estructurados.</td>
                 </tr>
                 <tr>
                     <td><code>web-map.yml</code></td>
@@ -122,11 +126,11 @@
                 </tr>
                 <tr>
                     <td><code>industria/config.yml</code><br><code>industria/edificios.yml</code><br><code>industria/crafteos.yml</code><br><code>industria/recursos.yml</code></td>
-                    <td>Herramienta de selección de estructuras, margen de solapamiento, tropas defensivas y catálogo de edificios, recetas y recursos.</td>
+                    <td>Herramienta de selección de estructuras (<code>STICK</code>), margen de solapamiento (<code>overlap-padding: 2</code>), ciclos de sync (<code>60s</code> admin / <code>1s</code> proceso), tropas defensivas de Fuerte (<code>military.enabled: true</code>) y catálogo de edificios, recetas y recursos.</td>
                 </tr>
                 <tr>
-                    <td><code>gui/*.yml</code> (13 archivos)</td>
-                    <td>Diseño de los inventarios interactivos (<code>main-menu.yml</code>, <code>population-menu.yml</code>, <code>military-ranks.yml</code>, <code>laws-menu.yml</code>, <code>diplomacy-menu.yml</code>, <code>economy-menu.yml</code>, <code>bank-menu.yml</code>, <code>auction-menu.yml</code>, <code>elections-menu.yml</code>, <code>government-menu.yml</code>, <code>technology-menu.yml</code>, <code>nation-info.yml</code>, <code>player-management.yml</code>).</td>
+                    <td><code>gui/*.yml</code> (84 archivos)</td>
+                    <td>Diseño completo de los <strong>84 inventarios interactivos</strong>: menús raíz/nación (<code>main-menu</code>, <code>nation-info</code>, <code>population-*</code>, <code>military-ranks</code>, <code>laws-menu</code>), diplomacia/guerra (<code>diplomacy-*</code>, <code>silo-coordinate-menu</code>), industria/aeropuertos (<code>industry-*</code>, <code>airport-*</code>), economía/subastas (<code>economy-*</code>, <code>bank-*</code>, <code>auction-*</code>, <code>shop-menu</code>), ciencia/política/sanidad/guía (<code>technology-*</code>, <code>elections-*</code>, <code>government-*</code>, <code>pandemic-*</code>, <code>guidebook-*</code>) y editores de Staff (<code>admin-*</code>).</td>
                 </tr>
             </tbody>
         </table>
@@ -262,8 +266,10 @@ civil-war:
   start-hour: 12
   duration-hours: 48</code></pre>
 
-        <h3>E. Pandemias, Base de Datos, Rendimiento, Mapa Táctico y Andamios</h3>
-        <pre><code>pandemic:
+        <h3>E. Pandemias, Base de Datos, Rendimiento, Mapa Táctico, Andamios, Menús y GeoJSON</h3>
+        <pre><code>config-version: 1               # Versión de esquema (migración automática)
+
+pandemic:
   enabled: true
   tick-interval: 600              # 600 ticks = 30 segundos por ciclo epidemiológico
   max-active: 3
@@ -328,7 +334,62 @@ scaffold-grapple:
   fly-speed: 0.055
   max-depth: 12
   double-shift-ms: 350
-  short-tap-ms: 250</code></pre>
+  short-tap-ms: 250
+
+leadership-codes:
+  default-duration-days: 30       # Días de validez por defecto de un código de liderazgo
+
+menus:
+  use-letter-heads: true          # Cabezales A-Z por inicial de nación en listados GUI
+
+geojson:
+  projection: equirectangular     # "equirectangular" o "mercator"
+  world-width: 73728
+  world-height: 36864
+  origin-x: 0
+  origin-z: 0
+  world: world
+
+chat:
+  enabled: true                   # Activa gestor de canales de chat (global/region/nacion/alianza)
+
+region:
+  join-leave-cooldown: 300        # Segundos de espera tras salir antes de volver a entrar (0 = desactivado)
+
+teleport:
+  home-cooldown: 60               # Cooldown en segundos entre usos de /dc inicio
+  home-warmup: 10                 # Segundos quieto previos al teletransporte de /dc inicio
+
+elections:
+  check-interval-seconds: 10      # Frecuencia mínima de revisión (5s mínimo efectivo)
+  start:
+    day: 7                        # 1=Domingo .. 7=Sábado
+    hour: 6
+  end:
+    day: 1                        # Domingo
+    hour: 18
+
+anti-glitch:
+  enabled: true
+  ghost-block-correction: true    # Anula saltos sobre bloques fantasma y resincroniza inventario
+  mining-glitch-correction: true  # Previene agujeros visuales en paredes protegidas
+  door-phasing-protection: true   # Sincroniza puertas dobles/trampillas contra crawling
+  vehicle-dismount-check: true    # Evita atravesar muros al desmontar botes/vagonetas
+  pearl-suffocation-check: true   # Bloquea perlas incrustadas en muros</code></pre>
+
+        <h3>F. Configuración del Motor Industrial (`industria/config.yml`)</h3>
+        <pre><code>structure:
+  selection-tool: STICK           # Material de la varita para delimitar estructuras
+placement:
+  overlap-padding: 2              # Margen mínimo de separación en bloques entre edificios
+administrative:
+  sync-seconds: 60                # Ciclo de mantenimiento/contabilidad administrativa
+processing:
+  sync-seconds: 1                 # Ciclo por segundo de recetas y extracción industrial
+military:
+  enabled: true                   # Tropas defensivas activas solo en guerra sobre la región
+dynmap:
+  markers-enabled: true</code></pre>
 
         <h2>4. Configuración de Misiles y Armas Nucleares (`misiles.yml`)</h2>
         <p>Controla el comportamiento de los misiles balísticos convencionales e intercontinentales nucleares (ICBM), la animación del hongo atómico y la zona de radiación residual:</p>

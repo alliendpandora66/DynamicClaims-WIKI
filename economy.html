@@ -126,10 +126,11 @@
             </tbody>
         </table>
 
-        <h2>3. Billetes Físicos vs. Saldo Bancario Virtual</h2>
+        <h2>3. Billetes Físicos vs. Saldo Bancario Virtual y Vault</h2>
         <ul>
-            <li><strong>Billetes Físicos:</strong> Son ítems en el inventario con metadatos NBT criptográficos (código de divisa, denominación, nación emisora y número de serie). Sirven para intercambios en mano entre jugadores; ten cuidado, ya que si mueres puedes perder los billetes que lleves encima.</li>
-            <li><strong>Saldo Bancario Virtual:</strong> Es el dinero depositado en <code>/dc banco</code>. Está 100% seguro aunque mueras en combate y se utiliza de forma automática para comprar en el <strong>Mercado Global (<code>/dc mercado</code>)</strong> y en la <strong>Tienda del Servidor (<code>/dc tienda</code>)</strong>.</li>
+            <li><strong>Ejemplo Numérico del Patrón Oro:</strong> Si tu Banco Central guarda <code>500</code> lingotes de oro y emite <code>1,000</code> billetes, cada billete vale <code>0.5000</code> oro. Si imprimes otros <code>1,000</code> billetes sin depositar más oro, el valor cae a <code>0.2500</code> oro (necesitarás el doble de billetes en <code>/dc tienda</code>). Si depositas otros <code>500</code> lingotes, el valor vuelve a <code>0.5000</code> oro.</li>
+            <li><strong>Billetes Físicos (Antiduplicación):</strong> Son ítems en el inventario con metadatos PDC/criptográficos (código ISO de divisa, denominación, nación emisora y número de serie único). Sirven para comercio presencial; si mueres puedes perderlos y sus series quedan auditadas para impedir duplicación.</li>
+            <li><strong>Saldo Bancario Virtual e Integración Vault:</strong> El dinero depositado en <code>/dc banco</code> permanece 100% seguro aunque mueras en combate y se usa automáticamente al comprar en <code>/dc mercado</code> y <code>/dc tienda</code> (con respaldo a Vault si el servidor o un jugador opera sin divisa nacional).</li>
         </ul>
     </main>
 

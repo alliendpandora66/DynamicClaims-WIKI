@@ -137,9 +137,67 @@
 
         <p>El Líder y los Colíderes gestionan el ejército desde <code>/dc poblacion</code> (o <code>/dc poblacion rangos &lt;JUGADOR&gt;</code>):</p>
         <ul>
-            <li><strong>Cupo Militar Nacional (<code>max-soldiers</code>):</strong> Cada nación tiene un límite máximo de plazas militares (<strong>20 soldados por defecto</strong>, incluidos los desconectados). Cada ciudadano con rango militar ocupa 1 plaza sin importar su grado.</li>
-            <li><strong>Ascensos y Degradaciones:</strong> El Líder puede asignar, ascender, degradar o retirar cualquier rango militar (volver a Civil libera su plaza). Los Colíderes pueden reclutar civiles y ascender militares a un grado superior, pero no degradarlos.</li>
+            <li><strong>Cupo Militar Nacional (<code>max-soldiers</code>):</strong> Cada nación tiene un límite máximo de plazas militares (<strong>20 soldados por defecto</strong>, incluidos los desconectados). También admite un placeholder externo de PlaceholderAPI (ej. <code>"%mi_expansion_cupo_militar%"</code>) resuelto sobre el dueño de la capital; si falta o devuelve un valor inválido, retorna a <code>20</code>. Cada ciudadano con rango militar ocupa 1 plaza sin importar su grado.</li>
+            <li><strong>Ascensos y Degradaciones:</strong> El Líder puede asignar, ascender, degradar o retirar cualquier rango militar (volver a Civil libera su plaza). Los Colíderes pueden reclutar civiles y ascender militares a un grado superior, pero no degradarlos. Si se reduce el cupo por debajo del censo actual, el historial se conserva pero solo las primeras <em>N</em> identidades canónicas pueden combatir.</li>
         </ul>
+
+        <h3>Matriz Detallada de Políticas por Acción (`RolePermissions`)</h3>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Acción en Menús / Comandos</th>
+                    <th>Roles Autorizados</th>
+                    <th>Condición Adicional</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gestión nacional, leyes y economía</td>
+                    <td>Dueño de capital, Colíder o Admin</td>
+                    <td>Se valida el cargo dentro de la nación seleccionada.</td>
+                </tr>
+                <tr>
+                    <td>Gestionar población / expulsar ciudadanos</td>
+                    <td>Dueño de capital, Líder del gobierno, Colíder o Admin</td>
+                    <td>Sin acceso admin, el ciudadano objetivo debe seguir perteneciendo a la nación.</td>
+                </tr>
+                <tr>
+                    <td>Gestionar colíderes / retirar moderadores / degradar rangos</td>
+                    <td>Dueño de capital, Líder del gobierno o Admin</td>
+                    <td>Los colíderes conservan su restricción de ascender sin poder degradar.</td>
+                </tr>
+                <tr>
+                    <td>Asignar moderadores nacionales</td>
+                    <td>Dueño de capital, Colíder o Admin</td>
+                    <td>Sigue la regla del comando nacional.</td>
+                </tr>
+                <tr>
+                    <td>Diplomacia, alianzas y guerras</td>
+                    <td>Dueño de capital, Colíder o Admin</td>
+                    <td>Los usuarios representan a su nación actual.</td>
+                </tr>
+                <tr>
+                    <td>Investigar tecnologías</td>
+                    <td>Dueño de capital, Cogobernador de capital, Colíder o Admin</td>
+                    <td>Usa región de respaldo si la nación carece temporalmente de capital.</td>
+                </tr>
+                <tr>
+                    <td>Crear moneda nacional</td>
+                    <td>Dueño de capital o Admin</td>
+                    <td>El colíder sin permiso admin no puede emitir moneda inicial.</td>
+                </tr>
+                <tr>
+                    <td>Invitar jugadores a una región</td>
+                    <td>Dueño regional, Cogobernador, Alcalde, Dueño/Colíder nacional o Admin</td>
+                    <td>No permite invitar a regiones de otra nación.</td>
+                </tr>
+                <tr>
+                    <td>Fundar nueva región o nación</td>
+                    <td>Solo Administrador (<code>OP</code> / <code>dynamicclaims.command.admin</code>)</td>
+                    <td>Incluye <code>/dc crear</code>, <code>/dc region crear</code> y <code>/dc nacion crear</code>.</td>
+                </tr>
+            </tbody>
+        </table>
 
         <h3>Escalafón Militar Predeterminado (<code>gui/military-ranks.yml</code>)</h3>
         <table class="wiki-table">

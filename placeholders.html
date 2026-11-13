@@ -110,6 +110,81 @@
                     <td><code>%dynamicclaims_sufijo_nacion%</code><br><code>%dynamicclaims_nation_badge%</code></td>
                     <td>Sufijo formateado con el color de la nación: <code> &amp;9[Francia]&amp;r</code> (o vacío si no tiene nación).</td>
                 </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_display%</code></td>
+                    <td><code>%dynamicclaims_nacion_display%</code></td>
+                    <td>Nombre visible con jerarquía de vasallaje (<code>Soberano ( Nación )</code> o <code>Sin nación</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_capital%</code></td>
+                    <td><code>%dynamicclaims_capital_nacion%</code></td>
+                    <td>Nombre de la región capital de la nación del jugador (o <code>N/A</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_leader%</code></td>
+                    <td><code>%dynamicclaims_lider_nacion%</code></td>
+                    <td>Líder oficial de la nación del jugador (o <code>N/A</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_coleaders%</code></td>
+                    <td><code>%dynamicclaims_colideres_nacion%</code></td>
+                    <td>Lista separada por comas de los colíderes actuales de la nación (o <code>""</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_population%</code></td>
+                    <td><code>%dynamicclaims_poblacion%</code><br><code>%dynamicclaims_nation_members%</code></td>
+                    <td>Población total real (ciudadanos únicos) de la nación (ej. <code>18</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_regions%</code></td>
+                    <td><code>%dynamicclaims_regiones_nacion%</code></td>
+                    <td>Número de regiones con territorio pertenecientes a la nación (ej. <code>4</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_chunks%</code></td>
+                    <td><code>%dynamicclaims_chunks_nacion%</code></td>
+                    <td>Cantidad total de chunks reclamados por todas las regiones de la nación (ej. <code>120</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_region_chunks%</code></td>
+                    <td><code>%dynamicclaims_chunks_region%</code></td>
+                    <td>Total de chunks reclamados de la región propia del jugador (ej. <code>32</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_region_owner%</code></td>
+                    <td><code>%dynamicclaims_gobernador%</code></td>
+                    <td>Nombre del propietario (<code>owner</code>) / gobernador de la región propia del jugador (o <code>N/A</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_role%</code></td>
+                    <td><code>%dynamicclaims_rol%</code><br><code>%dynamicclaims_nation_role%</code><br><code>%dynamicclaims_rol_nacion%</code></td>
+                    <td>Rol jerárquico del jugador (<code>Líder</code>, <code>Colíder</code>, <code>Gobernador</code>, <code>Cogobernador</code>, <code>Moderador</code>, <code>Miembro</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_alcalde%</code></td>
+                    <td>—</td>
+                    <td>Insignia de Alcalde si el jugador ostenta la alcaldía de la región actual (<code>★ Alcalde</code> o <code>""</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_is_alcalde%</code></td>
+                    <td><code>%dynamicclaims_es_alcalde%</code></td>
+                    <td><code>true</code> si el jugador es alcalde de su región, <code>false</code> en caso contrario.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_location_region%</code></td>
+                    <td><code>%dynamicclaims_region_actual%</code></td>
+                    <td>Nombre de la región reclamada donde está parado actualmente el jugador (o <code>Zona Salvaje</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_location_nation%</code></td>
+                    <td><code>%dynamicclaims_nacion_actual%</code></td>
+                    <td>Nombre de la nación propietaria del chunk actual que pisa el jugador (o <code>Zona Salvaje</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_in_claimed%</code></td>
+                    <td><code>%dynamicclaims_en_territorio%</code></td>
+                    <td><code>true</code> si el jugador está actualmente dentro de un chunk reclamado, <code>false</code> si está en zona libre.</td>
+                </tr>
             </tbody>
         </table>
 
@@ -157,7 +232,70 @@
             </tbody>
         </table>
 
-        <h2>3. Guerras y Combate (Combat Tag)</h2>
+        <h2>3. Diplomacia, Vasallaje e Infamia</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_alliance%</code></td>
+                    <td><code>%dynamicclaims_alianza%</code></td>
+                    <td>Nombre del bloque de alianza al que pertenece la nación del jugador (o <code>Sin alianza</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_alliance_raw%</code></td>
+                    <td><code>%dynamicclaims_alianza_raw%</code></td>
+                    <td>Nombre en bruto de la alianza o cadena vacía <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_alliance_members%</code></td>
+                    <td><code>%dynamicclaims_alianza_miembros%</code></td>
+                    <td>Número de naciones pertenecientes a la alianza del jugador (ej. <code>4</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_is_puppet%</code></td>
+                    <td><code>%dynamicclaims_es_titere%</code></td>
+                    <td><code>true</code> si la nación del jugador es un estado títere/vasallo, <code>false</code> en caso contrario.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_is_overlord%</code></td>
+                    <td><code>%dynamicclaims_es_soberano%</code></td>
+                    <td><code>true</code> si la nación del jugador tiene al menos un vasallo bajo su control.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_overlord%</code></td>
+                    <td><code>%dynamicclaims_soberano%</code></td>
+                    <td>Nombre de la nación soberana si es vasallo, o <code>Ninguno</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_puppets_count%</code></td>
+                    <td><code>%dynamicclaims_cantidad_titeres%</code></td>
+                    <td>Total de naciones títere sometidas por la nación del jugador (ej. <code>2</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_infamy%</code></td>
+                    <td><code>%dynamicclaims_infamia%</code></td>
+                    <td>Puntos de infamia actuales de la nación del jugador (ej. <code>35</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_infamy_limit%</code></td>
+                    <td><code>%dynamicclaims_limite_infamia%</code></td>
+                    <td>Límite máximo de infamia configurado en el servidor (ej. <code>100</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_over_infamy%</code></td>
+                    <td><code>%dynamicclaims_sobre_infamia%</code></td>
+                    <td><code>true</code> si la nación del jugador supera actualmente el límite de infamia.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Guerras y Combate (Combat Tag)</h2>
         <table class="wiki-table">
             <thead>
                 <tr>
@@ -187,10 +325,88 @@
                     <td><code>%dynamicclaims_tiempo_combate%</code></td>
                     <td>Segundos restantes de Combat Tag (ej. <code>14</code> o <code>0</code>).</td>
                 </tr>
+                <tr>
+                    <td><code>%dynamicclaims_war_goal%</code></td>
+                    <td><code>%dynamicclaims_objetivo_guerra%</code></td>
+                    <td>Objetivo bélico de la guerra activa actual de su nación (<code>CONQUEST</code>, <code>SUBJUGATION</code>, <code>INDEPENDENCE</code>, <code>LIBERATION</code> o <code>Ninguno</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_war_progress%</code></td>
+                    <td><code>%dynamicclaims_progreso_guerra%</code></td>
+                    <td>Porcentaje entero (<code>0</code>–<code>100</code>) de conquista de la guerra activa actual de su nación.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_war_remaining%</code></td>
+                    <td><code>%dynamicclaims_tiempo_guerra%</code></td>
+                    <td>Tiempo restante formateado (<code>mm:ss</code> o <code>HH:mm:ss</code>) de la batalla activa (ej. <code>42:15</code> o <code>00:00</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_has_scheduled_war%</code></td>
+                    <td><code>%dynamicclaims_guerra_programada%</code></td>
+                    <td><code>true</code> si la nación tiene una guerra en fase de preparación/programada.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_active_wars_count%</code></td>
+                    <td><code>%dynamicclaims_guerras_activas%</code></td>
+                    <td>Cantidad total de guerras activas simultáneamente en el servidor (ej. <code>2</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_victories%</code></td>
+                    <td><code>%dynamicclaims_victorias%</code><br><code>%dynamicclaims_victorioso%</code></td>
+                    <td>Victorias militares acumuladas por la nación (ej. <code>3</code>).</td>
+                </tr>
             </tbody>
         </table>
 
-        <h2>4. Economía, Divisas y Recursos</h2>
+        <h2>5. Gobierno, Elecciones y Rangos</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_gov_approval%</code></td>
+                    <td><code>%dynamicclaims_aprobacion%</code></td>
+                    <td>Porcentaje entero (<code>0</code>–<code>100</code>) de aprobación popular del gobierno nacional.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_gov_disapproval%</code></td>
+                    <td><code>%dynamicclaims_desaprobacion%</code></td>
+                    <td>Porcentaje entero (<code>0</code>–<code>100</code>) de desaprobación popular.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_civil_war_active%</code></td>
+                    <td><code>%dynamicclaims_guerra_civil%</code></td>
+                    <td><code>true</code> si la nación atraviesa actualmente una guerra civil.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_election_active%</code></td>
+                    <td><code>%dynamicclaims_eleccion_activa%</code></td>
+                    <td><code>true</code> si la nación tiene votaciones presidenciales en curso.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_election_remaining%</code></td>
+                    <td><code>%dynamicclaims_tiempo_eleccion%</code></td>
+                    <td>Tiempo restante (<code>HH:mm:ss</code> / <code>mm:ss</code>) de la elección activa de la nación, o <code>N/A</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_rank%</code></td>
+                    <td><code>%dynamicclaims_rango%</code></td>
+                    <td>Nombre visible del rango efectivo del jugador en <code>RankManager</code> (ej. <code>VIP</code> o <code>Ninguno</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_rank_prefix%</code></td>
+                    <td><code>%dynamicclaims_prefijo_rango%</code></td>
+                    <td>Prefijo formateado del rango del jugador (ej. <code>&amp;6[VIP] </code> o <code>""</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>6. Economía, Divisas y Recursos</h2>
         <table class="wiki-table">
             <thead>
                 <tr>
@@ -248,7 +464,85 @@
             </tbody>
         </table>
 
-        <h2>5. Placeholders Relacionales (`%rel_dynamicclaims_*%`)</h2>
+        <h2>7. Tiempo RP, Tecnología, Industria, Pandemias y Utilidades</h2>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_rp_date%</code></td>
+                    <td><code>%dynamicclaims_fecha_rp%</code></td>
+                    <td>Fecha actual del calendario roleplay del servidor (ej. <code>15.03.2004</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_rp_time%</code></td>
+                    <td><code>%dynamicclaims_hora_rp%</code></td>
+                    <td>Hora actual del calendario roleplay del servidor (ej. <code>14:30</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_rp_datetime%</code></td>
+                    <td><code>%dynamicclaims_fecha_hora_rp%</code></td>
+                    <td>Fecha y hora combinadas del calendario roleplay (ej. <code>15.03.2004 14:30</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_rp_is_day%</code></td>
+                    <td><code>%dynamicclaims_es_dia%</code></td>
+                    <td><code>true</code> si el calendario RP se encuentra en horario diurno.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_rp_is_night%</code></td>
+                    <td><code>%dynamicclaims_es_noche%</code></td>
+                    <td><code>true</code> si el calendario RP se encuentra en horario nocturno.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_tech_active%</code></td>
+                    <td><code>%dynamicclaims_tecnologia_activa%</code></td>
+                    <td>Nombre de la tecnología en investigación activa de la nación, o <code>Ninguna</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_tech_completed_count%</code></td>
+                    <td><code>%dynamicclaims_tecnologias_completadas%</code></td>
+                    <td>Cantidad de tecnologías desbloqueadas por la nación (ej. <code>7</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_tech_points%</code></td>
+                    <td><code>%dynamicclaims_puntos_tecnologia%</code></td>
+                    <td>Puntos de investigación sin asignar acumulados por la nación (ej. <code>45</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_industry_count%</code></td>
+                    <td><code>%dynamicclaims_industrias_nacion%</code></td>
+                    <td>Número de edificios industriales desplegados en las regiones de la nación (ej. <code>9</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_pandemic_active_count%</code></td>
+                    <td><code>%dynamicclaims_pandemias_activas%</code></td>
+                    <td>Cantidad de pandemias activas actualmente en el servidor (ej. <code>1</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_is_infected%</code></td>
+                    <td><code>%dynamicclaims_infectado%</code></td>
+                    <td><code>true</code> si el jugador está infectado por alguna pandemia activa.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_chat_channel%</code></td>
+                    <td><code>%dynamicclaims_canal_chat%</code></td>
+                    <td>Canal de chat seleccionado por el jugador (<code>GLOBAL</code>, <code>NATION</code>, <code>ALLY</code>, etc.).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_autoclaim%</code></td>
+                    <td>—</td>
+                    <td><code>true</code> si el jugador tiene activado el modo de auto-reclamación de chunks.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>8. Placeholders Relacionales (`%rel_dynamicclaims_*%`)</h2>
         <p>Para plugins compatibles con Placeholders Relacionales (como <strong>TAB</strong> o <strong>NameTagEdit</strong>), DynamicClaims evalúa la relación diplomática entre el jugador que mira (<em>viewer</em>) y el jugador objetivo (<em>target</em>):</p>
         <table class="wiki-table">
             <thead>
@@ -271,8 +565,16 @@
                     <td>Etiqueta traducible con color: <code>&amp;2[Tu Nación]</code>, <code>&amp;a[Aliado]</code>, <code>&amp;c[Enemigo]</code> o <code>&amp;f[Neutral]</code>.</td>
                 </tr>
                 <tr>
-                    <td><code>%rel_dynamicclaims_is_enemy%</code></td>
-                    <td><code>true</code> si las naciones de ambos jugadores están en guerra activa, <code>false</code> en caso contrario.</td>
+                    <td><code>%rel_dynamicclaims_is_enemy%</code><br><code>%rel_dynamicclaims_in_war%</code></td>
+                    <td><code>true</code> si las naciones de ambos jugadores están en guerra activa directa, <code>false</code> en caso contrario.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_same_nation%</code></td>
+                    <td><code>true</code> si ambos jugadores pertenecen a la misma nación.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_is_ally%</code></td>
+                    <td><code>true</code> si ambos pertenecen a la misma alianza o al mismo bando en una guerra activa.</td>
                 </tr>
                 <tr>
                     <td><code>%rel_dynamicclaims_nation_prefix%</code><br><code>%rel_dynamicclaims_prefijo_nacion%</code></td>

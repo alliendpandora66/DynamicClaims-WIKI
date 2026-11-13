@@ -90,7 +90,7 @@ softdepend:
   - DynamicClaims</code></pre>
 
         <h2>2. Descubrimiento del Servicio, Hilos y Concurrencia</h2>
-        <p>Descubre <code>UltraAPI</code> a través del <code>ServicesManager</code> de Bukkit. Las llamadas síncronas de <code>UltraGameplay</code> se ejecutan de forma segura en el hilo principal de Bukkit y devuelven copias inmutables (incluyendo clones de <code>Location</code>). Si consultas desde un hilo asíncrono o worker SQL, utiliza <code>game.executeAsync(...)</code>:</p>
+        <p>Descubre <code>UltraAPI</code> a través del <code>ServicesManager</code> de Bukkit. Verifica <code>ultra.isGameplayAvailable()</code> para operaciones de juego y <code>ultra.isAvailable()</code> si tu integración publica capas en el Atlas Web (también puedes consultar <code>ultra.stats()</code> &rarr; <code>Stats(layers, drawings, points, revision)</code> sin lecturas de mundo o BD). Las llamadas síncronas de <code>UltraGameplay</code> se ejecutan de forma segura en el hilo principal de Bukkit y devuelven copias inmutables (incluyendo clones de <code>Location</code>). Si consultas desde un hilo asíncrono o worker SQL, utiliza <code>game.executeAsync(...)</code>:</p>
         <pre><code>import com.wwcstudios.api.ultra.UltraAPI;
 import com.wwcstudios.api.ultra.UltraGameplay;
 import com.wwcstudios.api.ultra.UltraData.*;
@@ -283,7 +283,7 @@ layer.putAll(List.of(
             </tbody>
         </table>
 
-        <h3>Catálogo de los 39 Iconos Vectoriales (`AtlasDrawing.Icon`)</h3>
+        <h3>Catálogo de los 38 Iconos Vectoriales (`AtlasDrawing.Icon`)</h3>
         <table class="wiki-table">
             <thead>
                 <tr>
@@ -309,8 +309,8 @@ layer.putAll(List.of(
                     <td><code>ANCHOR</code>, <code>BOAT</code>, <code>COMPASS</code>, <code>WAYPOINT</code>, <code>MAP</code></td>
                 </tr>
                 <tr>
-                    <td><strong>Combate, Peligro y Símbolos (8)</strong></td>
-                    <td><code>SHIELD</code>, <code>SWORDS</code>, <code>HEART</code>, <code>SKULL</code>, <code>WARNING</code>, <code>RADIATION</code>, <code>BOLT</code>, <code>BOOK</code></td>
+                    <td><strong>Combate, Peligro y Símbolos (7)</strong></td>
+                    <td><code>SHIELD</code>, <code>SWORDS</code>, <code>HEART</code>, <code>SKULL</code>, <code>WARNING</code>, <code>RADIATION</code>, <code>BOOK</code></td>
                 </tr>
                 <tr>
                     <td><strong>Capas e Interfaz (4)</strong></td>
@@ -363,7 +363,7 @@ layer.putAll(List.of(
                 </tr>
                 <tr>
                     <td><code>ServerStatus</code></td>
-                    <td><code>modules</code> (mapa de los 36 módulos), <code>regions</code>, <code>nations</code>, <code>onlinePlayers</code>, <code>activeWar</code>, <code>pandemic</code>, <code>lowSpec</code>, <code>memoryCritical</code>, <code>gameDateTime</code></td>
+                    <td><code>modules</code> (mapa de los 35 módulos), <code>regions</code>, <code>nations</code>, <code>onlinePlayers</code>, <code>activeWar</code>, <code>pandemic</code>, <code>lowSpec</code>, <code>memoryCritical</code>, <code>gameDateTime</code></td>
                 </tr>
             </tbody>
         </table>
