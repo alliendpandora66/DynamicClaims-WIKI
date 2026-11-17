@@ -60,15 +60,15 @@
 
     <main class="main-content">
         <div class="section-banner operator">
-            <div>⚙️ <strong>Sección 3: Operador y Desarrolladores</strong> &mdash; Guía técnica oficial de <strong>UltraAPI v2</strong> (289 operaciones públicas), <code>DynamicClaimsAPI</code>, snapshots inmutables <code>UltraData</code>, capas del Atlas Web y eventos de Bukkit.</div>
+            <div>⚙️ <strong>Sección 3: Operador y Desarrolladores</strong> &mdash; Guía técnica oficial de <strong>UltraAPI v2</strong> (316 operaciones públicas), <code>DynamicClaimsAPI</code>, snapshots inmutables <code>UltraData</code>, capas del Atlas Web y eventos de Bukkit.</div>
             <div><span class="badge badge-operator">Developer SDK</span></div>
         </div>
 
         <h1>Java API (`DynamicClaimsAPI`) y UltraAPI v2</h1>
         <p>DynamicClaims expone dos puntos de integración públicos para plugins de Paper / Spigot (Java 21):</p>
         <ul>
-            <li><strong>UltraAPI v2 (<code>com.wwcstudios.api.ultra.*</code>):</strong> Servicio desacoplado registrado en el <code>ServicesManager</code> de Bukkit con <strong>289 operaciones públicas</strong> (273 de gameplay en <code>UltraGameplay</code> + 16 de dibujo vectorial en el Atlas Web vía <code>UltraLayer</code>). Retorna records inmutables definidos en <code>UltraData</code> sin exponer managers internos.</li>
-            <li><strong>Fachada Singleton (<code>com.wwcstudios.api.DynamicClaimsAPI</code>):</strong> Acceso directo mediante <code>DynamicClaimsAPI.get()</code> a los 14 subsistemas geopolíticos del plugin.</li>
+            <li><strong>UltraAPI v2 (<code>com.wwcstudios.api.ultra.*</code>):</strong> Servicio desacoplado registrado en el <code>ServicesManager</code> de Bukkit con <strong>316 operaciones públicas</strong> (300 de gameplay en <code>UltraGameplay</code> + 16 de dibujo vectorial en el Atlas Web vía <code>UltraLayer</code>). Retorna records inmutables definidos en <code>UltraData</code> sin exponer managers internos.</li>
+            <li><strong>Fachada Singleton (<code>com.wwcstudios.api.DynamicClaimsAPI</code>):</strong> Acceso directo mediante <code>DynamicClaimsAPI.get()</code> a los 15 subsistemas geopolíticos del plugin.</li>
         </ul>
 
         <h2>1. Dependencia Maven y `plugin.yml`</h2>
@@ -363,13 +363,17 @@ layer.putAll(List.of(
                 </tr>
                 <tr>
                     <td><code>ServerStatus</code></td>
-                    <td><code>modules</code> (mapa de los 35 módulos), <code>regions</code>, <code>nations</code>, <code>onlinePlayers</code>, <code>activeWar</code>, <code>pandemic</code>, <code>lowSpec</code>, <code>memoryCritical</code>, <code>gameDateTime</code></td>
+                    <td><code>modules</code> (mapa de los 36 módulos), <code>regions</code>, <code>nations</code>, <code>onlinePlayers</code>, <code>activeWar</code>, <code>pandemic</code>, <code>lowSpec</code>, <code>memoryCritical</code>, <code>gameDateTime</code></td>
+                </tr>
+                <tr>
+                    <td><code>CultureStatus</code></td>
+                    <td><code>id</code>, <code>name</code>, <code>color</code> (<code>#RRGGBB</code>), <code>description</code>, <code>nations</code> (conjunto inmutable de naciones asignadas)</td>
                 </tr>
             </tbody>
         </table>
 
-        <h2>7. Resumen de los 14 Dominios de `UltraGameplay` y `DynamicClaimsAPI`</h2>
-        <p>Tanto <code>UltraGameplay</code> como <code>DynamicClaimsAPI.get()</code> organizan sus métodos en 14 dominios funcionales:</p>
+        <h2>7. Resumen de los 15 Dominios de `UltraGameplay` y `DynamicClaimsAPI`</h2>
+        <p>Tanto <code>UltraGameplay</code> como <code>DynamicClaimsAPI.get()</code> organizan sus métodos en 15 dominios funcionales:</p>
         <table class="wiki-table">
             <thead>
                 <tr>
@@ -417,6 +421,10 @@ layer.putAll(List.of(
                 <tr>
                     <td><strong>10-14. Mercado, Tiempo, Chat, Recursos y Módulos</strong></td>
                     <td><code>getActiveAuctionListingsCount()</code>, <code>getPlayerPendingPayoutAmount(uuid)</code>, <code>getFormattedGameDateTime()</code>, <code>isNight()</code>, <code>getPlayerChatChannel(uuid)</code>, <code>setPlayerChatChannel(uuid, ch)</code>, <code>isTacticalMap(item)</code>, <code>isBlockPlayerPlaced(block)</code>, <code>isModuleEnabled(id)</code>, <code>getServerStatus()</code></td>
+                </tr>
+                <tr>
+                    <td><strong>15. Culturas (Naciones y Jugadores)</strong></td>
+                    <td><code>getAllCultures()</code>, <code>cultureExists(idOrName)</code>, <code>getCultureStatus(idOrName)</code>, <code>createCulture(id, name, color, desc)</code>, <code>deleteCulture(id)</code>, <code>getCultureDisplayName(id)</code>, <code>getCultureColor(id)</code>, <code>setCultureColor(id, hex)</code>, <code>getCultureDescription(id)</code>, <code>setCultureDescription(id, desc)</code>, <code>getNationCulture(nation)</code>, <code>getNationCultureId(nation)</code>, <code>getNationCultureColor(nation)</code>, <code>setNationCulture(nation, culture)</code>, <code>clearNationCulture(nation)</code>, <code>getPlayerCulture(uuid/name)</code>, <code>getPlayerCultureId(uuid/name)</code>, <code>getPlayerCultureColor(uuid/name)</code>, <code>getPlayerExplicitCulture(uuid/name)</code>, <code>setPlayerCulture(uuid/name, culture)</code>, <code>clearPlayerCulture(uuid/name)</code></td>
                 </tr>
             </tbody>
         </table>

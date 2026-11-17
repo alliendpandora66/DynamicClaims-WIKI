@@ -542,7 +542,76 @@
             </tbody>
         </table>
 
-        <h2>8. Placeholders Relacionales (`%rel_dynamicclaims_*%`)</h2>
+        <h2>8. Culturas (Naciones y Jugadores)</h2>
+        <p>Variables del subsistema de culturas (<code>CultureManager</code>). Por defecto, cada jugador hereda la cultura de su nación a menos que tenga una cultura individual asignada:</p>
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th>Variable Principal</th>
+                    <th>Alias en Español / Inglés</th>
+                    <th>Valor Devuelto / Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%dynamicclaims_culture%</code></td>
+                    <td><code>%dynamicclaims_cultura%</code><br><code>%dynamicclaims_player_culture%</code><br><code>%dynamicclaims_cultura_jugador%</code></td>
+                    <td>Nombre visible de la cultura efectiva del jugador (propia o heredada de su nación), o <code>Sin cultura</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_culture_raw%</code></td>
+                    <td><code>%dynamicclaims_cultura_raw%</code></td>
+                    <td>Nombre en bruto de la cultura efectiva del jugador, o <code>""</code> si no tiene.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_culture_id%</code></td>
+                    <td><code>%dynamicclaims_cultura_id%</code></td>
+                    <td>ID canónico en minúsculas de la cultura efectiva del jugador (ej. <code>hispanica</code> o <code>""</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_player_culture_raw%</code></td>
+                    <td><code>%dynamicclaims_cultura_jugador_raw%</code></td>
+                    <td>Nombre de la cultura individual explícita asignada al jugador (sin herencia nacional), o <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_has_custom_culture%</code></td>
+                    <td><code>%dynamicclaims_tiene_cultura_propia%</code></td>
+                    <td><code>true</code> si el jugador tiene una cultura individual explícita asignada, <code>false</code> si hereda la de su nación.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_culture%</code></td>
+                    <td><code>%dynamicclaims_cultura_nacion%</code></td>
+                    <td>Nombre visible de la cultura asignada a la nación del jugador (o <code>Sin cultura</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_culture_raw%</code></td>
+                    <td><code>%dynamicclaims_cultura_nacion_raw%</code></td>
+                    <td>Nombre en bruto de la cultura de la nación del jugador, o <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_culture_id%</code></td>
+                    <td><code>%dynamicclaims_cultura_nacion_id%</code></td>
+                    <td>ID canónico de la cultura de la nación del jugador, o <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_culture_color%</code></td>
+                    <td><code>%dynamicclaims_color_cultura%</code></td>
+                    <td>Color hexadecimal (<code>#RRGGBB</code>) de la cultura efectiva del jugador, o <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_nation_culture_color%</code></td>
+                    <td><code>%dynamicclaims_color_cultura_nacion%</code></td>
+                    <td>Color hexadecimal (<code>#RRGGBB</code>) de la cultura de la nación del jugador, o <code>""</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>%dynamicclaims_location_culture%</code></td>
+                    <td><code>%dynamicclaims_cultura_actual%</code></td>
+                    <td>Cultura de la nación propietaria del chunk donde está parado actualmente el jugador (o <code>Sin cultura</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>9. Placeholders Relacionales (`%rel_dynamicclaims_*%`)</h2>
         <p>Para plugins compatibles con Placeholders Relacionales (como <strong>TAB</strong> o <strong>NameTagEdit</strong>), DynamicClaims evalúa la relación diplomática entre el jugador que mira (<em>viewer</em>) y el jugador objetivo (<em>target</em>):</p>
         <table class="wiki-table">
             <thead>
@@ -571,6 +640,10 @@
                 <tr>
                     <td><code>%rel_dynamicclaims_same_nation%</code></td>
                     <td><code>true</code> si ambos jugadores pertenecen a la misma nación.</td>
+                </tr>
+                <tr>
+                    <td><code>%rel_dynamicclaims_same_culture%</code><br><code>%rel_dynamicclaims_misma_cultura%</code></td>
+                    <td><code>true</code> si ambos jugadores comparten la misma cultura efectiva.</td>
                 </tr>
                 <tr>
                     <td><code>%rel_dynamicclaims_is_ally%</code></td>
